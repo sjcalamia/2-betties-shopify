@@ -1,8 +1,8 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Foodly",
-    "theme_author": "Congruity Hub",
+    "theme_name": "2Betties - Foodly Clone",
+    "theme_author": "Pretty Sneaky Sis",
     "theme_version": "1.7.9",
     "theme_support_url": "https:\/\/congruityhub.ticksy.com\/",
     "theme_documentation_url": "http:\/\/foodly.gozha.net\/documentation\/"
@@ -131,6 +131,16 @@
         "id": "font_body_family",
         "label": "Font family",
         "options": [
+          {
+            "value": "Franklin-Gothic-UFW",
+            "label": "Franklin Gothic",
+            "group": "Sans-serif"
+          },
+          {
+            "value": "Sofia",
+            "label": "Sofia",
+            "group": "Sans-serif"
+          },
           {
             "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
