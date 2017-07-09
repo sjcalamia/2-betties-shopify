@@ -325,12 +325,16 @@ $breakpoint-has-pull:  ('medium', 'medium-down', 'large', 'post-large', 'wide');
 $colorBackground:   {{ settings.color_body_bg }};
 $colorPrimary:      {{ settings.color_primary }};
 $colorHighlight:    {{ settings.color_highlight }};
+$colorHighlightSecond: {{ settings.color_highlight_second }};
 $colorAccent:       {{ settings.color_accent }};
 $colorAdditional:   {{ settings.color_additional }};
+$colorAdditionalSecond: {{ settings.color_additional_second }};
 $colorInverse:      {{ settings.color_inverse }};
-$colorNeutral: #f5f4f4;
-$colorAdditionalSecond: lighten(desaturate(adjust-hue(#5c4b51, 10.2674), 3.8939), 32.9412);
-$colorHighlightSecond:  lighten(saturate(adjust-hue(#f06060, 0.0000), 8.1505), 12.5490);
+$colorNeutral: {{ settings.color_neutral }};
+$colorMenuText: {{ settings.color_menu_text }};
+$colorMenuTextActive: {{ settings.color_menu_text_active }};
+/* $colorAdditionalSecond: lighten(desaturate(adjust-hue(#5c4b51, 10.2674), 3.8939), 32.9412); */
+/* $colorHighlightSecond:  lighten(saturate(adjust-hue(#f06060, 0.0000), 8.1505), 12.5490); */
 
 // Button colors
 $colorBtnPrimary: $colorHighlight;
@@ -344,7 +348,7 @@ $colorLinkHover: $colorPrimary;
 
 // Text colors
 $colorTextBody:       {{ settings.color_body_text }};
-$colorTextBodyLight:  lighten(desaturate(adjust-hue($colorTextBody, 4.0336), 3.1089), 47.8431);
+$colorTextBodyLight:  {{ settings.color_body_text_light }};
 $colorTextHeader:     {{ settings.color_headers }};
 $colorTextAddHeader:  {{ settings.color_add_headers }};
 
@@ -2380,7 +2384,7 @@ th, td {
 
 
     &:hover {
-      color: $colorHighlight;
+      color: $colorMenuText;
 
       .svg-icon path {
         fill: $colorHighlight;
@@ -2435,7 +2439,7 @@ th, td {
   }
 
   .nav-list__item:hover {
-    background-color: $colorNeutral;
+    background-color: $colorInverse;
 
     .icon--plus-small:before,
     .icon--plus-small:after {
@@ -2446,7 +2450,7 @@ th, td {
   .nav-list__link {
     padding: 15px 38px 14px 38px;
     display: block;
-    color: $colorHighlight;
+    color: $colorMenuText;
     position: relative;
     z-index: 2;
   }
@@ -2517,7 +2521,7 @@ th, td {
     }
 
     & > .nav-list__link {
-      color: $colorAdditionalSecond;
+      color: $colorMenuText;
     }
 
     & > .icon--plus-small:after {
@@ -2581,7 +2585,7 @@ th, td {
   .nav-list {
     margin: 0 auto;
     padding-top: 7px;
-    width: 96%;
+    width: 100%;
     height: 84px;
     position: relative;
     text-align: center;
@@ -2603,7 +2607,7 @@ th, td {
       }
 
       &.active .nav-list__link {
-        color: $colorTextBodyLight;
+        color: $colorMenuTextActive;
       }
 
       &.active .nav-list__link:before,
@@ -15579,6 +15583,7 @@ th, td {
   position: relative;
   text-align: center;
   z-index: 4;
+  background-color: $colorBody;
 }
 
 .header--clear {
@@ -15683,10 +15688,10 @@ th, td {
   }
 
   .header--clear.fixed {
-    background-color: $colorNeutral;
+    background-color: $colorInverse;
 
     .nav-list {
-      background-color: $colorNeutral;
+      background-color: $colorInverse;
     }
   }
 }
