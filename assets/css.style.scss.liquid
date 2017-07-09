@@ -331,6 +331,9 @@ $colorAdditional:   {{ settings.color_additional }};
 $colorAdditionalSecond: {{ settings.color_additional_second }};
 $colorInverse:      {{ settings.color_inverse }};
 $colorNeutral: {{ settings.color_neutral }};
+$colorHeaderBg: {{ settings.color_header_bg }};
+$colorHeaderText: {{ settings.color_header_text }};
+$colorHeaderLogo: {{ settings.color_header_logo }};
 $colorMenuText: {{ settings.color_menu_text }};
 $colorMenuTextActive: {{ settings.color_menu_text_active }};
 /* $colorAdditionalSecond: lighten(desaturate(adjust-hue(#5c4b51, 10.2674), 3.8939), 32.9412); */
@@ -4604,7 +4607,7 @@ th, td {
   cursor: pointer;
 
   .svg-icon path {
-    fill: $colorTextBody;
+    fill: $colorHeaderText;
   }
 }
 
@@ -15191,6 +15194,7 @@ th, td {
   .site-logo {
     display: inline-block;
     line-height: 106px;
+    height: 84px;
   }
 
   .logo-container .site-logo img {
@@ -15584,7 +15588,8 @@ th, td {
   position: relative;
   text-align: center;
   z-index: 4;
-  background-color: $colorBody;
+  background-color: $colorHeaderBg;
+  color: $colorHeaderText;
 }
 
 .header--clear {
