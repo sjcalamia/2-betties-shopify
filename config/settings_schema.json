@@ -11,148 +11,148 @@
     "name": "Colors",
     "settings": [
       {
-        "type": "header",
-        "content": "Theme colors"
+        "content": "Theme colors",
+        "type": "header"
       },
       {
+        "label": "Body background color",
         "type": "color",
         "id": "color_body_bg",
-        "label": "Body background color",
         "default": "#ffffff"
       },
       {
+        "label": "Primary color",
         "type": "color",
         "id": "color_primary",
-        "label": "Primary color",
         "default": "#5c4b51",
         "info": "Brand color. Used for hover state of buttons and "
       },
       {
+        "label": "Hightlight color",
         "type": "color",
         "id": "color_highlight",
-        "label": "Hightlight color",
         "default": "#f06060",
         "info": "Used for buttons, sale badge, text link and error states"
       },
       {
+        "label": "Second Hightlight color",
         "type": "color",
         "id": "color_highlight_second",
-        "label": "Second Hightlight color",
         "default": "#f06060",
         "info": "Used for buttons, sale badge, text link and error states"
       },
       {
+        "label": "Accent color",
         "type": "color",
         "id": "color_accent",
-        "label": "Accent color",
         "default": "#f3b562",
         "info": "Used for special badge, overlay headings and some notification"
       },
       {
+        "label": "Additional color",
         "type": "color",
         "id": "color_additional",
-        "label": "Additional color",
         "default": "#8cbeb2",
         "info": "Used for succsesful notification"
       },
       {
+        "label": "Second Additional color",
         "type": "color",
         "id": "color_additional_second",
-        "label": "Second Additional color",
         "default": "#8cbeb2",
         "info": "Used for succsesful notification"
       },
       {
+        "label": "Inverse color",
         "type": "color",
         "id": "color_inverse",
-        "label": "Inverse color",
         "default": "#ffffff",
         "info": "Used for inverse text on darken background, background for social media buttons"
       },
       {
+        "label": "Neutral color",
         "type": "color",
         "id": "color_neutral",
-        "label": "Neutral color",
         "default": "#f4f4f4",
         "info": "Used for neutral backgrounds and whatnot"
       },
       {
-        "type": "header",
-        "content": "Text colors"
+        "content": "Text colors",
+        "type": "header"
       },
       {
+        "label": "Menu Link Text",
         "type": "color",
         "id": "color_menu_text",
-        "label": "Menu Link Text",
         "default": "#ffffff"
       },
       {
+        "label": "Menu Active Link Text",
         "type": "color",
         "id": "color_menu_text_active",
-        "label": "Menu Active Link Text",
         "default": "#f4f4f4"
       },
       {
+        "label": "Body text",
         "type": "color",
         "id": "color_body_text",
-        "label": "Body text",
         "default": "#5c4b51"
       },
       {
+        "label": "Body Text Light",
         "type": "color",
         "id": "color_body_text_light",
-        "label": "Body Text Light",
         "default": "#fceb91"
       },
       {
+        "label": "Heading color",
         "type": "color",
         "id": "color_headers",
-        "label": "Heading color",
         "default": "#5c4b51"
       },
       {
+        "label": "Additoinal heading color",
         "type": "color",
         "id": "color_add_headers",
-        "label": "Additoinal heading color",
         "default": "#ada2a4",
         "info": "Used for subheadings and small headings"
       },
       {
-        "type": "header",
-        "content": "Background"
+        "content": "Background",
+        "type": "header"
       },
       {
+        "label": "Image",
         "type": "radio",
         "id": "bg_image_choice",
-        "label": "Image",
         "options": [
           {
-            "value": "",
-            "label": "No background image"
+            "label": "No background image",
+            "value": ""
           },
           {
-            "value": "bg_custom",
-            "label": "Custom image (upload below)"
+            "label": "Custom image (upload below)",
+            "value": "bg_custom"
           }
         ]
       },
       {
+        "label": "Upload image",
         "type": "image",
-        "id": "bg_custom.png",
-        "label": "Upload image"
+        "id": "bg_custom.png"
       },
       {
+        "label": "Image display",
         "type": "radio",
         "id": "bg_image_display",
-        "label": "Image display",
         "options": [
           {
-            "value": "bg_image_title",
-            "label": "Title"
+            "label": "Title",
+            "value": "bg_image_title"
           },
           {
-            "value": "bg_image_stretch",
-            "label": "Stretch"
+            "label": "Stretch",
+            "value": "bg_image_stretch"
           }
         ]
       }
