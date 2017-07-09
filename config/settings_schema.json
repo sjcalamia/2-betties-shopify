@@ -77,6 +77,32 @@
         "info": "Used for neutral backgrounds and whatnot"
       },
       {
+        "content": "Header colors",
+        "type": "header"
+      },
+      {
+        "label": "Header Text Color",
+        "type": "color",
+        "id": "color_header_text",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Header Logo Color",
+        "type": "color",
+        "id": "color_header_logo",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Header Background Color",
+        "type": "color",
+        "id": "color_header_bg",
+        "default": "#ffffff"
+      },
+      {
+        "content": "Footer colors",
+        "type": "header"
+      },
+      {
         "content": "Text colors",
         "type": "header"
       },
