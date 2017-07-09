@@ -36,6 +36,13 @@
       },
       {
         "type": "color",
+        "id": "color_highlight_second",
+        "label": "Second Hightlight color",
+        "default": "#f06060",
+        "info": "Used for buttons, sale badge, text link and error states"
+      },
+      {
+        "type": "color",
         "id": "color_accent",
         "label": "Accent color",
         "default": "#f3b562",
@@ -50,10 +57,24 @@
       },
       {
         "type": "color",
+        "id": "color_additional_second",
+        "label": "Second Additional color",
+        "default": "#8cbeb2",
+        "info": "Used for succsesful notification"
+      },
+      {
+        "type": "color",
         "id": "color_inverse",
         "label": "Inverse color",
         "default": "#ffffff",
         "info": "Used for inverse text on darken background, background for social media buttons"
+      },
+      {
+        "type": "color",
+        "id": "color_neutral",
+        "label": "Neutral color",
+        "default": "#f4f4f4",
+        "info": "Used for neutral backgrounds and whatnot"
       },
       {
         "type": "header",
@@ -61,9 +82,27 @@
       },
       {
         "type": "color",
+        "id": "color_menu_text",
+        "label": "Menu Link Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_menu_text_active",
+        "label": "Menu Active Link Text",
+        "default": "#f4f4f4"
+      },
+      {
+        "type": "color",
         "id": "color_body_text",
         "label": "Body text",
         "default": "#5c4b51"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text_light",
+        "label": "Body Text Light",
+        "default": "#fceb91"
       },
       {
         "type": "color",
