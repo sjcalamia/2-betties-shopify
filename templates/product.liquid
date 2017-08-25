@@ -1,6 +1,6 @@
 <div id="container" class="parallax  {% unless product.featured_image.size > 0 %} product-without-image{% endunless %}">
   <div class="parallax__back">
-    {% include 'product-slideshow' %}
+    {% include 'product-hero' %}
   </div>
 
   <div class="parallax__base">
@@ -9,20 +9,18 @@
         <div itemscope itemtype="http://schema.org/Product" class="product product--lg grid__item one-whole">
           <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
           <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
-          <h1 itemprop="name" class="product__title {% if product.featured_image.size > 0 %}fade-up{% endif %}">{{ product.title }}</h1>
-          <div class="product__info {% if product.featured_image.size > 0 %}fade-up{% endif %}">
-            <span class="product__spec">
-
-              {% if product.type != blank %}
-                {{ product.type }} |
-              {% endif %}
-
+          <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
+          <h2 itemprop="type" class="product_type">{% if product.type != blank %}{{ product.type }}{% endif %}</h2>
+          {% include 'nuts.svg' %}
+          {% include 'lonealmond.svg' %}
+          <div class="product__info">
+            <span class="product__spec">6 per box |&nbsp;
               {% if product.available %}
                 {{ 'products.general.in_stock' | t }}
               {% else %}
                 {{ 'products.general.out_stock' | t }}
               {% endif %}
-
+              {% comment %}
               {% if settings.product_size_unit_enable %}
                 |
                 {% if product.first_available_variant.option1 != 'Default Title' %}
@@ -31,13 +29,14 @@
                   {{ product.first_available_variant.weight_unit }}
                 {% endif %}
               {% endif %}
+              {% endcomment %}
             </span>
 
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="product__expense">
               <meta itemprop="priceCurrency" content="{{ shop.currency }}">
               <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
-              <span class="product__price"><span itemprop="price" class="money">{{ product.price | money }}</span></span>
+              <span class="product__price js-price-and-value"><span itemprop="price" class="js-total-price money">{{ product.price | money }}</span></span>
 
               {% if product.variants.first.option1 != 'Default Title' %}
                 {% capture weight_unit %}{{ product.variants.first.option1 }}{% endcapture %}
@@ -107,7 +106,7 @@
                     <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
                     <span class="icon icon--arrow-left js-down-quantity"></span>
                   </div>
-                  <span class="js-price-and-value">x <span class="money">{{ product.price | money }}</span> = <span class="js-total-price money">{{ product.price | money }}</span></span>
+                  <span class="js-price-and-value"><span class="money hide">{{ product.price | money }}</span></span>
                 </div>
                 <div class="form__row">
                   <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
@@ -195,7 +194,7 @@
     </div> <!-- End wrapper -->
 
 
-    {% if settings.product_share_btns_anable %}
+    {% if settings.product_share_btns_enable %}
       <div class="{% if product.featured_image.size > 0 %}fade-up delay-two{% endif %}">
         {% comment %}
         Snippet for social media buttons

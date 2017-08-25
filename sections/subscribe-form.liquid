@@ -3,41 +3,38 @@
   	content: "{{ section.settings.subheading_overlap }}";
   }
 </style>
+<!-- SVGs -->
+{%- include 'nuts.svg' -%}
+{%- include 'lonealmond.svg'-%}
 <section class="section section--subscribe clearfix">
-  <div class="wrapper">
-    <div class="grid">
-      <div class="grid__item one-whole">
-        <div class="heading-block">
-        {% comment %}
-          Subscribe form headings
-          {% endcomment %}
-          {% if section.settings.heading_html != blank %}
-            <h3 class="section-heading heading--page">{{ section.settings.heading_html | upcase }}</h3>
-          {% endif %}
-        </div>
+    <div class="heading-block">
+    {% comment %}
+      Subscribe form headings
+      {% endcomment %}
+      {% if section.settings.heading_html != blank %}
+        <h3 class="section-heading heading--page">{{ section.settings.heading_html }}</h3>
+      {% endif %}
+      {% if section.settings.lede != blank %}
+        <p class="section__info text-center">{{ section.settings.lede }}</p>
+      {% endif %}
+    </div>
 
-        <div class="form-wrapper">            
-          {% if section.settings.subheading != blank %}
-            <p class="section__info text-center">{{ section.settings.subheading }}</p>
-          {% endif %}
-        
-          {% if settings.subscribe_form_variant == 'mailchimp' %}
-            {% comment %}
-            Snippet for MailChimp subscribe form
-            For setting go to Admin -> Theme -> Customize Theme -> Homepage
-            {% endcomment %}
-            {% include 'subscribe-form-mailchimp' %}
-          {% elsif settings.subscribe_form_variant == 'standart' %}
-            {% comment %}
-            Snippet for standart (Shopify) subscribe form
-            For setting go to Admin -> Theme -> Customize Theme -> Homepage
-            {% endcomment %}
-            {% include 'subscribe-form-shopify'%}
-          {% endif %}
-        </div> <!-- End form-wrapper -->
-      </div> <!-- End grid__item -->
-    </div> <!-- End grid -->
-  </div> <!-- End wrapper -->
+    <div class="form-wrapper">
+
+      {% if settings.subscribe_form_variant == 'mailchimp' %}
+        {% comment %}
+        Snippet for MailChimp subscribe form
+        For setting go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        {% include 'subscribe-form-mailchimp' %}
+      {% elsif settings.subscribe_form_variant == 'standart' %}
+        {% comment %}
+        Snippet for standart (Shopify) subscribe form
+        For setting go to Admin -> Theme -> Customize Theme -> Homepage
+        {% endcomment %}
+        {% include 'subscribe-form-shopify'%}
+      {% endif %}
+    </div> <!-- End form-wrapper -->
 </section>
 
 {% schema %}
@@ -52,9 +49,9 @@
       },
       {
         "type": "text",
-        "id": "subheading",
-        "label": "Subheading",
-        "default": "Join folks at Foodly family to get the latest news and the best offers"
+        "id": "lede",
+        "label": "Lede | Teaser text",
+        "default": "Find out what's shakin' and mostly bakin' in our world. SIgn up today for the latest news and events, plus special offers and more. Those in-the-know get the sweetest deals!"
       },
 	  {
         "type": "text",

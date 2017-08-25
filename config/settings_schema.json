@@ -3,32 +3,27 @@
     "name": "theme_info",
     "theme_name": "2Betties - Foodly Clone",
     "theme_author": "Pretty Sneaky Sis",
-    "theme_version": "1.7.9",
+    "theme_version": "0.9",
     "theme_support_url": "https:\/\/congruityhub.ticksy.com\/",
     "theme_documentation_url": "http:\/\/foodly.gozha.net\/documentation\/"
   },
-  {
-    "name": "Colors",
+  { "name": "Colors",
     "settings": [
-      {
-        "content": "Theme colors",
+      { "content": "Theme colors",
         "type": "header"
       },
-      {
-        "label": "Body background color",
+      { "label": "Body background color",
         "type": "color",
         "id": "color_body_bg",
         "default": "#ffffff"
       },
-      {
-        "label": "Primary color",
+      { "label": "Primary color",
         "type": "color",
         "id": "color_primary",
         "default": "#5c4b51",
         "info": "Brand color. Used for hover state of buttons and "
       },
-      {
-        "label": "Hightlight color",
+      { "label": "Hightlight color",
         "type": "color",
         "id": "color_highlight",
         "default": "#f06060",
@@ -101,6 +96,36 @@
       {
         "content": "Footer colors",
         "type": "header"
+      },
+      {
+        "label": "Footer Text Color",
+        "type": "color",
+        "id": "color_footer_text",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Footer Logo Color",
+        "type": "color",
+        "id": "color_footer_logo",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Footer Background Color",
+        "type": "color",
+        "id": "color_footer_bg",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Footer Icon Foreground Color",
+        "type": "color",
+        "id": "color_footer_icon_fg",
+        "default": "#ffffff"
+      },
+      {
+        "label": "Footer Icon Background Color",
+        "type": "color",
+        "id": "color_footer_icon_bg",
+        "default": "#ffffff"
       },
       {
         "content": "Text colors",
@@ -184,40 +209,32 @@
       }
     ]
   },
-  {
-    "name": "Typography",
+  { "name": "Typography",
     "settings": [
-      {
-        "type": "header",
+      { "type": "header",
         "content": "Body font"
       },
-      {
-        "type": "select",
+      { "type": "select",
         "id": "font_body_family",
         "label": "Font family",
         "options": [
-          {
-            "value": "Franklin-Gothic-UFW",
+          { "value": "franklin-gothic-urw-comp, sans-serif",
             "label": "Franklin Gothic",
-            "group": "Sans-serif"
+            "group": "Sans-serif | Typekit"
           },
-          {
-            "value": "Sofia",
+          { "value": "sofia-pro-soft, sans-serif",
             "label": "Sofia",
-            "group": "Sans-serif"
+            "group": "Sans-serif | Typekit"
           },
-          {
-            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+          { "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
             "group": "Sans-serif"
           },
-          {
-            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+          { "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
             "label": "Gill Sans",
             "group": "Sans-serif"
           },
-          {
-            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          { "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
             "label": "Helvetica Neue",
             "group": "Sans-serif"
           },
@@ -370,6 +387,16 @@
         "id": "font_header_page_family",
         "label": "Font family",
         "options": [
+          {
+            "value": "franklin-gothic-urw-comp, sans-serif",
+            "label": "Franklin Gothic",
+            "group": "Sans-serif | Typekit"
+          },
+          {
+            "value": "sofia-pro-soft, sans-serif",
+            "label": "Sofia",
+            "group": "Sans-serif | Typekit"
+          },
           {
             "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
@@ -535,6 +562,16 @@
         "label": "Font family",
         "options": [
           {
+            "value": "franklin-gothic-urw-comp, sans-serif",
+            "label": "Franklin Gothic",
+            "group": "Sans-serif | Typekit"
+          },
+          {
+            "value": "sofia-pro-soft, sans-serif",
+            "label": "Sofia",
+            "group": "Sans-serif | Typekit"
+          },
+          {
             "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
             "group": "Sans-serif"
@@ -699,6 +736,16 @@
         "label": "Font family",
         "options": [
           {
+            "value": "franklin-gothic-urw-comp, sans-serif",
+            "label": "Franklin Gothic",
+            "group": "Sans-serif | Typekit"
+          },
+          {
+            "value": "sofia-pro-soft, sans-serif",
+            "label": "Sofia",
+            "group": "Sans-serif | Typekit"
+          },
+          {
             "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
             "group": "Sans-serif"
@@ -857,6 +904,16 @@
         "label": "Font family",
         "options": [
           {
+            "value": "franklin-gothic-urw-comp, sans-serif",
+            "label": "Franklin Gothic",
+            "group": "Sans-serif | Typekit"
+          },
+          {
+            "value": "sofia-pro-soft, sans-serif",
+            "label": "Sofia",
+            "group": "Sans-serif | Typekit"
+          },
+          {
             "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
             "group": "Sans-serif"
@@ -1004,6 +1061,46 @@
         ],
         "default": "Google_Alex+Brush"
       }
+    ]
+  },
+  {
+    "name": "Breakpoints",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Breakpoints"
+      },
+      {
+        "type": "text",
+        "id": "mq_mobile_width",
+        "label": "Mobile Width Breakpoint",
+        "default": "480px"
+      },
+      {
+        "type": "text",
+        "id": "mq_tablet_width",
+        "label": "Tablet Width Breakpoint",
+        "default": "769px"
+      },
+      {
+        "type": "text",
+        "id": "mq_laptop_width",
+        "label": "Laptop Width Breakpoint",
+        "default": "1024px"
+      },
+      {
+        "type": "text",
+        "id": "mq_desktop_width",
+        "label": "Desktop Width Breakpoint",
+        "default": "1200px"
+      },
+      {
+        "type": "text",
+        "id": "mq_wide_width",
+        "label": "Wide Width Breakpoint",
+        "default": "1537px"
+      }
+
     ]
   },
   {
@@ -1476,7 +1573,7 @@
       },
       {
         "type": "checkbox",
-        "id": "article_share_btns_anable",
+        "id": "article_share_btns_enable",
         "label": "Show share buttons"
       },
       {

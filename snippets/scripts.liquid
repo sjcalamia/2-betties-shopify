@@ -242,8 +242,8 @@
         prevButton: '.homepage-swiper-btn-prev',
         preventClicks: false,
         spaceBetween: 3,
-        slidesPerGroup: 4,
-        slidesPerView: 4,
+        slidesPerGroup: 3,
+        slidesPerView: 3,
         loop: false,
         autoplay: autoplaySetting,
         onInit: function(carouselHomepage) {
@@ -278,6 +278,23 @@
           }
         }
       });
+    });
+  }
+
+  /*
+    ---------------------------------------------------------
+    Animated SVG backgrounds
+   (Sections/subscribe-form.liquid)
+    ---------------------------------------------------------
+  */
+  var walnut, threealmonds, nuts, maple;
+  if (document.querySelector('.section-subscribe')) {
+    require(['Snap'], function(Snap) {
+      walnut = Snap("#walnut");
+      threealmonds = Snap("#threealmonds");
+      nuts = Snap("#nuts");
+      maple = Snap("#maple");
+
     });
   }
 

@@ -85,14 +85,14 @@
   },
   "cart": {
     "general": {
-      "heading": "Your Food bag",
+      "heading": "Your bag",
       "product_title": "Product Title",
       "quantity": "QTY",
       "price": "Price",
       "remove": "x",
       "total": "Total",
       "total_information": "Price excludes delivery, which is applied at checkout. Orders will be processed in USD",
-      "note_heading": "Note to Foodly store",
+      "note_heading": "Note to 2Betties",
       "note_placeholder": "Leave your special requirements here",
       "checkout_button": "Proceed to checkout",
       "additional_information_heading": "Choose package",
@@ -113,10 +113,11 @@
     },
     "cart_page": {
       "continue_shopping": "Continue shopping",
-      "within": "within Foodly collections"
+      "within": ""
     }
   },
   "collections": {
+    "shop_title": "Snacks with integrity.",
     "list_collections": {
       "heading": "Product collections"
     },
@@ -147,7 +148,7 @@
       "kilogram": "kilogram"
     },
     "product_page": {
-      "description_title": "Description",
+      "description_title": "Product Description",
       "nutritional_title": "Nutritional value",
       "special_recipe_title": "Special Recipe",
       "special_recipe_license_mark": "Credits:",
@@ -184,7 +185,7 @@
     "search": {
       "heading": "Search",
       "placeholder": "Looking for...",
-      "placeholder_for_header": "Type your search request",
+      "placeholder_for_header": "I'm looking for...",
       "header_full_placeholder_normal_state": "I’m looking for...",
       "header_full_placeholder_voice_state": "Recording...",
       "header_full_placeholder_processing_state": "Wait a bit — server is trying its best",

@@ -1,10 +1,36 @@
 {%- unless settings.favicon_enable -%}
-  <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'favicon_apple-touch-icon-152x152.png' | asset_url }}">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'favicon_apple-touch-icon-144x144.png' | asset_url }}">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'favicon_apple-touch-icon-114x114.png' | asset_url }}">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'favicon_apple-touch-icon-72x72.png' | asset_url }}">
-  <link rel="apple-touch-icon-precomposed" href="{{ 'favicon_apple-touch-icon-57x57.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="57x57" href="{{ 'apple-icon-57x57.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="60x60" href="{{ 'apple-icon-60x60.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="72x72" href="{{ 'apple-icon-72x72.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{ 'apple-icon-76x76.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="114x114" href="{{ 'apple-icon-114x114.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="120x120" href="{{ 'apple-icon-120x120.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="144x144" href="{{ 'apple-icon-144x144.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="152x152" href="{{ 'apple-icon-152x152.png' | asset_url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-icon-180x180.png' | asset_url }}">
+<link rel="manifest" href="{{ 'manifest.json' | asset_url }}">
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ 'apple-touch-icon-57x57.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'apple-touch-icon-114x114.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'apple-touch-icon-72x72.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'apple-touch-icon-144x144.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ 'apple-touch-icon-60x60.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ 'apple-touch-icon-120x120.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ 'apple-touch-icon-76x76.png' | asset_url }}" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'apple-touch-icon-152x152.png' | asset_url }}" />
+<link rel="icon" type="image/png" href="{{ 'favicon-196x196.png' | asset_url }}" sizes="196x196" />
+<link rel="icon" type="image/png" href="{{ 'favicon-96x96.png' | asset_url }}" sizes="96x96" />
+<link rel="icon" type="image/png" href="{{ 'favicon-32x32.png' | asset_url }}" sizes="32x32" />
+<link rel="icon" type="image/png" href="{{ '/favicon-16x16.png' | asset_url }}" sizes="16x16" />
+<link rel="icon" type="image/png" href="{{ 'favicon-128.png' | asset_url }}" sizes="128x128" />
+<meta name="application-name" content="2Betties"/>
+<meta name="msapplication-TileColor" content="{{ settings.color_primary }}" />
+<meta name="msapplication-TileImage" content="{{ 'mstile-144x144.png' | asset_url }}" />
+<meta name="msapplication-square70x70logo" content="{{ 'mstile-70x70.png' | asset_url }}" />
+<meta name="msapplication-square150x150logo" content="{{ 'mstile-150x150.png' | asset_url }}" />
+<meta name="msapplication-wide310x150logo" content="{{ 'mstile-310x150.png' | asset_url }}" />
+<meta name="msapplication-square310x310logo" content="{{ 'mstile-310x310.png' | asset_url }}" />
+
 {%- else -%}
   <link rel="shortcut icon" href="{{ settings.favicon | img_url: '16x' | format: 'ico' }}">
 {%- endunless -%}

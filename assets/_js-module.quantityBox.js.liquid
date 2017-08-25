@@ -6,7 +6,7 @@ define(['jquery', 'shopInfo', 'shopifyCommon', 'utils'], function($, shopInfo, S
       DOM : {}
     };
 
-    this.options = utils.mergeOptions(defOpt, options);    
+    this.options = utils.mergeOptions(defOpt, options);
     this.DOM     = utils.domFinder(this.options.DOM);
 
     for (var i = 0, max = this.DOM.quantityFieldsAll.length; i < max; i++) {
@@ -27,17 +27,17 @@ define(['jquery', 'shopInfo', 'shopifyCommon', 'utils'], function($, shopInfo, S
 
     var quantityParentDOM = target.closest('.quantity-field').parentElement;
 
-    var totalPriceDOM     = quantityParentDOM.querySelector('.js-total-price');
+    var totalPriceDOM     = document.querySelector('.js-total-price');
     var productPriceDOM   = quantityParentDOM.querySelector('.js-price-and-value > .money');
     var productPrice      = productPriceDOM.innerHTML;
-    
+
     productPrice = productPrice.replace(/[^0-9.]/g, '');
     productPrice = parseFloat(productPrice.replace(/\./g, ''));
 
     var total = target.value * productPrice;
-    
+
     totalPriceDOM.textContent = Shopify.formatMoney(total, shopInfo.moneyFormat);
-    
+
     {% if settings.show_multiple_currencies %}
       if ( totalPriceDOM && totalPriceDOM.getAttribute('data-currency') !== '' ){
         totalPriceDOM.removeAttribute('data-currency-' + Currency.currentCurrency.toLowerCase());
@@ -82,5 +82,5 @@ define(['jquery', 'shopInfo', 'shopifyCommon', 'utils'], function($, shopInfo, S
     });
   };
 
-  return QuantityBox;  
+  return QuantityBox;
 })

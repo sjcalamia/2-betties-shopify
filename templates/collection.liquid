@@ -1,15 +1,29 @@
+<!-- Begin templates/collection.liquid -->
 <section class="section section--page">
+  {%- if collection == "AllProductsCollection" -%}
+  <section class="hero full_width">
+    <h1 class="shop title script">Our Products</h1>
+  </section>
+  {%- endif -%}
   <div class="wrapper">
     <div class="page-description">
-      <h1 class="heading--page">{{ collection.title }}</h1>
+      <h2 class="heading--page">
+        {%- if collection.title == 'Products' -%}
+          {{ 'collections.shop_title' | t }}
+        {%- else -%}
+          {{ collection.title }}
+        {%- endif -%}
+      </h2>
+    {% comment %}
       <h2 class="subheading--page-small"><em>{{ collection.products.size }} {{ 'collections.product_list.products_in_collection' | t }}</em></h2>
+    {% endcomment %}
     </div>
 
 
     {% comment %}
     Snippet for toolbar with types of view and sorting options
-    {% endcomment %}
     {% include 'collection-toolbar' %}
+    {% endcomment %}
 
     {% comment %}
     Show products (grid view)

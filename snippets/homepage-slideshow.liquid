@@ -1,6 +1,9 @@
 {% comment %}
-Homepage slideshow 
+Homepage slideshow
 For settings go to Admin -> Theme -> Customize Theme -> Home page Slideshow
+----
+THIS DOES NOT SEEM TO BE USED AND IS A USELESS SNIPPET. Thanks Foodly. Heh.
+----
 {% endcomment %}
 <!-- Flexslider -->
 <div class="flexslider flexslider-thumb flexslider-thumb--homepage">
@@ -20,24 +23,22 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page Slideshow
       {% capture slide_price %}homepage_slide_{{ slide_num }}_price{% endcapture %}
       {% capture slide_price_desc %}homepage_slide_{{ slide_num }}_price_desc{% endcapture %}
 
-
 	    <li class="slide slide--{{ slide_num }}" data-thumb="{{ slide_thumb_img | asset_url | small }}">
-	      
+
 	    	  {{ slide_img | asset_url | img_tag: '1024x1024' }}
-	    	  
+
 	    	  {% if settings[slide_text_enable] %}
 				  	<div class="slide__info-wrapper">
-              <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_heading] | upcase }}</a></h1>
-              <h2 class="subheading--page slide__subheading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_subheading] }}</em></a></h2>
+              <h1 class="heading--page slide__heading"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_heading] }}<br/><span class="tobe">2B</span><br/>{{ settings[slide_subheading] }}</a></h1>
               <div class="slide__price-point">
                 <div class="slide__price"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}">{{ settings[slide_price] }}</a></div>
                 <div class="slide__desc"><a class="slide__link" href="{{ settings[slide_link] }}" title="{{ settings[slide_heading] }}"><em>{{ settings[slide_price_desc] }}</em></a></div>
               </div>
             </div>
 	    	  {% endif %}
-	    	
+
 	    </li>
-	    
+
     {% endfor %}
   </ul>
 </div>

@@ -1,6 +1,5 @@
 {%- comment -%}
 Strip span tags
-{%- endcomment -%}
 {%- assign content = content_html | split: ']<' | join: '] <' -%}
 {%- assign content = content | split: '>[' | join: '> [' -%}
 {%- assign content = content | split: '[</span>' | join: '[' -%}
@@ -9,6 +8,7 @@ Strip span tags
 {%- assign content = content | split: '</span><span>]' | join: ']' -%}
 {%- assign content = content | split: '[<span>' | join: '[' -%}
 {%- assign content = content | split: '</span>]' | join: ']' -%}
+{%- endcomment -%}
 
 {%- comment -%}
 Strip P tags
@@ -39,3 +39,8 @@ Strip pre tags
 {%- assign content = content | split: '</pre><pre>]' | join: ']' -%}
 {%- assign content = content | split: '[<pre>' | join: '[' -%}
 {%- assign content = content | split: '</pre>]' | join: ']' -%}
+
+{%- comment -%}
+Replace double dash with em dash
+{%- endcomment -%}
+{%- assign content = content | replace: '--', '&mdash;' -%}

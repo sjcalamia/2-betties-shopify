@@ -7,13 +7,13 @@
     <div class="grid__item one-whole">
       {% assign slider = false %}
       {% assign slider_and_img = false %}
-      
+
       {% assign  content_html =  page.content %}
 
       {% comment %}
       Strip unnecessary html
-      {% endcomment %}
       {% include 'strip_html_tags' with content_html %}
+      {% endcomment %}
 
       {% if content contains '[/slider]' %}
         {% assign slider = true %}

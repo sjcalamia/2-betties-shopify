@@ -110,7 +110,7 @@ define(['snapSVG'], function(Snap){
 
         // Author section
         var authorContainer = document.createElement("div");
-        var authorPhoto = document.createElement("img");        
+        var authorPhoto = document.createElement("img");
         var authorTitleInfoContainer = document.createElement("div");
         var authorTitle = document.createElement("h2");
         var authorInfo = document.createElement("span");
@@ -130,16 +130,16 @@ define(['snapSVG'], function(Snap){
 
           if ( _this.pulseAnimation ) {
             _this._popupButton.classList.add('pulse');
-            _this._pulseShadowBlock.classList.add('pulse-shadow');            
+            _this._pulseShadowBlock.classList.add('pulse-shadow');
           }
-          
+
           _this._popupButton.classList.remove('showUp');
         });
 
         this._popupButton.setAttribute('data-morph-start-open', 'M340,170c0,159.5,0,159.5-160,159.5S20,329.5,20,170S20,10.5,180,10.5C341,10.5,340,10.5,340,170L340,170');
         this._popupButton.setAttribute('data-morph-open', 'M360,363H0V-23h360V363z');
 
-        this._popupButton.innerHTML = '<svg class="svg-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 360 340"><defs><filter id="dropshadow" height="130%"><feGaussianBlur in="SourceAlpha" stdDeviation="15"/><feOffset dx="2" dy="2" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/> </feMerge></filter></defs><path  d="M293.1,283.1c-61.8,61.8-163.9,61.7-225.9-0.4S5.1,118.7,66.9,56.9s163.9-61.7,225.9,0.4S354.9,221.3,293.1,283.1L293.1,283.1"  filter="url(#dropshadow)"/></svg>';
+        this._popupButton.innerHTML = '<svg class="svg-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="63" viewBox="0 0 64 63"> <defs> <filter id="dropshadow" height="130%"> <feGaussianBlur in="SourceAlpha" stdDeviation="15"/> <feOffset dx="2" dy="2" result="offsetblur"/> <feComponentTransfer> <feFuncA type="linear" slope="0.2"/> </feComponentTransfer> <feMerge> <feMergeNode/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <path  d="M11.2082413,56.9090795 C-2.68925494,45.3506004 -3.8244577,25.5205251 8.70770874,10.6030981 C20.6684157,-3.62404725 41.6540072,-3.52478809 54.4812084,10.846487 C64.0630278,21.2696046 68.6859946,41.1250611 57.3303358,52.2076402 C46.4108745,63.4701549 24.4834413,67.3294777 11.2082413,56.9090795"  filter="url(#dropshadow)"/> </svg>';
 
         this._popupButton.addEventListener('click', function(e){
           _this._openPopup(e);
@@ -166,22 +166,22 @@ define(['snapSVG'], function(Snap){
 
         authorContainer.className += ' gruit-popup__author ';
         authorContainer.appendChild(authorPhoto);
-        authorContainer.appendChild(authorTitleInfoContainer);  
+        authorContainer.appendChild(authorTitleInfoContainer);
 
-        this._popupNewsContainer.appendChild(authorContainer);  
+        this._popupNewsContainer.appendChild(authorContainer);
 
         // News section
-        newsTitle.className += ' gruit-popup__news-title '; 
+        newsTitle.className += ' gruit-popup__news-title ';
         newsTitle.innerHTML += this.newsTitle;
 
         newsText.className += ' gruit-popup__news-text ';
-        newsText.innerHTML += this.newsText;  
+        newsText.innerHTML += this.newsText;
 
         this._closeButton.className += ' gruit-popup__close-btn ';
         this._closeButton.addEventListener('click', function(){
           _this._closePopup();
         });
-        
+
         this._popupNewsContainer.appendChild(newsTitle);
         this._popupNewsContainer.appendChild(newsText);
         this._popupNewsContainer.appendChild(this._closeButton);
@@ -189,11 +189,11 @@ define(['snapSVG'], function(Snap){
         // Link section
         link.className += ' gruit-popup__link ';
         link.href = this.linkHref;
-        link.innerHTML += this.linkText + ' <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12"><path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/></svg>'; 
+        link.innerHTML += this.linkText + ' ';
         link.target = '_blank';
         link.alt = this.linkText;
 
-        this._popupNewsContainer.appendChild(link);  
+        this._popupNewsContainer.appendChild(link);
 
         // Insert all elements into the container
         this._popupNewsContainer.className += ' gruit-popup__news ';
@@ -207,11 +207,11 @@ define(['snapSVG'], function(Snap){
 
     _insertCSS: {
       value: function() {
-        var cssFile = document.createElement('link'); 
+        var cssFile = document.createElement('link');
         cssFile.rel = 'stylesheet';
         cssFile.href = this.pathToCSS;
 
-        var elemInsert = document.getElementsByTagName('link')[0]; 
+        var elemInsert = document.getElementsByTagName('link')[0];
         elemInsert.parentNode.insertBefore(cssFile, elemInsert);
       }
     },
@@ -235,11 +235,11 @@ define(['snapSVG'], function(Snap){
             } );
           } );
 
-          setTimeout( function() { 
+          setTimeout( function() {
              _this._popupButton.classList.add('gruit-popup-sizeup');
           }, 150 );
 
-          setTimeout( function() { 
+          setTimeout( function() {
             _this._popupContainer.classList.remove('close');
             _this._popupContainer.classList.add('open', 'read');
           }, 500 );
@@ -264,7 +264,7 @@ define(['snapSVG'], function(Snap){
             _this._popupContainer.classList.remove('animation');
           } );
 
-          setTimeout( function() { 
+          setTimeout( function() {
              _this._popupButton.classList.remove('gruit-popup-sizeup');
           }, 150 );
 
@@ -312,7 +312,7 @@ define(['snapSVG'], function(Snap){
     _animationInit: {
       value: function() {
         var svgElement = this._popupButton.querySelector('svg');
-        
+
         var snapObject = Snap( svgElement );
         this._animPaths.pathButton = snapObject.select('path');
         this._animPaths.pathsButton = {
@@ -347,10 +347,10 @@ define(['snapSVG'], function(Snap){
   });
 
   return GruitPopup;
-  
+
 });
-  
-/* 
+
+/*
 var global = (function(){
 
   global.createGruitPopup = function(options) {

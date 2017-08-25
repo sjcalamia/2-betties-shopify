@@ -1,0 +1,93 @@
+<article class="nutrition">
+  <header class="hero heading--page">
+    <h1 class="hed title">{{ page.title }}</h1>
+    <h2 class="dek subtitle">Feed your mind.</h2>
+  </header>
+  <section class="wrapper grid">
+    <header class="intro">
+      <h3 class="hed">Why you should be nuts about nuts.</h3>
+      <p class="lede">They taste great! And they satisfy your hunger. Nuts are an excellent source of fiber and mono- and poly- unsaturated fats. These healthy fats help lower LDL (bad cholesterol) and raise HDL (good cholesterol) unlike the fats in processed foods. Did we mention they taste great?</p>
+    </header>
+    <h4 class="dek">Cracking the benefits:</h4>
+    <section class="grid__item wrapper almonds lesson">
+      <figure class="left"><img class="" src='{{ "almonds.jpg" | asset_img_url: "large" }}' alt=""></figure>
+      <div class=" right qa">
+        <h3 class="question">Why are almonds good</br>for you?</h3>
+        <p class="answer">Almonds are good for your muscles, bones, and teeth since they are a great source of calcium and magnesium.</p>
+      </div>
+    </section>
+    <section class="grid__item wrapper pumpkin lesson">
+      <div class="left qa">
+        <h3 class="question">Why are pumpkin seeds good for you?</h3>
+        <p class="answer">They're a rich source of zinc and a supplier of Vitamins E, K, and B. Feeling blue? They contain tryptophan which helps improve your mood. Their healthy fats and hight magnesium content are good for the heart and sore muscles. A great post-workout food for recovery.</p>
+      </div>
+      <figure class="right"><img src='{{ 'pumpkin-seeds.jpg' | asset_img_url: "large" }}' alt=""></figure>
+    </section>
+    <section class="grid__item wrapper walnuts lesson">
+      <figure class="left"><img src='{{ 'walnuts.jpg' | asset_img_url: "large" }}' alt=""></figure>
+      <div class="right qa">
+        <h3 class="question">Why are walnuts good</br>for you?</h3>
+        <p class="answer">You may be shell shocked to know just how good walnuts are for you. High in fiber and healthy fats, walnuts can improve your blood-vessel health and circulation. They're also known to help curb appetite and hunger pains. Some evidence has even shown that when consumed regularly, walnuts can help deter memory loss.</p>
+      </div>
+    </section>
+  </section>
+  <section class="wrapper grid sugars">
+    <article class="lesson grid__item one-whole">
+      <h3>Natural vs. Refined Sugars.</h3>
+      <p>Sugar, regardless of its source, is a simple carbohydrate converted into glucose that the body then uses for energy. There is a big difference, however, between natural sugar and added sugar, refined sugar, and non-refined sugar. Added sugar can be refined or non-refined. Unrefined natural sweeteners such as maple syrup and honey have more beneficial nutrients compared to refined sugars—including table sugar, high fructose corn syrup, beet, or rice syrups.</p>
+      <p><strong>The American Heart Association suggests an added sugar limit per day for:</strong></p>
+      <ul>
+        <li>Women 24 grams or about 6 teaspoons of sugar (100 calories) and,</li>
+        <li>Men 36 grams or about 9 teaspoons of sugar (150 calories.)</li>
+      </ul>
+    </article>
+  </section>
+  <section class="hero sugars">
+
+  </section>
+  <section class="wrapper grid protein">
+    <div class="grid__item one-whole">
+      <h3>Power up your protein knowledge.</h3>
+      <p>Protein aids the healthy development of your organs, tissues, muscles, hair, and nails. Additionally, protein helps support the absorption of important nutrients use universally by the body to develop, grow, and function normally. This incredible enzyme and hormone producer is the building block of bones, muscles, cartilage, skin, and blood. It also helps to reduce hunger and boost metabolism—helping you to lose/maintain your weight while stabilizing your blood sugar levels. Protein is also known to help improve your ability to learn and concentrate—reducing brain fog and boosting your energy levels.</p>
+      <ul>
+        <li>The Recommended Dietary Allowance (RDA) is 0.8 grams of protein per kilogram of body weight or 0.36 grams per pound</li>
+        <li>The average sedentary man should get 56 grams of protein; 46 grams of protein for the average sedentary woman</li>
+        <li>1 Egg has 6 grams of protein, 2 Rounds have 6 grams of protein</li>
+      </ul>
+    </div>
+  </section>
+  <section class="hero protein">
+
+  </section>
+  <section class="wrapper grid nutrition-label">
+    <header class="intro">
+      <h3 class="hed">What to look for on a nutrition label and why.</h3>
+      <p class="dek">Here are some insights and tips to get better acquainted with the Nutritional Facts Label. Understanding of the dos and don'ts (and what's really inside that package) will help you make smarter food choices for you and your family.</p>
+    </header>
+    <figure class="one-whole grid__item">
+      <figure-caption class="one-whole"><h5 class="one-third push--one-third medium-down--hide">Typical Snack-Cookie Label:</h5></figure-caption>
+      <ol type="1" start="1" class="one-third left medium-down--one-whole medium-down--clear">
+        <li>
+          <p><strong>Check the servings and calories&mdash;</strong>if you eat more than a single serving, you're multiplying the number of calories and percentage of the nutrient's Daily Value</p>
+        </li>
+        <li>
+          <p><strong>Make sure you're getting quality calories&mdash;</strong>check the label, read the ingredients and look at the calories. Are they really worth it? It all depends on the nutrients that come with it.</p>
+        </li>
+        <li>
+          <p><strong>Not all fats are created equal&mdash;</strong>Polyunsaturated and monounsaturated fats are considered "good fats" and you'll find them in fish, nuts, and vegetable oil. Saturated fats, trans fats, and cholesterol all lead to potential heart disease and are a big NO NO.</p>
+        </li>
+      </ol>
+      <img src="{{ '101_label.png' | asset_url }}" alt="Sample nutrition label from a common snack cookie." class="one-third medium-down--one-whole" />
+      <ol type="1" start="4" class="one-third right medium-down--one-whole medium-down--clear">
+        <li>
+          <p><strong>Reduce your sodium, reduce your blood pressure&mdash;</strong>processed foods are big producers of sodium in yuour diet. For most people, 2,300 milligrams is current recommended limit and not necessarily recommended daily allowance. For health sake, consider lowering sodium/salt intake and increasing your amount of potassium to help counteract sodium's effect on blood pressure.</p>
+        </li>
+        <li>
+          <p><strong>Beware of sugar&mdash;</strong>and stay away from empty calories. Foods with added refined sugars and few essential nutrients should be consumed sparingly. If added sugar fis the first ingredient listed best to stay clear. Also look for these other added sugars: sucrose, glucose, high fructose corn syrup, corn syrup, beet syrup, rice syrup, maltose nad dextrose</p>
+        </li>
+        <li>
+          <p><strong>Note the first or second ingredients listed&mdash;</strong>these are the primary source of sustenance in the food and contribute to its overall nutritional value.</p>
+        </li>
+      </ol>
+  </section>
+</article>
