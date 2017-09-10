@@ -13,41 +13,23 @@
 {% endfor %}
 
 <footer class="footer {% unless social_enable %}social-disable{% endunless %} {% unless payment_enable %}payment-disable{% endunless %} clearfix" style="{% if section.settings.footer_img_enable %}background-image: url({{ section.settings.img_footer_bg | img_url: '2000x' | format: 'jpg' }}); background-repeat: no-repeat; background-position: 50% 50%;{% else %}background-color: {{ section.settings.color_bg }}{% endif %}">
-  
+
   {% comment %}
   Instagram feed
   For setting go to Admin -> Theme -> Customize Theme -> Footer
   {% endcomment %}
-  
-  {% if section.settings.foter_above == 'instagram' %}
+
+  {% if section.settings.footer_above == 'instagram' %}
     <div class="instagram-feed-container">
-      <h2 class="heading--page">{{ section.settings.instagram_heading | upcase }}</h2>
+      <h2 class="heading--page">{{ section.settings.instagram_heading }}</h2>
       <h4 class="subheading--page-small"><em>{{ section.settings.instagram_subheading }}</em></h4>
       <div class="instagram-feed" id="instafeed"></div>
     </div>
-  
-  {% elsif section.settings.foter_above == 'subscribe_form' %}
-    <div class="subscribe-form subscribe-form--footer">
-      <h2 class="heading--page">{{ section.settings.subscribe_heading | upcase }}</h2>
-      <h4 class="subheading--page-small"><em>{{ section.settings.subscribe_subheading }}</em></h4>
-      {% if settings.subscribe_form_variant == 'mailchimp' %}
-        {% comment %}
-        Snippet for MailChimp subscribe form
-        For setting go to Admin -> Theme -> Customize Theme -> Homepage
-        {% endcomment %}
-        {% include 'subscribe-form-mailchimp' %}
-      {% elsif settings.subscribe_form_variant == 'standart' %}
-        {% comment %}
-        Snippet for standart (Shopify) subscribe form
-        For setting go to Admin -> Theme -> Customize Theme -> Homepage
-        {% endcomment %}
-        {% include 'subscribe-form-shopify'%}
-      {% endif %}
-    </div>
   {% endif %}
-        
-  <hr class="hr--clear">
-  
+
+{% assign subscribe_heading = section.settings.subscribe_heading %}
+{% assign subscribe_lede = section.settings.subscribe_subheading %}
+{% include 'subscribe-header' %}
   {% comment %}
   Choose css grid for columns number
   {% endcomment %}
@@ -62,27 +44,27 @@
     {% when 4 %}
       {% assign footer_column_width = 'large--one-quarter medium--one-half one-whole' %}
   {% endcase %}
-  
+
   <div class="wrapper">
     <div class="grid">
-      
+
       {% for block in section.blocks %}
         {% case block.type %}
-      
+
           {% when 'address' %}
       		{% comment %}
             Contact information.
             For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
-            {% endcomment %}       
+            {% endcomment %}
 
       		<div class="grid__item {{ footer_column_width }} footer__item footer__item--contact {% if settings.footer_show_methods_of_payment %}footer__item--contact-half{% endif %}" {{ block.shopify_attributes }}>
               {% if block.settings.address_text != blank %}
-                <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+                <h4 class="heading--add-small">{{ block.settings.title }}</h4>
                 <div>{{ block.settings.address_text }}</div>
               {% endif %}
             </div>
 		  	<!--   -->
-      
+
       	  {% when 'latest_blog' %}
       		{% comment %}
             Latest from blog.
@@ -90,7 +72,7 @@
             {% endcomment %}
 
       		<div class="grid__item {{ footer_column_width }} footer__item footer__item--blog ">
-              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              <h4 class="heading--add-small">{{ block.settings.title }}</h4>
               <div class="footer__item--blog-item">
                 {% assign article = blogs[block.settings.blog].articles.first %}
                 {% if article.image %}
@@ -102,12 +84,12 @@
 
                 {% endif %}
                 <div class="article-desc">
-                  <h5 class="article-title">{{ article.title | link_to: article.url | truncatewords: 6 }}</h5>  
+                  <h5 class="article-title">{{ article.title | link_to: article.url | truncatewords: 6 }}</h5>
                 </div>
               </div>
             </div>
       		<!--   -->
-      
+
       	  {% when 'menu' %}
       		{% comment %}
             Footer menu.
@@ -115,7 +97,7 @@
             {% endcomment %}
 
       		<div class="grid__item {{ footer_column_width }} footer__item footer__item--menu">
-              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              <h4 class="heading--add-small">{{ block.settings.title }}</h4>
               <ul class="footer-list">
                 {% for link in linklists[block.settings.linklist].links %}
                   <li class="footer-list__item">
@@ -125,15 +107,15 @@
               </ul>
             </div>
       		<!--   -->
-      
+
       	  {% when 'social' %}
       		{% comment %}
             Social media icons.
             For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
             {% endcomment %}
-      
+
       		<div class="grid__item {{ footer_column_width }} footer__item footer__item--social">
-              <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+              <h4 class="heading--add-small">{{ block.settings.title }}</h4>
               {% include 'social-links' %}
             </div>
       		<!--   -->
@@ -143,10 +125,10 @@
             Payment Methods.
             For setting go to Admin -> Theme -> Customize Theme -> Section -> Footer
             {% endcomment %}
-      
+
       		<div class="grid__item {{ footer_column_width }}  footer__item footer__item--payments">
               <p class="copyright-mobile">
-                &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+                &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }}
                 {% if section.settings.copyright_link != blank %}
                   <a class="text-link--default" href="{{ section.settings.copyright_link }}" target="_blank" title="{{ section.settings.copyright_link_text }}">{{ section.settings.copyright_link_text }}</a>
                 {% endif %}
@@ -155,7 +137,7 @@
 
                 {% unless shop.enabled_payment_types == empty %}
                   {% assign enabled_payment_types = 'visa,master,american_express,paypal,diners_club,discover,jcb,google' %}
-                  <h4 class="heading--add-small">{{ block.settings.title | upcase }}</h4>
+                  <h4 class="heading--add-small">{{ block.settings.title }}</h4>
                   <ul class="list-payments">
                     {% for type in shop.enabled_payment_types %}
                       {% if enabled_payment_types contains type %}
@@ -175,15 +157,15 @@
                 {% endunless %}
             </div>
       		<!--   -->
-      
+
         {% endcase %}
       {% endfor %}
-      
+
     </div><!-- end grid -->
-  </div><!-- end wrapper-->              
+  </div><!-- end wrapper-->
 
   <p class="copyright">
-  &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }} 
+  &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ 'layout.copyright.right_reserved' | t }}
     {% if section.settings.copyright_link != blank %}
       <a class="text-link--default" href="{{ section.settings.copyright_link }}" target="_blank" title="{{ section.settings.copyright_link_text }}">{{ section.settings.copyright_link_text }}</a>
     {% endif %}
@@ -191,6 +173,10 @@
 
 </footer>
 <!-- *** End footer *** -->
+
+<!-- SVGs -->
+{%- include 'nuts.svg' -%}
+<!-- end SVGs -->
 
 {% schema %}
   {
@@ -224,7 +210,7 @@
       },
       {
         "type": "radio",
-        "id": "foter_above",
+        "id": "footer_above",
         "label": "What show before footer",
         "options": [
           {

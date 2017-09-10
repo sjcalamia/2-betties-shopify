@@ -1,0 +1,11 @@
+<!-- Article: {{ block.settings.info_article }}-->
+{% assign raw_art = block.settings.info_article %}
+{% assign art = articles[block.settings.info_article] %}
+<!-- art img src: {{ art.image.src }}-->
+<!-- art img url: {{ art.url }}-->
+{% capture img %}{{ art.image.src }}{% endcapture %}
+{% capture hed %}{{ art.title }}{% endcapture %}
+{% capture content %}{{ art.excerpt_or_content }}{% endcapture %}
+{% capture img_tag %}<img width="100%" src="{{ art.image.src | img_url: 'large' }}" />{% endcapture %}
+
+{%- include 'info-box-content' -%}

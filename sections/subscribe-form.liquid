@@ -1,41 +1,8 @@
-<style>
-  .section--subscribe .section-heading:before {
-  	content: "{{ section.settings.subheading_overlap }}";
-  }
-</style>
-<!-- SVGs -->
-{%- include 'nuts.svg' -%}
-{%- include 'lonealmond.svg'-%}
-<section class="section section--subscribe clearfix">
-    <div class="heading-block">
-    {% comment %}
-      Subscribe form headings
-      {% endcomment %}
-      {% if section.settings.heading_html != blank %}
-        <h3 class="section-heading heading--page">{{ section.settings.heading_html }}</h3>
-      {% endif %}
-      {% if section.settings.lede != blank %}
-        <p class="section__info text-center">{{ section.settings.lede }}</p>
-      {% endif %}
-    </div>
+{% assign subscribe_heading = section.settings.heading_html %}
+{% assign subscribe_lede = section.settings.lede %}
+{% include 'subscribe-header' %}
 
-    <div class="form-wrapper">
 
-      {% if settings.subscribe_form_variant == 'mailchimp' %}
-        {% comment %}
-        Snippet for MailChimp subscribe form
-        For setting go to Admin -> Theme -> Customize Theme -> Homepage
-        {% endcomment %}
-        {% include 'subscribe-form-mailchimp' %}
-      {% elsif settings.subscribe_form_variant == 'standart' %}
-        {% comment %}
-        Snippet for standart (Shopify) subscribe form
-        For setting go to Admin -> Theme -> Customize Theme -> Homepage
-        {% endcomment %}
-        {% include 'subscribe-form-shopify'%}
-      {% endif %}
-    </div> <!-- End form-wrapper -->
-</section>
 
 {% schema %}
   {

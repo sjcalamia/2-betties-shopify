@@ -1,0 +1,47 @@
+{% if hero_article %}
+  {% capture image__url %}{{ articles[hero_article].image.src | img_url: '2000x' | format: 'jpg' }}{% endcapture %}
+  <!-- hero_article: {{ hero_article }} -->
+  <!-- article: {{ articles[hero_article] }} -->
+  <!-- image__url: {{ image__url }} -->
+  {% capture hero_title %}{{ articles[hero_article].title }}{% endcapture %}
+  {% capture hero_desc %}{{ articles[hero_article].content }}{% endcapture %}
+  {% unless hero_link %}
+    {% assign hero_link = false %}
+  {% endunless %}
+{% endif %}
+
+{% if hero_dek %}
+  <!-- hero_dek: {{ hero_dek }} -->
+  {% capture hero_desc %}{{ hero_dek }}{% endcapture %}
+{% endif %}
+
+<!-- 
+Hero Section
+
+.. variables: \n
+    img_bg: {{ img_bg }} \n
+    image__url: {{ image__url }} \n
+    hero_title: {{ hero_title }} \n
+    hero_desc: {{ hero_desc }} \n
+    hero_link: {{ hero_link }} \n
+-->
+
+{% if image__url %}
+<section class="hero clearfix" style="background-image: url({{ image__url }});">
+{% else %}
+<section class="hero clearfix" style="background-image: url({{ img_bg | img_url: '2000x' | format: 'jpg' }});">
+{% endif %}
+  <div class="">
+    {% if hero_title != blank %}
+      <h1 class="title hed">{{ hero_title }}</h1>
+    {% endif %}
+    {% if hero_desc != blank %}
+      <h2 class="dek">{{ hero_desc | newline_to_br }}</h2>
+    {% endif %}
+    {% if hero_link %}
+      <a class="btn btn--default" href="{{ hero_link }}" title="{{ 'general.hero_image.button' | t }}">{{ 'general.hero_image.button' | t }}</a>
+    {% endif %}
+  </div>
+</section>
+
+

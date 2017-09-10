@@ -1,0 +1,262 @@
+{% schema %}
+  {
+    "name": "Our Story",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sect_hed",
+        "label": "Headline"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sect_hed",
+        "label": "Show Section Headline",
+        "default": false
+      },
+      {
+        "type": "radio",
+        "id": "background_lightness",
+        "label": "Light or Dark Background?",
+        "default": "light",
+        "options": [
+          { "value": "light", "label": "Light" },
+          { "value": "dark", "label": "Dark" }
+        ]
+      },
+      {
+        "type": "radio",
+        "id": "default_image_size",
+        "label": "Default Image Size",
+        "default": "one-half",
+        "options": [
+          { "value": "one-quarter", "label": "1/4" },
+          { "value": "one-third", "label": "1/3" },
+          { "value": "one-half", "label": "1/2" }
+        ],
+        "info": "You can specify sizes for individual blocks, but if you don't, then this size will be used for all"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_image_on_mobile",
+        "label": "Hide Images on Mobile?",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "info",
+        "name": "Info Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "hed",
+            "label": "Headline",
+            "placeholder": "Type a headline or dont"
+          },
+          {
+            "type": "image_picker",
+            "id": "figure",
+            "label": "Image"
+          },
+          {
+            "type": "radio",
+            "id": "image_size",
+            "label": "Image Size",
+            "default": "one-half",
+            "options": [
+              { "value": "one-quarter", "label": "1/4" },
+              { "value": "one-third", "label": "1/3" },
+              { "value": "one-half", "label": "1/2" }
+            ]
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Body Content"
+          },
+          {
+            "type": "radio",
+            "id": "image_alignment",
+            "label": "Image Alignment",
+            "options": [
+              { "value": "none", "label": "Image side alternates per row" },
+              { "value": "left", "label": "Image Left, Text Right" },
+              { "value": "right", "label": "Image Right, Text Left" }
+            ],
+            "default": "none",
+            "info": "By default images will alternate back and forth, but if you would prefer them to be on a specific side, select this."
+          }
+        ]
+      },
+      {
+        "type": "article",
+        "name": "Article Block",
+        "settings": [
+          {
+            "type": "article",
+            "id": "info_article",
+            "label": "Article to feature in info box"
+          },
+          {
+            "type": "radio",
+            "id": "image_alignment",
+            "label": "Image Alignment",
+            "options": [
+              { "value": "none", "label": "Image side alternates per row" },
+              { "value": "left", "label": "Image Left, Text Right" },
+              { "value": "right", "label": "Image Right, Text Left" }
+            ],
+            "default": "none",
+            "info": "By default images will alternate back and forth, but if you would prefer them to be on a specific side, select this."
+          },
+          {
+            "type": "radio",
+            "id": "image_size",
+            "label": "Image Size",
+            "default": "one-half",
+            "options": [
+              { "value": "one-quarter", "label": "1/4" },
+              { "value": "one-third", "label": "1/3" },
+              { "value": "one-half", "label": "1/2" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "Arbitrary HTML",
+        "settings": [
+          {
+            "type": "html",
+            "id": "html_area",
+            "label": "Arbitrary HTML"
+          }
+        ]
+      },
+      {
+        "type": "hero",
+        "name": "Hero",
+        "settings": [
+          { 
+            "type": "article",
+            "id": "hero_article",
+            "label": "Article Content with which to populate Hero"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Content Area",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "text_content",
+            "label": "Content Area"
+          }
+        ]
+      },
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [ 
+          {
+            "type": "text",
+            "id": "quotee",
+            "label": "Quotee"
+          },
+          {
+            "type": "textarea",
+            "id": "quote_text",
+            "label": "Quote"
+          } 
+        ]
+      }
+
+    ],
+    "default": {
+      "settings": {
+        "sect_hed": "Our Story",
+        "show_sect_hed": false
+      },
+      "blocks": [
+        {
+          "type": "hero",
+          "settings": {
+            "hero_article": "our-story/hero"
+          }
+        },
+        {
+          "type": "text",
+          "settings": { "text_content":" " }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quotee": "Bridget Greaney",
+            "quote_text": "Our brand doesn't promise you can scale a mountain or run a marathon. But our snacks might give you the boost you need to get to work on time. They're nutritious, delicious, and always ready to go."
+          }
+        }
+      ]
+    }
+  }
+{% endschema %}
+
+{% stylesheet %}
+/* Our Story Page */
+
+/* End Our Story Styles */
+{% endstylesheet %}
+
+<div class="sections"><!--moveable sections-->
+{% for block in section.blocks %}
+  <section class="page {{ block.type }}">
+    {% case block.type %}
+    {% when "hero" %}
+      {% assign hero_article = block.settings.hero_article %}
+    {% when "text" %}
+      {% if page %}
+        {% assign text_content = page.content %}
+      {% endif %}
+      {% when "quote" %}
+        {% assign quotee = block.settings.quotee %}
+        {% assign quote_text = block.settings.quote_text %}
+    {% endcase%}
+  {% capture inc %}block-{{ block.type }}{% endcapture %}
+  {%- include inc -%}
+  </section>
+{% endfor %}
+</div><!--end sections-->
+
+{% javascript %}
+// Our Story Specific Scripts
+let infoboxSizing = (e)=>{
+  console.log("Infobox sizing event: ",e);
+  require(['jquery'],($)=>{
+    $(".info-box").each(
+      (i,e)=>{
+        let $el = $(e)
+        let $img = $($el.find("img"))
+        let $con = $($el.children(".content")[0])
+        let $hed = $($con.find(".hed")[0])
+        let $led = $($con.find(".lede")[0])
+        // set the font size so that the content matches the image height
+        console.log($img.height())
+        while ($con.height() >  $img.height()) {
+          let fs = parseFloat($led.css("fontSize"));
+          if (fs < 9) break;
+          $led.css("font-size",(fs - 0.75)+"px")
+          $hed.css("font-size",(parseFloat($hed.css("fontSize")) - 0.5)+"px")
+        }
+
+        // set the padding so that the content is vertically centered.
+        let padd = ( $el.height()-$con.height() ) / 2
+        $con.css("padding-top", "calc( " + padd + "px - .5em )")
+      }
+    )
+  })
+}
+window.addEventListener("load", infoboxSizing)
+window.addEventListener("resize", infoboxSizing)
+
+{% endjavascript %}
+

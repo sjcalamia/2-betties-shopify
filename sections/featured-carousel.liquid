@@ -9,10 +9,24 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page
 
 {% if section.settings.featured_collection != blank %}
   <!-- Swiper -->
-  <div class="swiper-container carousel carousel--homepage" data-autoplay="{{ autoplay }}">
+  <div class="swiper-container carousel carousel--homepage has-featured-collection" data-autoplay="{{ autoplay }}">
     <h2 class="featured-collection-title">{{ section.settings.featured_collection_title }}</h2>
     <div class="swiper-wrapper">
       {% for product in collections[section.settings.featured_collection].products %}
+
+      {%- unless forloop.last -%}
+      {% comment %}
+        If we are NOT on the last item of the loop, which **should** be the promo item...
+        This variable gets passed in to the snippet
+      {% endcomment %}
+        {% capture product_caption %}{{ section.settings.product_quantity_desc }}{% endcapture %}
+      {% else %}
+      {% comment %}
+        If we are on the promo item, then assign the promo description
+      {% endcomment %}
+        {% capture product_caption %}{{ section.settings.promo_desc }}{% endcapture %}
+      {%- endunless -%}
+
         <div class="swiper-slide" data-img-bg="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.png' | asset_url }}{% endif %}">
           {% include 'product-item-grid' %}
         </div>
@@ -33,7 +47,7 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page
         <span class="icon icon--arrow-left"></span>
       </div>
     </div>
-  {% endif %}
+    {% endif %}
   </div>
 {% else %}
   <!-- Swiper -->
@@ -51,7 +65,7 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page
 
               </div>
             </a>
-            <span class="product__price-point">
+            <span class="">
               <span class="product__price"><span class="money">{{ "10" | money }}</span></span><br>
 
               {% if settings.collection_product_badge == 'price'%}
@@ -68,8 +82,11 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page
 
             <div class="product__info">
               <h4 class="product__title"><a href="" title="product title">{{ product.title | default: "Product Name" | truncatewords: 4 }}</a></h4>
+              <h6 class="product__quantity-desc">{{ section.settings.product_quantity_desc }}</h6>
+              <!--<h6 class="product__quantity-desc">{{ section.settings.promo_desc }}</h6>-->
 
               <span class="product__spec">
+              <span class="product__price"><span class="money">{{ "10" | money }}</span></span><br>
                 Product type &nbsp;|&nbsp;In stock&nbsp;|&nbsp;Big
               </span>
             </div> <!-- End product__info -->
@@ -118,6 +135,20 @@ For settings go to Admin -> Theme -> Customize Theme -> Home page
         "label": "Headline",
         "info": "Displayed above the featured collection",
         "default": "Shop our snacks..."
+      },
+      {
+        "type": "text",
+        "id": "product_quantity_desc",
+        "label": "Product Quantity Description",
+        "info": "Displayed below the Product Title and above the price",
+        "default": "12 Rounds total (6 packs of 2)"
+      },
+      {
+        "type": "text",
+        "id": "promo_desc",
+        "label": "Promo Product Description",
+        "info": "Displayed in the third item, below the promo product title",
+        "default": "three new, exciting flavors!"
       }
     ],
   	"presets": [

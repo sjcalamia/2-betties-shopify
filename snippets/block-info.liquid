@@ -1,0 +1,8 @@
+{% capture img %}{{ block.settings.figure }}{% endcapture %}
+{% capture hed %}{{ block.settings.hed }}{% endcapture %}
+{% capture content %}{{ block.settings.content }}{% endcapture %}
+{% capture img_tag %}<img src="{{ block.settings.figure.src | image_url: 'large' }}" />{% endcapture %}
+
+{%- include 'info-box-content' -%}
+
+

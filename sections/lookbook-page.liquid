@@ -136,17 +136,17 @@
           <div class="grid__item">
             <div class="picker-nav-container">
               <div class="image-holder">
-                <img class="choosed-pack-image" src="{{ recipe_img }}" alt="{{ recipe_title }}">
+                <img class="chosen-pack-image" src="{{ recipe_img }}" alt="{{ recipe_title }}">
               </div>
 
-              <div class="choosed-pack-info">
-                <div class="choosed-pack-desc">{{ recipe_desc }} <a class="text-link--default" href="{{ recipe_url }}">{{ 'layout.lookbook_page.recipe_detail' | t }}</a></div>
-                <span class="choosed-pack-author">{{ recipe_author }}</span>
+              <div class="chosen-pack-info">
+                <div class="chosen-pack-desc">{{ recipe_desc }} <a class="text-link--default" href="{{ recipe_url }}">{{ 'layout.lookbook_page.recipe_detail' | t }}</a></div>
+                <span class="chosen-pack-author">{{ recipe_author }}</span>
               </div>
 
               <div class="picker-nav__total">
                 <h4 class="total-heading">{{ 'layout.lookbook_page.lookbook_total' | t }}</h4>
-                <span class="choosed-pack-total">
+                <span class="chosen-pack-total">
                   <span class="money">{{ 0 | money }}</span>
                 </span>
                 <form class="lookbook-cart--total js-form-disable" action="/cart/add" method="POST">

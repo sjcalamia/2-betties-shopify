@@ -1,35 +1,30 @@
+<!-- *** Main content *** -->
+<main class="main-content" role="main">
 <article class="nutrition">
   <header class="hero heading--page">
     <h1 class="hed title">{{ page.title }}</h1>
     <h2 class="dek subtitle">Feed your mind.</h2>
   </header>
-  <section class="wrapper grid">
+  <section class="grid">
     <header class="intro">
       <h3 class="hed">Why you should be nuts about nuts.</h3>
       <p class="lede">They taste great! And they satisfy your hunger. Nuts are an excellent source of fiber and mono- and poly- unsaturated fats. These healthy fats help lower LDL (bad cholesterol) and raise HDL (good cholesterol) unlike the fats in processed foods. Did we mention they taste great?</p>
     </header>
     <h4 class="dek">Cracking the benefits:</h4>
-    <section class="grid__item wrapper almonds lesson">
-      <figure class="left"><img class="" src='{{ "almonds.jpg" | asset_img_url: "large" }}' alt=""></figure>
-      <div class=" right qa">
-        <h3 class="question">Why are almonds good</br>for you?</h3>
-        <p class="answer">Almonds are good for your muscles, bones, and teeth since they are a great source of calcium and magnesium.</p>
-      </div>
-    </section>
-    <section class="grid__item wrapper pumpkin lesson">
-      <div class="left qa">
-        <h3 class="question">Why are pumpkin seeds good for you?</h3>
-        <p class="answer">They're a rich source of zinc and a supplier of Vitamins E, K, and B. Feeling blue? They contain tryptophan which helps improve your mood. Their healthy fats and hight magnesium content are good for the heart and sore muscles. A great post-workout food for recovery.</p>
-      </div>
-      <figure class="right"><img src='{{ 'pumpkin-seeds.jpg' | asset_img_url: "large" }}' alt=""></figure>
-    </section>
-    <section class="grid__item wrapper walnuts lesson">
-      <figure class="left"><img src='{{ 'walnuts.jpg' | asset_img_url: "large" }}' alt=""></figure>
-      <div class="right qa">
-        <h3 class="question">Why are walnuts good</br>for you?</h3>
-        <p class="answer">You may be shell shocked to know just how good walnuts are for you. High in fiber and healthy fats, walnuts can improve your blood-vessel health and circulation. They're also known to help curb appetite and hunger pains. Some evidence has even shown that when consumed regularly, walnuts can help deter memory loss.</p>
-      </div>
-    </section>
+    {% assign nuts = "almonds" %}
+    {% capture answer %}Almonds are good for your muscles, bones, and teeth since they are a great source of calcium and magnesium.{% endcapture %}
+    {% capture image_alignment %}{% cycle "left", "right" %}{% endcapture %}
+    {% include 'block-lesson' %}
+
+    {% assign nuts = "pumpkin seeds" %}
+    {% capture answer %}They're a rich source of zinc and a supplier of Vitamins E, K, and B. Feeling blue? They contain tryptophan which helps improve your mood. Their healthy fats and hight magnesium content are good for the heart and sore muscles. A great post-workout food for recovery.{% endcapture %}
+    {% capture image_alignment %}{% cycle "left", "right" %}{% endcapture %}
+    {% include 'block-lesson' %}
+
+    {% assign nuts = "walnuts" %}
+    {% capture answer %}You may be shell shocked to know just how good walnuts are for you. High in fiber and healthy fats, walnuts can improve your blood-vessel health and circulation. They're also known to help curb appetite and hunger pains. Some evidence has even shown that when consumed regularly, walnuts can help deter memory loss.{% endcapture %}
+    {% capture image_alignment %}{% cycle "left", "right" %}{% endcapture %}
+    {% include 'block-lesson' %}
   </section>
   <section class="wrapper grid sugars">
     <article class="lesson grid__item one-whole">
@@ -91,3 +86,36 @@
       </ol>
   </section>
 </article>
+</main>
+<!-- *** End main content *** -->
+<script>
+let infoboxSizing = (e)=>{
+  console.log("Infobox sizing event: ",e);
+  require(['jquery'],($)=>{
+    $(".info-box").each(
+      (i,e)=>{
+        let $el = $(e)
+        let $img = $($el.find("img"))
+        let $con = $($el.children(".content")[0])
+        let $hed = $($con.find(".hed")[0])
+        let $led = $($con.find(".lede")[0])
+        // set the font size so that the content matches the image height
+        console.log($img.height())
+        while ($con.height() >  $img.height()) {
+          let fs = parseFloat($led.css("fontSize"));
+          if (fs < 9) break;
+          $led.css("font-size",(fs - 0.75)+"px")
+          $hed.css("font-size",(parseFloat($hed.css("fontSize")) - 0.5)+"px")
+        }
+
+        // set the padding so that the content is vertically centered.
+        let padd = ( $el.height()-$con.height() ) / 2
+        $con.css("padding-top", "calc( " + padd + "px - .5em )")
+      }
+    )
+  })
+}
+document.addEventListener("DOMContentLoaded", infoboxSizing)
+window.addEventListener("resize", infoboxSizing)
+
+</script>

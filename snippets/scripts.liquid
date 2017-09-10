@@ -1057,8 +1057,8 @@
         var currentImage = imagesContainerDOM.querySelector('.show-in');
         currentImage.classList.remove('show-in');
 
-        var choosedImage = imagesContainerDOM.querySelector('[data-variant-id="' + radioBtn.value + '"]');
-        choosedImage.classList.add('show-in');
+        var chosenImage = imagesContainerDOM.querySelector('[data-variant-id="' + radioBtn.value + '"]');
+        chosenImage.classList.add('show-in');
       }
 
       new ProductVariantsConverter({
@@ -1115,7 +1115,7 @@
   {% endif %}
 
 
-  {% if settings.foter_above == 'instagram' %}
+  {% if settings.footer_above == 'instagram' %}
   /*
     ---------------------------------------------------------
     Instagram Feed

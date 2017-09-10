@@ -12,15 +12,6 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
 			  alt="{{ product.title }}">
     </div>
   </a>
-  <span class="product__price-point">
-    <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br/>
-    {%- if settings.collection_product_badge == 'price' -%}
-      {%- if product.compare_at_price_min > product.price -%}
-        <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
-      {%- endif -%}
-    {%- endif -%}
-  </span>
-
   {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
     <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
   {% endif %}
@@ -28,21 +19,35 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
 
   <div class="product__info">
     <h4 class="product__title"><a href="{{ product.url }}" title="{{ product.title }}">{{ product.title | truncatewords: 4 }}{% if product.type != blank %}&nbsp;{{ product.type }}{%- endif -%}</a></h4>
+		{% if product_caption %}
+    <h6 class="product__quantity-desc">{{ product_caption }}</h6>
+		{% endif %}
+    {% if product.price > 0.00 %}
     <span class="product__spec">
-      {% if product.available %}
-      {% comment %}
-        {{ 'products.general.in_stock' | t }}
-      {% endcomment %}
-      {% else %}
-        {{ 'products.general.out_stock' | t }}
-      {% endif %}
-      {%- if settings.product_size_unit_enable -%}
-        {%- if product.first_available_variant.option1 != 'Default Title' -%}
-          {{ product.first_available_variant.option1 }}
-        {%- else -%}
-          {{ product.first_available_variant.weight_unit }}
+        {% if product.available %}
+        {% comment %}
+          {{ 'products.general.in_stock' | t }}
+        {% endcomment %}
+          <span class="">
+            <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br/>
+            {%- if settings.collection_product_badge == 'price' -%}
+              {%- if product.compare_at_price_min > product.price -%}
+                <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
+              {%- endif -%}
+            {%- endif -%}
+          </span>
+
+        {% else %}
+          {{ 'products.general.out_stock' | t }}
+        {% endif %}
+        {%- if settings.product_size_unit_enable -%}
+          {%- if product.first_available_variant.option1 != 'Default Title' -%}
+            {{ product.first_available_variant.option1 }}
+          {%- else -%}
+            {{ product.first_available_variant.weight_unit }}
+          {%- endif -%}
         {%- endif -%}
-      {%- endif -%}
     </span>
+  {% endif %}
   </div> <!-- End product__info -->
 </div> <!-- End product -->

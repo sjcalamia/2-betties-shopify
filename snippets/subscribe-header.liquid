@@ -1,0 +1,24 @@
+<section class="section section--subscribe clearfix">
+  <div class="heading-block">
+    {% comment %} Subscribe form headings {% endcomment %}
+    {% if subscribe_heading != blank %}
+      <h3 class="section-heading heading--page">{{ subscribe_heading }}</h3>
+    {% endif %}
+    {% if subscribe_lede != blank %}
+      <p class="section__info text-center">{{ subscribe_lede }}</p>
+    {% endif %}
+  </div>
+
+  <div class="form-wrapper">
+
+    {% comment %} For setting go to Admin -> Theme -> Customize Theme -> Homepage {% endcomment %}
+    {% if settings.subscribe_form_variant == 'mailchimp' %}
+      {% include 'subscribe-form-mailchimp' %}
+    {% elsif settings.subscribe_form_variant == 'standard' %}
+      {% include 'subscribe-form-shopify'%}
+    {% endif %}
+  </div> <!-- End form-wrapper -->
+  <!--grid -->
+</section>
+
+

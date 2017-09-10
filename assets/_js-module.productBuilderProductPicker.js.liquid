@@ -25,11 +25,11 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
     this.DOM.pikerContent     = this.DOM.productPicker.querySelector('.js-picker-content');
 
     this.DOM.pickerNav        = this.DOM.productPicker.querySelector('.picker-nav');
-    this.DOM.pickerInfo       = this.DOM.pickerNav.querySelector('.choosed-pack-info');
-    this.DOM.pickerNavPrice   = this.DOM.pickerNav.querySelector('.choosed-pack-total .money');
-    this.DOM.pickerNavImage   = this.DOM.pickerNav.querySelector('.choosed-pack-image');
-    this.DOM.pickerNavAuthor  = this.DOM.pickerNav.querySelector('.choosed-pack-author');
-    this.DOM.pickerNavDesc    = this.DOM.pickerNav.querySelector('.choosed-pack-desc');
+    this.DOM.pickerInfo       = this.DOM.pickerNav.querySelector('.chosen-pack-info');
+    this.DOM.pickerNavPrice   = this.DOM.pickerNav.querySelector('.chosen-pack-total .money');
+    this.DOM.pickerNavImage   = this.DOM.pickerNav.querySelector('.chosen-pack-image');
+    this.DOM.pickerNavAuthor  = this.DOM.pickerNav.querySelector('.chosen-pack-author');
+    this.DOM.pickerNavDesc    = this.DOM.pickerNav.querySelector('.chosen-pack-desc');
 
     this.DOM.pickerNavNextBtn = this.DOM.pickerNav.querySelector('.next-btn');
     this.DOM.pickerNavPrevBtn = this.DOM.pickerNav.querySelector('.prev-btn');
@@ -125,9 +125,9 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
     var target = e.target,
         self   = this;
 
-    var choosedPack = target.closest('.picker-pack');
+    var chosenPack = target.closest('.picker-pack');
 
-    if ( !choosedPack ) {
+    if ( !chosenPack ) {
       return null;
     }
 
@@ -136,13 +136,13 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
     this.summary.products = {};
 
     // add main class to show picker nav
-    this.DOM.productPicker.classList.add('pack-choosed');
+    this.DOM.productPicker.classList.add('pack-chosen');
 
-    if ( this.DOM.activePack && choosedPack === this.DOM.activePack ) {
+    if ( this.DOM.activePack && chosenPack === this.DOM.activePack ) {
 
       // click on active tab
-      this.DOM.activePack.classList.remove('is-choosed');
-      this.DOM.productPicker.classList.remove('pack-choosed');
+      this.DOM.activePack.classList.remove('is-chosen');
+      this.DOM.productPicker.classList.remove('pack-chosen');
       this.DOM.activePack = false;
       this.options.resetPackAction();
 
@@ -152,25 +152,25 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
     } else if ( this.DOM.activePack ) {
 
       // click on tab the different than active
-      this.DOM.activePack.classList.remove('is-choosed');
-      choosedPack.classList.add('is-choosed');
-      this.DOM.activePack = choosedPack;
-      this.setPickerNav(choosedPack);
+      this.DOM.activePack.classList.remove('is-chosen');
+      chosenPack.classList.add('is-chosen');
+      this.DOM.activePack = chosenPack;
+      this.setPickerNav(chosenPack);
       this.options.resetPackAction();
     } else {
 
       // click when no one tab is active
-      choosedPack.classList.add('is-choosed');
-      this.DOM.activePack = choosedPack;
-      this.setPickerNav(choosedPack);
+      chosenPack.classList.add('is-chosen');
+      this.DOM.activePack = chosenPack;
+      this.setPickerNav(chosenPack);
     }
 
     this.checkAccessories();
   };
 
-  ProductPicker.prototype.setPickerNav = function(choosedPack) {
+  ProductPicker.prototype.setPickerNav = function(chosenPack) {
 
-    if ( !choosedPack ) {
+    if ( !chosenPack ) {
 
       this.DOM.pickerNavPrice.innerHTML  = Shopify.formatMoney('0', "{{ shop.money_format }}");
       this.DOM.pickerNavImage.src        = '';
@@ -182,16 +182,16 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
 
     var packId, packPrice, packImage, packURL, packDesc, packAuthor, fullDesc;
 
-    packId     = choosedPack.getAttribute('data-pack-id');
-    packPrice  = choosedPack.getAttribute('data-price');
-    packImage  = choosedPack.getAttribute('data-image');
-    packURL    = choosedPack.getAttribute('data-url');
-    packDesc   = choosedPack.getAttribute('data-desc');
-    packAuthor = choosedPack.getAttribute('data-author');
+    packId     = chosenPack.getAttribute('data-pack-id');
+    packPrice  = chosenPack.getAttribute('data-price');
+    packImage  = chosenPack.getAttribute('data-image');
+    packURL    = chosenPack.getAttribute('data-url');
+    packDesc   = chosenPack.getAttribute('data-desc');
+    packAuthor = chosenPack.getAttribute('data-author');
     fullDesc   = '';
 
     this.summary.image    = packImage;
-    this.summary.packName = choosedPack.getAttribute('data-title');
+    this.summary.packName = chosenPack.getAttribute('data-title');
 
     this.total = this.packPrices[packId];
 
@@ -214,7 +214,7 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
     }
 
     if ( window.shopCurrency != Currency.currentCurrency ) {
-      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.chosen-pack-total span.money', 'money_format');
     }
 
   };
@@ -392,7 +392,7 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
         this.DOM.pickerNavPrice.removeAttribute('data-currency');
       }
       if ( window.shopCurrency != Currency.currentCurrency ) {
-        Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+        Currency.convertAll(shopCurrency, Currency.currentCurrency, '.chosen-pack-total span.money', 'money_format');
       }
 
   };
@@ -425,9 +425,9 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
 
     var ingredientsListContainer = this.DOM.summaryContainer.querySelector('.ingredients-list-container'),
         accessoriesListContainer = this.DOM.summaryContainer.querySelector('.accessories-list-container'),
-        choosedPackImage         = this.DOM.summaryContainer.querySelector('.choosed-pack-image'),
-        choosedPackTitle         = this.DOM.summaryContainer.querySelector('.picker-pack__title'),
-        choosedPackTotalPrice    = this.DOM.summaryContainer.querySelector('.picker-pack__price .money');
+        chosenPackImage         = this.DOM.summaryContainer.querySelector('.chosen-pack-image'),
+        chosenPackTitle         = this.DOM.summaryContainer.querySelector('.picker-pack__title'),
+        chosenPackTotalPrice    = this.DOM.summaryContainer.querySelector('.picker-pack__price .money');
 
     // reset list of ingredients and accessorieses
     ingredientsListContainer.innerHTML = '';
@@ -435,11 +435,11 @@ define(['ajaxCart', 'jquery.cart', 'shopInfo'], function(ajaxCart, Cart, shopInf
 
     this.checkoutLink = 'cart/';
 
-    choosedPackImage.src            = this.summary.image;
-    choosedPackTitle.innerHTML      = this.summary.packName;
-    choosedPackTotalPrice.innerHTML = Shopify.formatMoney(this.total, "{{ shop.money_format }}");
+    chosenPackImage.src            = this.summary.image;
+    chosenPackTitle.innerHTML      = this.summary.packName;
+    chosenPackTotalPrice.innerHTML = Shopify.formatMoney(this.total, "{{ shop.money_format }}");
 
-    this.convertCurrency(choosedPackTotalPrice);
+    this.convertCurrency(chosenPackTotalPrice);
 
     // Crate ingredients list
     if ( Object.keys(this.summary.products).length > 0) {

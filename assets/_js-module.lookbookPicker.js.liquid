@@ -15,8 +15,8 @@ define(['ajaxCart', 'jquery.currencies', 'shopInfo', 'shopifyCommon'], function(
     this.DOM.lbContainer      = document.querySelector(options.lookbookSelector);
 
     this.DOM.lbNav            = this.DOM.lbContainer.querySelector('.picker-nav');
-    this.DOM.lbInfo           = this.DOM.lbNav.querySelector('.choosed-pack-info');
-    this.DOM.total            = this.DOM.lbNav.querySelector('.choosed-pack-total .money');
+    this.DOM.lbInfo           = this.DOM.lbNav.querySelector('.chosen-pack-info');
+    this.DOM.total            = this.DOM.lbNav.querySelector('.chosen-pack-total .money');
     this.DOM.checkoutBtn      = this.DOM.lbNav.querySelector('.checkout-btn');
 
     // Two forms 'Add to Cart'
@@ -24,7 +24,7 @@ define(['ajaxCart', 'jquery.currencies', 'shopInfo', 'shopifyCommon'], function(
     this.DOM.addCartFormTotal = this.DOM.lbContainer.querySelector('.lookbook-cart--total');
 
     this.checkboxes = this.DOM.lbContainer.querySelectorAll('.js-product-checkbox');
-    // object with choosed product ids
+    // object with chosen product ids
     this.products   = this.getProducts();
 
     this.init();
@@ -234,7 +234,7 @@ define(['ajaxCart', 'jquery.currencies', 'shopInfo', 'shopifyCommon'], function(
     }
 
     if ( window.shopCurrency != Currency.currentCurrency ) {
-      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.choosed-pack-total span.money', 'money_format');
+      Currency.convertAll(shopCurrency, Currency.currentCurrency, '.chosen-pack-total span.money', 'money_format');
     }
   };
   {% endif %}

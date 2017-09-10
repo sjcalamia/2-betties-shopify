@@ -4,7 +4,7 @@ define([], function(){
 
   /*
     ---------------------------------------------------------
-    Get supported event for animation ending    
+    Get supported event for animation ending
     ---------------------------------------------------------
   */
   var getAnimationEndEvent = function() {
@@ -26,19 +26,19 @@ define([], function(){
 
   /*
     ---------------------------------------------------------
-    Search DOM Elements    
+    Search DOM Elements
     ---------------------------------------------------------
   */
   function domFinder (DOM) {
     var temp;
-    
+
     for (var prop in DOM){
-      
+
       temp = domFinder._findHtmlEl (prop, DOM[prop]);
       if (temp) {
         DOM[prop] = temp;
       } else {
-        throw new Error(DOM[prop] +' is not exist');
+        throw new Error(DOM[prop] +' does not exist');
       }
     }
 
@@ -46,29 +46,29 @@ define([], function(){
   }
 
   domFinder._findHtmlEl = function (queryName, queryStr) {
-    
+
     var htmlElement,
         idQueryRegExp   = /(id$)/i,
         allQueryRegExp  = /(all$)/i,
         hashIdRegExp = /^#.+/i;
-    
+
     if (idQueryRegExp.test(queryName)) {//if name parametr has ID(id) ending
-      
+
       htmlElement = document.getElementById(queryStr);
-    
+
     } else if (allQueryRegExp.test(queryName)) {//if name parametr has ALL(all) ending
-      
+
       htmlElement = document.querySelectorAll(queryStr);
-      
+
     } else if (hashIdRegExp.test(queryStr)){//if query string has # begining
-      
+
       htmlElement = document.getElementById(queryStr.replace('#', ''));
-    
+
     } else {
-      
-      htmlElement = document.querySelector(queryStr);    
+
+      htmlElement = document.querySelector(queryStr);
     }
-    
+
     return htmlElement;
   }
 
@@ -192,7 +192,7 @@ define([], function(){
       return null;
     }
 
-    var cssFile   = document.createElement('link'); 
+    var cssFile   = document.createElement('link');
     cssFile.rel   = 'stylesheet';
     cssFile.href  = link;
     cssFile.media = 'only x';
@@ -202,16 +202,16 @@ define([], function(){
       cssFile.removeEventListener('load', onloadCSS);
     });
 
-    document.head.appendChild(cssFile);      
+    document.head.appendChild(cssFile);
   };
 
 
 
   /*
     ---------------------------------------------------------
-    Polyfill for matches   
+    Polyfill for matches
     ---------------------------------------------------------
-  */  
+  */
   window.Element && function(ElementPrototype) {
       ElementPrototype.matches = ElementPrototype.matches ||
       ElementPrototype.matchesSelector ||
@@ -223,12 +223,12 @@ define([], function(){
           return !!nodes[i];
       }
   }(Element.prototype);
-  
+
 
 
   /*
     ---------------------------------------------------------
-    Polyfill for closest   
+    Polyfill for closest
     ---------------------------------------------------------
   */
   window.Element && function(ElementPrototype) {
@@ -241,7 +241,7 @@ define([], function(){
   }(Element.prototype);
 
 
-  
+
   /*
     ---------------------------------------------------------
     Polyfill for requestAnimFrame
@@ -301,7 +301,7 @@ define([], function(){
     Disable or enable browser scroll
     http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
     ---------------------------------------------------------
-  */ 
+  */
   function disableScroll () {
     if (window.addEventListener) // older FF
         window.addEventListener('DOMMouseScroll', _preventDefault, false);
@@ -331,7 +331,7 @@ define([], function(){
     ---------------------------------------------------------
     Merge to objects. First will be overwritten by second one
     ---------------------------------------------------------
-  */ 
+  */
   function mergeOptions(obj1,obj2){
     var obj3 = {};
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
@@ -339,7 +339,7 @@ define([], function(){
     return obj3;
   }
 
-  
+
 
   return {
     getAnimationEndEvent: getAnimationEndEvent,

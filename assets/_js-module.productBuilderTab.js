@@ -53,16 +53,16 @@ define([], function(){
   };
 
   Tab.prototype.showTabContent = function(hash) {
-    var choosedTabContent = this.DOM.tabsContent.querySelector(hash);
+    var chosenTabContent = this.DOM.tabsContent.querySelector(hash);
 
-    if ( !choosedTabContent || choosedTabContent === this.DOM.activeTabContent ) {
+    if ( !chosenTabContent || chosenTabContent === this.DOM.activeTabContent ) {
       return null;
     }
 
     this.DOM.activeTabContent.classList.remove('is-active');
-    choosedTabContent.classList.add('is-active')
+    chosenTabContent.classList.add('is-active')
 
-    this.DOM.activeTabContent = choosedTabContent;
+    this.DOM.activeTabContent = chosenTabContent;
   };
 
   Tab.prototype.changeTabManually = function(hash) {

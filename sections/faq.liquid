@@ -1,0 +1,256 @@
+{% schema %}
+{
+  "name": "Accordion",
+  "settings": [
+    { "id": "hed",
+      "type": "text",
+      "label": "Headline",
+      "default": "Frequently Asked Questions"
+    },
+    { "id": "dek",
+      "type": "text",
+      "label": "Sub Headline"
+    },
+    { "id": "lede",
+      "type": "textarea",
+      "label": "Intro Text"
+    }
+  ],
+  "blocks": [
+    { "name": "FAQ",
+      "type": "faq",
+      "settings": [
+        { "id": "question",
+          "type": "text",
+          "label": "Question",
+          "default": "But do you even?"
+        },
+        { "id": "answer",
+          "type": "textarea",
+          "label": "Answer",
+          "default": "Of course we even."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Special Sections",
+      "name": "FAQ",
+      "settings":
+      {
+        "hed": "Frequently Asked Questions",
+        "dek": ""
+      },
+      "blocks": [
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Which of your products are gluten free?",
+            "answer": "All of our products are naturally gluten free! Most gluten-free snacks are re-engineered to be so—taking a regular chocolate chip cookie, for example, and manipulating and re-manufacturing it to meet dietary restrictions. Our Rounds are simply made by using naturally gluten-free ingredients from the start. Our friends and family liked how we perfected our recipes, and we hope you will, too."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Where are your foods made?",
+            "answer": "All are handmade in the USA. Baltimore, MD, to be exact."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "What is the shelf life of your product?",
+            "answer": "For best quality, our food should be consumed by the printed date on each wrapper—90 days or sooner is optimal. Nevertheless, please follow storage and handling instructions, including keeping them in a cool dry place."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Are your foods vegan friendly?",
+            "answer": "Depends on your definition of vegan friendly. We do not include ingredients such as milk, whey, or casein—or any animal by-products—however, our products are made with honey, which is the byproduct of bees."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Do your products contain any common food allergens such as dairy, wheat, or nuts?",
+            "answer": "Our products are grain-free and dairy-free—meaning they do not contain gluten, wheat, and lactose. However, they are produced in a shared space facility and they do contain tree nuts. No peanuts."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "What about GMO’s and organic?",
+            "answer": "To be non-GMO you have to be organic. We currently source all our ingredients from non-GMO and organic-certified vendors. That being said, since we are just getting our legs under us, so to speak, we are not yet certified non-GMO/organic"
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Kosher?",
+            "answer": "Our products are not certified Kosher."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "What amount of sugar are in 2Bettie snacks?",
+            "answer": "We never use refined sugar—only natural sugars like maple syrup and honey. Our goal is to balance good taste with the least amount of sugar possible, since women should only get 100 calories or 25 grams/day = 6 teaspoons and men should only get 150 calories or 35 grams/day = 9 teaspoons. For specific amounts of sugar per product, please visit our product pages."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Why eat our product?",
+            "answer": "Because they’re nutritious, delicious, and healthy. Plus, they’ll leave you feeling satiated, satisfied, and happy. We’re obviously biased, but we love our snacks. We eat them in the morning, plus as a mid-morning or afternoon snack. And yes, we sometimes eat them after dinner for a little something sweet. Ever feel regret after you eat a snack? You won’t with 2Betties products. They make you feel good and that’s just one more reason why we love them."
+          }
+        },
+        {
+          "type":"faq",
+          "settings":
+          {
+            "question": "Why are nuts good for you? And why are your products nut-based?",
+            "answer": "The mono- and poly- unsaturated fats found in nuts are healthy fats. Healthy fats are good for you because they help lower your LDL (bad cholesterol) and raise you HDL (good cholesterol). Nuts also provide a good source of fiber and help pack a punch with a satiating snack."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% comment %}
+================================================================================
+Styles
+================================================================================
+{% endcomment %}
+
+{% stylesheet 'scss' %}
+
+.accordion {
+  .accordion__tabitem {
+    .accordion__tabtitle {
+      width: 100%;
+      cursor: pointer;
+
+      &::after, &::before {
+        content: " ";
+        background-image: url("data:image/svg+xml;%3csvg xmlns%3d'http%3a//www.w3.org2000/svg' width%3d'30' height%3d'30'%3e%3cpath d%3d'm0 15h30' stroke%3d'%23000'/%3e%3c/svg%3e");
+        background-size: cover;
+        font-family: sans-serif;
+        font-size: 18px;
+        position: relative;
+        display: inline-block;
+        float: right;
+        height: 30px;
+        width: 30px;
+      }
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(315deg);
+      }
+    }
+    .accordion__tabcontent {
+      display: block;
+      visibility: hidden;
+      height: 0px;
+      transition: height 420ms ease-in-out;
+
+    }
+    &:focus, &.open {
+      .accordion__tabtitle::before {
+        transform: rotate(315deg);
+      }
+      .accordion__tabtitle::after {
+        transform: rotate(45deg);
+      }
+      .accordion__tabcontent {
+        display: block;
+        height: auto;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+{% endstylesheet %}
+
+
+{% comment %}
+================================================================================
+Markup
+================================================================================
+{% endcomment %}
+
+<section class="accordion">
+  <header class="accordion__header">
+    <h2 class="hed headline">{{ section.settings.hed }}</h2>
+    {%- if section.settings.dek -%}
+    <h4 class="dek subhead">{{ section.settings.dek }}</h4>
+    {%- endif -%}
+    {%- if section.settings.lede -%}
+    <div class="lede intro">{{ section.settings.lede }}</div>
+    {%- endif -%}
+  </header>
+  <ul class="accordion__tabgroup">
+  {%- for block in section.blocks -%}
+    {% assign state = "open" %}
+    {% unless forloop.first %}
+      {% assign state = "closed" %}
+    {% endunless %}
+    <li class="accordion__tabitem {{ state }} {{ block.type }} {{ block.shopify_attributes }}">
+    {%- case block.type -%}
+      {%- when 'faq' -%}
+      <h3 class="question accordion__tabtitle">{{ block.settings.question }}</h3>
+      <div class="answer accordion__tabcontent">{{ block.settings.answer }}</div>
+
+      {%- else -%}
+
+    {%- endcase -%}
+    </li>
+  {%- endfor -%}
+  </ul>
+</section>
+
+
+{% comment %}
+================================================================================
+Scripts
+================================================================================
+{% endcomment %}
+
+{% javascript %}
+let faqinit = (ev)=>{
+  console.log("faqinit")
+  require(['jquery'],($)=>{
+  console.log("faqinit: jquery init")
+    $(".accordion__tabtitle").click((e)=> {
+      let el = e.currentTarget;
+      console.log("faq item clicked",el)
+      let $tab = $(el).parent(".accordion__tabitem")
+      console.log($tab)
+      $tab.toggleClass("closed").toggleClass("open")
+    })
+    $(".accordion__tabtitle").each((i,e)=>{
+      while ( parseInt( window.getComputedStyle(e, ':first-line') .getPropertyValue('height') ) < $(e).height() ) {
+        let fs = parseInt($(e).css("fontSize")) - 1
+        $(e).css("font-size",(fs<=8?8:fs)+"px")
+      }
+    })
+  })
+}
+window.addEventListener("load", faqinit);
+{% endjavascript %}

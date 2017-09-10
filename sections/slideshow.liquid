@@ -1,148 +1,3 @@
-{% if section.blocks.size > 0 %}
-
-  <style>
-
-    {%- comment -%}fix for flexslider blinking{%- endcomment -%}
-    .flexslider.loading ul.slides > :first-child {
-      opacity: 1 !important;
-    }
-
-    {%- if section.settings.position_y -%}
-      @media (min-width: 769px) {
-        .flexslider-thumb--homepage {
-          margin-top: {{- section.settings.position_y -}}px;
-        }
-      }
-    {%- endif -%}
-
-    #flex-control-thumb { display: none; visibility: hidden; }
-
-    {%- for block in section.blocks -%}
-
-      {%- assign slide_img = block.settings.image | img_url: '2000x', format: 'pjpg' -%}
-      {%- assign slide_img_small = block.settings.image | img_url: '250x', format: 'pjpg' -%}
-      {%- if block.settings.image == nil -%}
-        {%- assign slide_img = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '2000x' -%}
-        {%- assign slide_img_small = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '250x' -%}
-      {%- endif -%}
-
-      .slide--{{ forloop.index }} {
-        background-image: url({{slide_img}}), url({{slide_img_small}});
-      }
-
-      {%- assign heading_pos = block.settings.heading_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign heading_XY = heading_pos | split: ' ' %}
-      {%- assign add_heading_pos = block.settings.heading_add_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign add_heading_XY = add_heading_pos | split: ' ' %}
-      {%- assign price_badge_pos = block.settings.price_bage_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign price_XY = price_badge_pos | split: ' ' %}
-
-      {%- assign heading_mob_pos = block.settings.heading_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign heading_mob_XY = heading_mob_pos | split: ' ' %}
-      {%- assign add_heading_mob_pos = block.settings.heading_add_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign add_heading_mob_XY = add_heading_mob_pos | split: ' ' %}
-      {%- assign price_badge_mob_pos = block.settings.price_bage_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
-      {%- assign price_mob_XY = price_badge_mob_pos | split: ' ' %}
-
-
-      .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
-        left: {{- heading_XY[0] -}}%;
-        top: {{- heading_XY[1] -}}%;
-      }
-      .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
-        left: {{- add_heading_XY[0] -}}%;
-        top: {{- add_heading_XY[1] -}}%;
-      }
-      .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
-        left: {{- price_XY[0] -}}%;
-        top: {{- price_XY[1] -}}%;
-      }
-
-      @media (max-width: 768px) {
-        {%- if block.settings.is_mobile_heading -%}
-          .slide--{{ forloop.index }} .slide__mainhead {
-            display: none;
-          }
-        {%- endif -%}
-        {%- if block.settings.is_mobile_add_heading -%}
-          .slide--{{ forloop.index }} .slide__add_heading {
-            display: none;
-          }
-        {%- endif -%}
-        {%- if block.settings.is_mobile_price_bage -%}
-          .slide--{{ forloop.index }} .slide__price-point {
-            display: none;
-          }
-        {%- endif -%}
-        .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
-          left: {{- heading_mob_XY[0] -}}%;
-          top: {{- heading_mob_XY[1] -}}%;
-        }
-        .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
-          left: {{- add_heading_mob_XY[0] -}}%;
-          top: {{- add_heading_mob_XY[1] -}}%;
-        }
-        .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
-          left: {{- price_mob_XY[0] -}}%;
-          top: {{- price_mob_XY[1] -}}%;
-        }
-      }
-
-
-    {%- endfor -%}
-
-  </style>
-
-  {%- assign autoplay = section.settings.slideshow_autoplay -%}
-  {%- assign autoplaySpeed = section.settings.slideshow_time_animation | default: "3000" -%}
-  {%- assign slideshow_effect = section.settings.slideshow_effect | default: 'fade' -%}
-
-  <div class="flexslider flexslider-thumb flexslider-thumb--homepage loading" data-autoplay="{{- autoplay -}}" data-autoplay-speed="{{- autoplaySpeed -}}" data-slideshow-effect="{{- slideshow_effect -}}">
-    <ul class="slides">
-      {%- for block in section.blocks -%}
-
-        {%- assign slide_thumb_img = block.settings.image_thumb | img_url: '150x', format: 'jpg' -%}
-        {%- if block.settings.image_thumb == nil -%}
-          {%- assign slide_thumb_img = "img_thumb_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '150x' -%}
-        {%- endif -%}
-
-        <li class="slide slide--{{ forloop.index }}" data-thumb="{{ slide_thumb_img }}">
-
-          {% if block.settings.heading != blank %}
-            <div class="slide__info-part slide__mainhead">
-              <h1 class="heading--page slide__heading">
-                <a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}">
-                  <span class="top-text">{{ block.settings.heading }}</span><br/>
-                  <span class="tobe">{% include '2Bsvg' %}</span><br/>
-                  <span class="bottom-text">{{ block.settings.subheading }}</span></a>
-              </h1>
-            </div>
-          {% endif %}
-
-          {% if block.settings.heading_add != blank %}
-            <div class="slide__info-part slide__add_heading">
-              <h3 class="subheading--page slide__heading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading_add }} {{ block.settings.subheading_add }}">{{ block.settings.heading_add }}<br/>{{ block.settings.subheading_add }}</a></h3>
-            </div>
-          {% endif %}
-
-          {% if block.settings.price != blank and block.settings.price_desc != blank %} {%- comment -%} Price badge {%-endcomment-%}
-            <div class="slide__price-point" style="background-color: {{block.settings.price_bage_bgcolor}};">
-              <a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}" style="color: {{block.settings.price_bage_textcolor}};">
-                <span class="slide__price"><span class="money">{{ block.settings.price }}</span></span>
-                <span class="slide__desc"><em>{{ block.settings.price_desc }}</em></span>
-              </a>
-            </div>
-          {% endif %}{%- comment -%} End price badge {%- endcomment -%}
-
-        </li>
-      {%- endfor -%}
-    </ul>
-    <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <path d="M11.2082413,57.0897432 C-2.68925494,45.4945705 -3.8244577,25.6015426 8.70770874,10.6367587 C20.6684157,-3.63555216 41.6540072,-3.5359779 54.4812084,10.8809203 C64.0630278,21.3371271 68.6859946,41.2556169 57.3303358,52.3733788 C46.4108745,63.6716474 24.4834413,67.543222 11.2082413,57.0897432" id="flex-control-thumb" fill="#3DB1C8"></path>
-    </svg>
-  </div>
-{% endif %}
-
 {% schema %}
   {
     "name": "Slideshow",
@@ -235,12 +90,10 @@
             "label":     "Hide on mobile",
             "default":   false
           },
-          {
-          "type": "paragraph",
+          { "type": "paragraph",
           "content": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
           },
-          {
-          "type": "header",
+          { "type": "header",
           "content": "Deck | Subheading",
           "info":   "Add extra description to your slide"
           },
@@ -362,6 +215,22 @@
             "label": "Background image",
             "info":"Recomended image size at least 2000x1500 px"
           },
+          {
+            "type": "text",
+            "id": "image_slide_bg_positionX",
+            "label": "Image content centering left/right position",
+            "default": "100%",
+            "placeholder": "100%",
+            "info": "This is the X-axis position of the center of the image. This is the left (0%) to right (100%) position of the most important part of the image. Values in the field above should be in percentage only. The default is 100% right alignment"
+          },
+          {
+            "type": "text",
+            "id": "image_slide_bg_positionY",
+            "label": "Image content centering top/bottom position",
+            "default": "50%",
+            "placeholder": "50%",
+            "info": "This is the X-axis position of the center of the image. This is the top (0%) to bottom (100%) position of the most important part of the image. Values in the field above should be in percentage only. The default is 50%, centered top to bottom"
+          },
 		      {
             "type": "image_picker",
             "id": "image_thumb",
@@ -441,3 +310,189 @@
     ]
   }
 {% endschema %}
+{% if section.blocks.size > 0 %}
+
+  <style>
+
+    {%- comment -%}fix for flexslider blinking{%- endcomment -%}
+    .flexslider.loading ul.slides > :first-child {
+      opacity: 1 !important;
+    }
+
+    {%- if section.settings.position_y -%}
+      @media (min-width: 769px) {
+        .flexslider-thumb--homepage {
+          margin-top: {{- section.settings.position_y -}}px;
+        }
+      }
+    {%- endif -%}
+
+    #flex-control-thumb { display: none; visibility: hidden; }
+
+    {%- for block in section.blocks -%}
+
+      {%- assign slide_img = block.settings.image | img_url: '2000x', format: 'pjpg' -%}
+      {%- assign slide_img_small = block.settings.image | img_url: '250x', format: 'pjpg' -%}
+      {%- if block.settings.image == nil -%}
+        {%- assign slide_img = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '2000x' -%}
+        {%- assign slide_img_small = "img_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '250x' -%}
+      {%- endif -%}
+
+      {% capture image_slide_bg_XY %}{{ block.settings.image_slide_bg_positionX }} {{ block.settings.image_slide_bg_positionY }}{% endcapture %}
+
+      .slide--{{ forloop.index }} {
+        background-image: url({{slide_img}}), url({{slide_img_small}});
+        background-position: {{ image_slide_bg_XY }};
+      }
+
+      {%- assign heading_pos = block.settings.heading_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign heading_XY = heading_pos | split: ' ' %}
+      {%- assign add_heading_pos = block.settings.heading_add_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign add_heading_XY = add_heading_pos | split: ' ' %}
+      {%- assign price_badge_pos = block.settings.price_bage_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign price_XY = price_badge_pos | split: ' ' %}
+
+      {%- assign heading_mob_pos = block.settings.heading_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign heading_mob_XY = heading_mob_pos | split: ' ' %}
+      {%- assign add_heading_mob_pos = block.settings.heading_add_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign add_heading_mob_XY = add_heading_mob_pos | split: ' ' %}
+      {%- assign price_badge_mob_pos = block.settings.price_bage_mob_positionXY | replace: ',', ' ' | replace: ':', ' ' | replace: '%', ' ' | replace: 'px', ' ' -%}
+      {%- assign price_mob_XY = price_badge_mob_pos | split: ' ' %}
+
+
+
+      .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
+        left: {{- heading_XY[0] -}}%;
+        top: {{- heading_XY[1] -}}%;
+      }
+      .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
+        left: {{- add_heading_XY[0] -}}%;
+        top: {{- add_heading_XY[1] -}}%;
+      }
+      .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
+        left: {{- price_XY[0] -}}%;
+        top: {{- price_XY[1] -}}%;
+      }
+
+      @media (max-width: 768px) {
+        {%- if block.settings.is_mobile_heading -%}
+          .slide--{{ forloop.index }} .slide__mainhead {
+            display: none;
+          }
+        {%- endif -%}
+        {%- if block.settings.is_mobile_add_heading -%}
+          .slide--{{ forloop.index }} .slide__add_heading {
+            display: none;
+          }
+        {%- endif -%}
+        {%- if block.settings.is_mobile_price_bage -%}
+          .slide--{{ forloop.index }} .slide__price-point {
+            display: none;
+          }
+        {%- endif -%}
+        .flexslider .slide.slide--{{ forloop.index }} .slide__mainhead {
+          left: {{- heading_mob_XY[0] -}}%;
+          top: {{- heading_mob_XY[1] -}}%;
+        }
+        .flexslider .slide.slide--{{ forloop.index }} .slide__add_heading {
+          left: {{- add_heading_mob_XY[0] -}}%;
+          top: {{- add_heading_mob_XY[1] -}}%;
+        }
+        .flexslider .slide.slide--{{ forloop.index }} .slide__price-point {
+          left: {{- price_mob_XY[0] -}}%;
+          top: {{- price_mob_XY[1] -}}%;
+        }
+      }
+
+
+    {%- endfor -%}
+
+  </style>
+
+  {%- assign autoplay = section.settings.slideshow_autoplay -%}
+  {%- assign autoplaySpeed = section.settings.slideshow_time_animation | default: "3000" -%}
+  {%- assign slideshow_effect = section.settings.slideshow_effect | default: 'fade' -%}
+
+  <div class="flexslider flexslider-thumb flexslider-thumb--homepage loading" data-autoplay="{{- autoplay -}}" data-autoplay-speed="{{- autoplaySpeed -}}" data-slideshow-effect="{{- slideshow_effect -}}">
+    <ul class="slides">
+      {%- for block in section.blocks -%}
+
+        {%- assign slide_thumb_img = block.settings.image_thumb | img_url: '150x', format: 'jpg' -%}
+        {%- if block.settings.image_thumb == nil -%}
+          {%- assign slide_thumb_img = "img_thumb_homepage_slide_" | append: forloop.index | append: ".jpg" | asset_img_url: '150x' -%}
+        {%- endif -%}
+
+        <li class="slide slide--{{ forloop.index }}" data-thumb="{{ slide_thumb_img }}">
+
+          {% if block.settings.heading != blank %}
+            <div class="slide__info-part slide__mainhead">
+              <h1 class="heading--page slide__heading">
+                <a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}">
+                  <span class="top-text">{{ block.settings.heading }}</span><br/>
+                  <span class="tobe">{% include '2Bsvg' %}</span><br/>
+                  <span class="bottom-text">{{ block.settings.subheading }}</span></a>
+              </h1>
+            </div>
+          {% endif %}
+
+          {% if block.settings.heading_add != blank %}
+            <div class="slide__info-part slide__add_heading">
+              <h3 class="subheading--page slide__heading"><a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading_add }} {{ block.settings.subheading_add }}">{{ block.settings.heading_add }}<br/>{{ block.settings.subheading_add }}</a></h3>
+            </div>
+          {% endif %}
+
+          {% if block.settings.price != blank and block.settings.price_desc != blank %} {%- comment -%} Price badge {%-endcomment-%}
+            <div class="slide__price-point" style="background-color: {{block.settings.price_bage_bgcolor}};">
+              <a class="slide__link" href="{{ block.settings.link }}" title="{{ block.settings.heading }}" style="color: {{block.settings.price_bage_textcolor}};">
+                <span class="slide__price"><span class="money">{{ block.settings.price }}</span></span>
+                <span class="slide__desc"><em>{{ block.settings.price_desc }}</em></span>
+              </a>
+            </div>
+          {% endif %}{%- comment -%} End price badge {%- endcomment -%}
+
+        </li>
+      {%- endfor -%}
+    </ul>
+    <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="M11.2082413,57.0897432 C-2.68925494,45.4945705 -3.8244577,25.6015426 8.70770874,10.6367587 C20.6684157,-3.63555216 41.6540072,-3.5359779 54.4812084,10.8809203 C64.0630278,21.3371271 68.6859946,41.2556169 57.3303358,52.3733788 C46.4108745,63.6716474 24.4834413,67.543222 11.2082413,57.0897432" id="flex-control-thumb" fill="#3DB1C8"></path>
+    </svg>
+  </div>
+{% endif %}
+
+<script>
+// {% javascript %}
+let initSlider = (ev) => {
+  // Make slider height match the original aspect ratio from the image uploaded.
+  // This engine is not that smart right now and you have to set imgx and imgy yourself
+  // perhaps we should make this a generator and be able to specify X and Y on the fly
+
+  let slider = document.getElementsByClassName("flexslider-thumb--homepage")[0]
+  let slides = document.getElementsByClassName("slide")
+  let slide = slides[0]
+  let slide_styles = window.getComputedStyle(slide)
+  let imgx = 2000
+  let imgy = 761
+  let imgrat = imgx / imgy
+  // Here is where the magic happens:
+  let slide_height = parseInt(slide_styles.getPropertyValue('width'))/imgrat
+
+  // Make the slider container proportional height
+  slider.style.height = slide_height + "px"
+
+  for (slide of slides) {
+    // Adjust slide height
+    slide.style.height = slide_height + "px"
+  }
+
+  // Center the controls vertically
+  let ctrls = document.getElementsByClassName("flex-control-nav")[0]
+  let ctrls_height = parseInt(window.getComputedStyle(ctrls).getPropertyValue("height"))
+  ctrls.style.marginTop =  (ctrls_height / 2)*-1 + "px"
+
+  console.log("initSlider")
+}
+
+window.addEventListener('load',initSlider)
+window.addEventListener('resize',initSlider)
+// {% endjavascript %}
+</script>

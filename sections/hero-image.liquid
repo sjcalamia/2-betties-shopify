@@ -1,3 +1,13 @@
+
+{% comment %}
+{% capture img_bg %}{{ section.settings.image_bg }}{% endcapture %}
+{% capture hero_title %}{{ section.settings.title }}{% endcapture %}
+{% capture hero_desc %}{{ section.settings.description }}{% endcapture %}
+{% capture hero_link %}{{ section.settings.link }}{% endcapture %}
+{% include 'block-hero' %}
+{% endcomment %}
+
+<!-- {{ section.settings.image_bg }}-->
 <section class="hero-image clearfix" style="background-image: url({{ section.settings.image_bg | img_url: '2000x' | format: 'jpg' }});">
   <div class="hero-image__content text-center">
     {% if section.settings.title != blank %}

@@ -59,7 +59,7 @@
           </span>
           <span class="fallback-text">{{ 'layout.menu.open_menu' | t }}</span>
         </button>
-        <div id="main-nav" class="drawer drawer--left-side drawer--menu close">
+        <nav id="main-nav" class="drawer drawer--left-side drawer--menu close">
 
           <!-- Store description -->
           {% comment %}{% unless section.settings.header_mobile_logo_disable %}
@@ -71,14 +71,11 @@
 
           <div class="drawer__wrapper">
             <div class="drawer__header">
-
               {% include 'logo' %}
-
               <button class="drawer__btn-close" type="button">
                 <span class="icon icon--close"></span>
                 <span class="fallback-text">{{ 'layout.menu.close_menu' | t }}</span>
               </button>
-
             </div> <!-- end drawer__header -->
 
             <ul class="nav-list">
@@ -86,35 +83,29 @@
 
               {% assign mega_menu_item_handle = linklists[section.settings.mega_menu_linklist].title | handle %}
 
-
               {% for link in linklists.main-menu.links %}
-              {% comment %}
-              Assign the variable for marking active link
-              - https://ecommerce.shopify.com/c/ecommerce-design/t/current-page-menu-highlighting-help-26714
-              {% endcomment %}
+                {% comment %}
+                  assign the variable for marking active link
+                  - https://ecommerce.shopify.com/c/ecommerce-design/t/current-page-menu-highlighting-help-26714
+                {% endcomment %}
                 {% assign active = false %}
-                  {% if template == 'index' and link.url == '/' %}
-                    {% assign active = true %}
-                  {% elsif collection.url == link.url %}
-                    {% assign active = true %}
-                  {% elsif blog.url == link.url %}
-                    {% assign active = true %}
-                  {% elsif page.url == link.url %}
-                    {% assign active = true %}
-                  {% elsif page_title == link.title %}
-                    {% assign active = true %}
-                  {% elsif template == 'list-collections' and link.url == '/collections' %}
-                    {% assign active = true %}
-                  {% elsif page_title == 'Products' and link.url == '/collections/all' %}
-                    {% assign active = true %}
-                  {% elsif template == 'article' and link.url == article.url %}
-                    {% assign active = true %}
-                	{% endif %}
-
+                {% if template == 'index' and link.url == '/' %}
+                  {% assign active = true %}
+                {% elsif collection.url == link.url %} {% assign active = true %}
+                {% elsif blog.url == link.url %} {% assign active = true %}
+                {% elsif page.url == link.url %} {% assign active = true %}
+                {% elsif page_title == link.title %} {% assign active = true %}
+                {% elsif template == 'list-collections' and link.url == '/collections' %}
+                  {% assign active = true %}
+                {% elsif page_title == 'products' and link.url == '/collections/all' %}
+                  {% assign active = true %}
+                {% elsif template == 'article' and link.url == article.url %}
+                  {% assign active = true %}
+                {% endif %}
 
                 {% assign child_list_handle = link.title | handle %}
                 {% assign second_level_menu = false %}
-								{% assign third_level = false %}
+                {% assign third_level = false %}
 
                 {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
                   {% assign second_level_menu = true %}
@@ -134,23 +125,20 @@
 
                 {% if second_level_menu %}
 
-									{% if child_list_handle == mega_menu_item_handle %}
-										{% assign nav_list_item_mega = true %}
-									{% endif %}
+                  {% if child_list_handle == mega_menu_item_handle %}
+                    {% assign nav_list_item_mega = true %}
+                  {% endif %}
 
                   <li class="nav-list__item {% if active %}active{% endif %} has-dropdown {% if third_level == true %} has-dropdown--tertiary{% endif %} {% if nav_list_item_mega %} nav-list__item--mega {% endif %}">
                     <a class="nav-list__link" href="{{ link.url }}">{{ link.title }}</a>
                     <span class="icon--plus-small js-collapse"></span>
 
-										<!-- Secondary menu level -->
-										<ul class="nav-list__dropdown {% unless third_level == true %}nav-list__dropdown--secondary{% endunless %}">
+                    <!-- secondary menu level -->
+                    <ul class="nav-list__dropdown {% unless third_level == true %}nav-list__dropdown--secondary{% endunless %}">
 
-										{% if nav_list_item_mega %}
-
-												{% for mega_list_item in linklists[section.settings.mega_menu_linklist].links limit:4 %} {% comment %} Start second level menu for loop {% endcomment %}
-
+                    {% if nav_list_item_mega %}
+                        {% for mega_list_item in linklists[section.settings.mega_menu_linklist].links limit:4 %} {% comment %} start second level menu for loop {% endcomment %}
                           {% if mega_list_item.type == "collection_link" %}
-
                             <li class="nav-list__item nav-list__item--add">
                               <a class="nav-list__link" href="{{ mega_list_item.object.url }}">
                                 <div class="img-holder img-holder--block nav-list__image">
@@ -162,21 +150,29 @@
                             </li>
 
                           {% endif %}
-													{% if mega_list_item.type == "product_link" %}
-
-                            <li class="nav-list__item nav-list__item--add">
+                          {% if mega_list_item.type == "product_link" %}
+                            {% assign product = mega_list_item.object %}
+                            {% capture product_caption %}{{ settings.product_grid_caption | default: "12 Rounds (6 packs of 2)" }}{% endcapture %}
+                            <!-- {{ product.title }}-->
+                            <!-- {{ product.url }}-->
+                            <!-- {{ product.available }}-->
+                            <li class="nav-list__item nav-list__item--add">{% include 'product-item-grid' %}</li>
+{% comment %}
+<!--                            <li class="nav-list__item nav-list__item--add">
                               <a class="nav-list__link" href="{{ mega_list_item.object.url }}">
                                 <div class="img-holder img-holder--block nav-list__image">
-                                  <img src="{{ mega_list_item.object.images[0].src | img_url: 'small' }}" alt="">
+                                  <img src="{{ mega_list_item.object.images[0].src | img_url: 'large' }}" alt="{{ mega_list_item.object.title }}" />
                                 </div>
-                                <h3 class="nav-list__title">{{ mega_list_item.object.title }}</h3>
-                                <p class="nav-list__desc">{{ mega_list_item.object.description | truncatewords: 25 | strip_html }}</p>
+                                <h3 class="nav-list__title">{{ mega_list_item.object.title }}&nbsp;{{ mega_list_item.object.type }}</h3>
+                                <p class="nav-list__desc">pack of 12 rounds, 6 2&ndash;packs</p>
+                                <p class="nav-list__price price money">{{ mega_list_item.object.price | money }}</p>
                               </a>
                             </li>
+-->
+{% endcomment %}
+                          {% endif %}
 
-													{% endif %}
-
-                        {% endfor %} {% comment %} End second level menu for loop {% endcomment %}
+                        {% endfor %} {% comment %} end second level menu for loop {% endcomment %}
 
                     {% else %}
                         {% for child_link in linklists[child_list_handle].links %}
@@ -187,7 +183,7 @@
                             <li class="nav-list__item has-dropdown">
                               <a class="nav-list__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
                               <span class="icon--plus-small js-collapse"></span>
-                              <!-- Third menu level -->
+                              <!-- third menu level -->
                               <ul class="nav-list__dropdown">
                                 {% for grand_child_link in linklists[grand_child_list_handle].links %}
                                   <li class="nav-list__item">
@@ -202,14 +198,14 @@
                             <li class="nav-list__item">
                               <a class="nav-list__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
                             </li>
-                          {% endif %} {% comment %} End if statetment for third level menu {% endcomment %}
+                          {% endif %} {% comment %} end if statetment for third level menu {% endcomment %}
 
-                        {% endfor %} {% comment %} End for loop second level menu {% endcomment %}
+                        {% endfor %} {% comment %} end for loop second level menu {% endcomment %}
 
 
                     {% endif %}
-										</ul>
-										<!-- end secondary menu level -->
+                    </ul>
+                    <!-- end secondary menu level -->
                   </li>
 
                 {% else %}
@@ -396,7 +392,7 @@
               {% endif %}
             </ul>
           </div> <!-- end drawer__wrapper -->
-        </div> <!-- end drawer -->
+        </nav> <!-- end drawer -->
         <!-- *** End menu *** -->
 
         <!-- *** Shopping cart *** -->

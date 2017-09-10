@@ -1,3 +1,5 @@
+<!-- *** Main content *** -->
+<main class="main-content" role="main">
 <div id="container" class="parallax  {% unless product.featured_image.size > 0 %} product-without-image{% endunless %}">
   <div class="parallax__back">
     {% include 'product-hero' %}
@@ -12,7 +14,6 @@
           <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
           <h2 itemprop="type" class="product_type">{% if product.type != blank %}{{ product.type }}{% endif %}</h2>
           {% include 'nuts.svg' %}
-          {% include 'lonealmond.svg' %}
           <div class="product__info">
             <span class="product__spec">6 per box |&nbsp;
               {% if product.available %}
@@ -484,6 +485,8 @@
     {% endif %}
   </div>
 </div>
+</main>
+<!-- *** End main content *** -->
 {% unless product == empty %}
   <script type="application/json" id="ProductJson">
     {{ product | json }}

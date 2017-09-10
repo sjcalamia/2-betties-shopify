@@ -1,0 +1,58 @@
+{% comment %}
+Variables in use: 
+    desktop
+    mobile
+    hide_class
+    image_alignment
+    image_size
+    img_src
+    hed
+    content
+{% endcomment %}
+<!--
+LIQUID VARS
+desktop: {{ desktop }}
+mobile: {{ mobile }}
+hide_class: {{ hide_class }}
+image_alignment {{ image_alignment }}
+image_size: {{ image_size }}
+img_src: {{ img_src }}
+hed: {{ hed }}
+content: {{ content }}
+-->
+
+{% case image_size %}
+  {% when "one-quarter" %}
+    {% assign content_size = "three-quarters" %}
+  {% when "one-third" %}
+    {% assign content_size = " two-thirds" %}
+  {% when "one-half" %}
+    {% assign content_size = "one-half" %}
+{% endcase %}
+
+{% case image_alignment %}
+  {% when "left" %}
+    {% assign content_alignment = "right" %}
+  {% when "right" %}
+    {% assign content_alignment = "left" %}
+{% endcase %}
+
+
+{%- if image_alignment == "left" -%}
+  <figure class="{{ desktop }}left {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
+    <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+  </figure>
+{%- endif -%}
+
+<div class="content {{ content_alignment | prepend: desktop }} {{ content_size | prepend: desktop }} {{ mobile }}one-whole">
+  <h3 class="hed">{{ block.settings.hed }}</h3>
+  <p class="lede body excerpt">{{ block.settings.content }}</p>
+</div>
+
+{%- if image_alignment == "right" -%}
+  <figure class="{{ desktop }}right {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
+    <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+  </figure>
+{%- endif -%}
+
+

@@ -1,0 +1,27 @@
+{% schema %}
+{
+  "name":"Testimonial",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quotee",
+      "label": "Quotee"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial",
+      "category": "Special sections"
+    }
+  ]
+}
+{% endschema %}
+
+{% capture quote_text %}{{ section.settings.quote_text }}{% endcapture %}
+{% capture quotee %}{{ section.settings.quotee }}{% endcapture %}
+{% include 'block-quote' %}
