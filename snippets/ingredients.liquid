@@ -1,0 +1,14 @@
+  <div class="ingredients">
+    {% assign raw_ingredients = ingredients | default: "walnut, threealmonds, nuts, maple" | split: ", " %}
+    {% for i in raw_ingredients %}
+      <span class="{{ i }} ingredient">
+        <svg>
+{% capture rindex %}{{ 'now' | date: '%S' | times: 360 | divided_by: 60 }}{% endcapture %}
+{% capture txindex %}{{ 'now' | date: '%S' | times: 200 | divided_by: 60 }}{% endcapture %}
+{% capture tyindex %}{{ 'now' | date: '%S' | times: 300 | divided_by: 60 }}{% endcapture %}
+{% comment %}transform="rotate({{rindex}}deg) translate({{txindex}} {{tyindex}})"{% endcomment %}
+          <use href="#{{ i }}" class="{{ i }} nut bg-drawing"  />
+        </svg>
+      </span>
+    {% endfor%}
+  </div>
