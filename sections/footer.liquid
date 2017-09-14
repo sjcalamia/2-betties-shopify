@@ -38,11 +38,11 @@
     {% when 1 %}
       {% assign footer_column_width = 'text-center' %}
     {% when 2 %}
-      {% assign footer_column_width = 'large--one-half medium--one-half one-whole' %}
+      {% assign footer_column_width = 'large--one-half medium--one-half small-one-whole' %}
     {% when 3 %}
-      {% assign footer_column_width = 'large--one-third medium--one-third one-whole' %}
+      {% assign footer_column_width = 'large--one-third medium--one-third small-one-whole' %}
     {% when 4 %}
-      {% assign footer_column_width = 'large--one-quarter medium--one-half one-whole' %}
+      {% assign footer_column_width = 'large--one-quarter medium--one-half small-one-whole' %}
   {% endcase %}
 
   <div class="wrapper">
@@ -175,7 +175,7 @@
 <!-- *** End footer *** -->
 
 <!-- SVGs -->
-{%- include 'nuts.svg' -%}
+{%- include 'ingredients.svg' -%}
 <!-- end SVGs -->
 
 {% schema %}
@@ -363,3 +363,175 @@
     ]
   }
 {% endschema %}
+
+{% javascript %}
+let infoboxSizing = (ev)=>{
+  if (!document.querySelector(".info-box")) { return; }
+  console.log(`Infobox sizing ${ev.type} event received`);
+  window.infobox__timeout = []
+  require(['jquery'],($)=>{
+    $(".info-box").each(
+      (i,e)=>{
+        let img = e.getElementsByTagName("img")[0]
+        let imgheight = parseFloat(window.getComputedStyle(img).getPropertyValue("height"))
+        if (imgheight < 100) {
+          console.info(`tried to size infobox, but height was ${imgheight} `)
+          window.infobox__timeout[i] = window.setTimeout(250,infoboxSizing.bind(e,[i,e]))
+          return
+        }
+
+        let vw = (n) => parseFloat($(window).width())/100 * n
+        let min_fs = $(window).width() < 480 ? vw(3) : 9 // Minimum Font Size: 9px
+        let max_fs = vw(5) // Max Font Size: 5vw
+        let hed_inc = 1 // Adjustment Increment Headline
+        let lede_inc = 0.75 // Adjustment Increment Copy
+        let conimgrat = 0.75 // Content to Image Ratio
+
+        let con = e.getElementsByClassName("content")[0]
+        let hed = e.getElementsByClassName("hed")[0]
+        let lede = e.getElementsByClassName("lede")[0]
+        let hsty = window.getComputedStyle(hed)
+        let lsty = window.getComputedStyle(lede)
+        let csty = window.getComputedStyle(con)
+
+        let $el = $(e)
+        let $con = $(con)
+        let $hed = $(hed)
+        let $lede = $(lede)
+        let conheight = $con.height()
+        let minconheight = imgheight * conimgrat
+        let conot = () => con.offsetTop - minconheight // this will be positive when the content has been pushed too far.
+
+        let fs = (el_style) => parseFloat(el_style.getPropertyValue("font-size"))
+        let hfs,//hed font size
+            lfs //lede font size
+        //console.log("img < con", (imgheight < conheight))
+        //console.log( `${imgheight * conimgrat} = ${conimgrat} conimgrat * ${imgheight} imgheight > ${conheight} conheight ? ${(imgheight * conimgrat) > conheight}` )
+
+        // I think we need to set the whole container to be the height of the image... but will that mess up the content sizing? hrm.
+        // seems like it might screw up the offset detection.. that is, the part of the script that determines if the text is too long even at the minimum font size
+        $con.parent().css("height",`${imgheight}px`)
+        console.log(e)
+        let articleheight = parseFloat(window.getComputedStyle(e).getPropertyValue("height"))
+        console.log(`BEFORE: article height: ${articleheight} content height: ${conheight}`)
+        const safety = 10000
+        let safe = safety
+        while ( ( imgheight < conheight || conheight < articleheight ) && safe ) {
+          console.log(`ITERATING ${safety-safe}: content height: ${conheight}`)
+          safe--; if (!safe) { console.warn("Loop exceeded safe repetitions. Quitting."); break; window.removeEventListener("resize",infoboxSizing) }
+          /*console.info(
+            `--- ITERATION ${100-safe} -----\n`,
+            "---Content Height / Image height -----\n",
+            conheight,"\n",
+            imgheight,"\n",
+            "\n---Headline Objs-----\n",
+            hed, "\n",
+            $hed, "\n",
+            "\n---Lede Objs-----\n",
+            lede, "\n",
+            $lede, "\n",
+            "\n---headline font sizes-----\n",
+            hfs, "\n",
+            fs(hsty), "\n",
+            "\n---lede font sizes-----\n",
+            lfs, "\n",
+            fs(lsty)
+          )*/
+          //conheight = $hed.height() + parseFloat($hed.css("margin-bottom")) + $lede.height()
+          oconheight = conheight
+          conheight = parseFloat(csty.getPropertyValue("height"))
+          let ohfs = hfs = fs(hsty)
+          let olfs = lfs = fs(lsty)
+          if ( conheight > imgheight ) {
+            // shrink the font to fit
+            lfs -= lede_inc
+            hfs -= hed_inc
+            if (lfs < min_fs) {
+              // lede font too small
+              console.info(`lede font size reached min ${lfs}px`)
+              lfs = olfs
+            }
+            if (hfs < min_fs || hfs < lfs * 1.25) {
+              console.info(`hed font size reached min ${hfs}px`)
+              // hed font too small
+              hfs = ohfs
+            }
+            if (( hfs == ohfs && lfs == olfs )) {
+              // if they were both too small, and it still doesn't fit...
+              // split their rows!
+              $(img).addClass('full-width').parent().addClass('full-width')
+              $con.addClass('full-width')
+              console.info(`fonts both at min_fs [lfs: ${lfs}, hfs: ${hfs}], adding full-width to boxes and starting over`)
+              continue
+            }
+          } else if ( ( minconheight < imgheight && conheight < minconheight ) ) {
+            // grown the font if it's too small
+            lfs += lede_inc
+            hfs += hed_inc
+            if (lfs > max_fs ){
+              console.info(`lede font size reached max ${lfs}px`)
+              lfs = olfs
+            }
+            if (hfs > max_fs || hfs > lfs * 2) {
+              console.info(`hed font size reached max ${hfs}px`)
+              hfs = ohfs
+            }
+            if (hfs == ohfs && lfs == olfs) {
+              console.info(`max_fs reached by hfs: ${hfs} and lfs: ${lfs} and the content is still smaller than the image. Stopping.`)
+              break
+            }
+          }
+          if (conot() > 0) {
+              console.info(`We seem to be wrapping conot(): ${conot()}`)
+              $(img).addClass('full-width').parent().addClass('full-width')
+              $con.addClass('full-width')
+          } else if (parseInt($(window).width) > 669) {
+              $(img).removeClass('full-width').parent().removeClass('full-width')
+              $con.removeClass('full-width')
+          }
+          if (lfs > hfs) {
+            console.warn(`lede font size ${lfs} was greater than header font size ${hfs}. We've gone too far. Stopping.`)
+            break
+          }
+          if (oconheight == conheight) {
+            // we're not even doing anything anymore. Just stop..
+            console.warn(`Content height ${conheight} does not seem to be changing ${oconheight} after ${safety-safe} iterations. We're ineffective. Stopping.`)
+            break
+          }
+
+          $hed.css('font-size',hfs+'px')
+          $lede.css('font-size',lfs+'px')
+        }
+        console.log(`AFTER: image height: ${imgheight} content height: ${conheight}`)
+        console.log("offset top: ",con.offsetTop)
+        if (conot() <= 0 || $(window).width > 680) {
+          // set the padding so that the content is vertically centered.
+          let cpad = parseFloat(csty.getPropertyValue("padding-top"))
+          console.log(`current padding ${cpad}`)
+          let padd = ( imgheight - conheight - (cpad)) / 2
+          //console.log(imgheight,conheight,$hed.height(),$lede.height())
+          //$con.css("padding-top", `calc( ${padd}px - .5em )`)
+          // get current content padding values
+          $con.css("padding-top", `${cpad+padd}px`)
+              //.css("height",`${$(img).height() - padd}px`)
+              .removeClass("full-width")
+          $(e.getElementsByTagName("img")[0]).removeClass("full-width")//.css('width','')
+            .parent().removeClass("full-width")
+        } else {
+          console.log(conot(),con.offsetTop,minconheight)
+          // we're on mobile, where the image and content stack
+          $con.css("padding-top", "5vw")
+              .css("margin-top", "0")
+              .addClass("full-width")
+          $(e.getElementsByTagName("img")[0]).addClass("full-width").css('width','100%')
+            .parent().addClass("full-width")
+
+        }
+      }
+    )
+  })
+}
+document.addEventListener("DOMContentLoaded", infoboxSizing)
+document.addEventListener("load",infoboxSizing)
+window.addEventListener("resize", infoboxSizing)
+{% endjavascript %}
