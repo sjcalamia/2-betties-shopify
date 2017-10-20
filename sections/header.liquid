@@ -211,7 +211,12 @@
                 {% else %}
 
                   <li class="nav-list__item {% if active %}active{% endif %}">
-                    <a class="nav-list__link" href="{{ link.url }}">{{ link.title }}</a>
+                  {% unless active %}
+                    {% assign ltag = 'a' %}
+                  {% else %}
+                    {% assign ltag = 'span' %}
+                  {% endunless %}
+                  <{{ ltag }} class="nav-list__link" href="{{ link.url }}">{{ link.title }}</{{ltag}}>
                   </li>
 
                 {% endif %}
@@ -547,13 +552,7 @@
                   <div class="cart-empty display-none">
                     <div class="cart-empty__wrapper">
                       <h5 class="heading--add-small">{{ 'cart.empty.heading' | t | upcase }}</h5>
-                      <p class="cart-empty__info">{{ 'cart.empty.additional_information_html' | t }}</p>
-                      <a class="btn btn--underlines" href="/collections/all" title="{{ 'cart.empty.button' | t }}">
-                        {{ 'cart.empty.button' | t }}
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="61" height="12" viewBox="0 0 61 12">
-                          <path d="M60.217,1.433 C45.717,2.825 31.217,4.217 16.717,5.609 C13.227,5.944 8.806,6.200 6.390,5.310 C7.803,4.196 11.676,3.654 15.204,3.216 C28.324,1.587 42.033,-0.069 56.184,0.335 C58.234,0.394 60.964,0.830 60.217,1.433 ZM50.155,5.670 C52.205,5.728 54.936,6.165 54.188,6.767 C39.688,8.160 25.188,9.552 10.688,10.943 C7.198,11.278 2.778,11.535 0.362,10.645 C1.774,9.531 5.647,8.988 9.175,8.551 C22.295,6.922 36.005,5.265 50.155,5.670 Z" class="cls-1"/>
-                        </svg>
-                      </a>
+                      <p class="cart-empty__info"><a href="/collections/our-products">{{ 'cart.empty.additional_information_html' | t }}</a></p>
                     </div>
                   </div>
 

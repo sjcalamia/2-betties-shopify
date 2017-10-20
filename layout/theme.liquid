@@ -8,11 +8,11 @@
 {%- capture shopify_header -%}{{- shopify_header | replace: '<script', '|*|<script' -}}     {%- endcapture -%}
 {%- capture shopify_header -%}{{- shopify_header | replace: '</script>', '</script>|*|' -}} {%- endcapture -%}
 
-{%- assign header_contetnt_arr = shopify_header | split: '|*|' -%}
+{%- assign header_content_arr = shopify_header | split: '|*|' -%}
 {%- assign shopify_header_scripts = '' -%}
 {%- assign shopify_header_non_scripts = '' -%}
 
-{%- for tag_in_header in header_contetnt_arr  -%}
+{%- for tag_in_header in header_content_arr  -%}
 
   {%- if tag_in_header contains "script" -%}
     {%- assign shopify_header_scripts = shopify_header_scripts | append: tag_in_header -%}
@@ -23,7 +23,7 @@
 {%- endfor -%}
 
 
-{%- comment -%} parsing content_for_layout to separate sctyle tags from others {%- endcomment -%}
+{%- comment -%} parsing content_for_layout to separate style tags from others {%- endcomment -%}
 
 {%- capture  template_output -%}  {{ content_for_layout }} {%- endcapture -%}
 
@@ -49,11 +49,12 @@
 
 
 <!doctype html>
-<html class="no-js">
+<html amp class="no-js">
 <head>
 
   <!-- Meta Tags ================================================== -->
   {%- include 'meta-tags' -%}
+    <meta name="google-site-verification" content="avtpWH0qnnOLcn8iXSMhdQtjzdGUgZMXQKqWRQyEB3A" />
 
   <!-- Title and description ================================================== -->
   <title>
@@ -70,17 +71,20 @@
   {%- include 'favicon' -%}
 
   <!-- Fonts ================================================== -->
-  {%- include 'google-fonts-ajax' -%}
+  {% comment %}{%- include 'google-fonts-ajax' -%}{% endcomment %}
   {%- include 'typekit-fonts-ajax' -%}
 
   <!-- CSS ================================================== -->
   {%- include 'stylesheets' -%}
 
+  <!-- content_for_header without scripts ======================= -->
+  {{shopify_header_non_scripts | strip_newlines}}
+
   {%- comment -%} Parsed style tags from body {%- endcomment -%}
   {{template_output_styles}}
 
-  <!-- content_for_header without scripts ======================= -->
-  {{shopify_header_non_scripts | strip_newlines}}
+  {% comment %}<!-- content_for_header without scripts ======================= -->{% endcomment %}
+  {% comment %}{{shopify_header_non_scripts | strip_newlines}}{% endcomment %}
 
 
   {%- comment -%}
@@ -90,21 +94,25 @@
     {{ "shopify_common.js"  | shopify_asset_url | script_tag }}
     {{ "customer_area.js" | shopify_asset_url  | script_tag }}
   {%- endif -%}
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded",(e)=> {
+      /* document.getElementById("{{ page_title | handle }}").classList.remove("loading") */
+      document.getElementById("main-wrapper").classList.remove("loading")
+    })
+  </script>
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {% if settings.show_multiple_currencies %}currency-is-hide{% endif %}">
 
-  <div class="content-wrapper">
+<!-- {{ '2Betties-footer-logo.svg' | asset_url }} -->
+  <div class="content-wrapper loading" id="main-wrapper">
     <noscript>
       <div class="javascript-is-disabled">
         <p>JavaScript is <strong>disabled</strong> in your browser, this may cause some limitations to apply, and some functions may not be available.</p>
       </div>
     </noscript>
-
-    {%- section 'header' -%}
-
-    <!-- *** Main content *** -->
-    <main class="main-content" role="main">
+      
+      {% include "main_open" %}
       {% if template == 'blog' or template == 'article' %}
         <div class="js-page-content">
           {{ template_output_non_styles }}
@@ -112,13 +120,8 @@
       {% else %}
         {{ template_output_non_styles }}
       {% endif %}
-    </main>
-    <!-- *** End main content *** -->
+      {% include "main_close" %}
 
-    {% comment %}
-    Snippet for footer
-    {% endcomment %}
-    {% section 'footer' %}
   </div> <!-- End content-wrapper -->
 
   {%- if settings.popup_enable -%}

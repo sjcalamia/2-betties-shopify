@@ -10,6 +10,8 @@ Variables in use:
     content
 {% endcomment %}
 <!--
+/snippets/info-box.liquid
+
 LIQUID VARS
 desktop: {{ desktop }}
 mobile: {{ mobile }}
@@ -38,21 +40,13 @@ content: {{ content }}
 {% endcase %}
 
 
-{%- if image_alignment == "left" -%}
-  <figure class="{{ desktop }}left {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
-    <img width="100%" src="{{ img_src | img_url: 'large' }}" />
-  </figure>
-{%- endif -%}
-
-<div class="content {{ content_alignment | prepend: desktop }} {{ content_size | prepend: desktop }} {{ mobile }}one-whole">
+<div class="content {{mobile}}clear {{ content_alignment }} {{ content_size }} {{ mobile }}one-whole">
   <h3 class="hed">{{ block.settings.hed }}</h3>
   <p class="lede body excerpt">{{ block.settings.content }}</p>
 </div>
 
-{%- if image_alignment == "right" -%}
-  <figure class="{{ desktop }}right {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
-    <img width="100%" src="{{ img_src | img_url: 'large' }}" />
-  </figure>
-{%- endif -%}
+<figure class="{{ image_alignment }} {{mobile}}clear {{ image_size }} {{ hide_class | prepend: mobile | default: 'small--one-whole'}}">
+  <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+</figure>
 
 

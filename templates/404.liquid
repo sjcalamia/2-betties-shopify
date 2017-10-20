@@ -2,7 +2,7 @@
 Special layout for 404 page and password page
 - https://docs.shopify.com/themes/theme-development/templates/404-liquid
 {% endcomment %}
-{% layout none %}
+{% layout '404' %}
 
 <!doctype html>
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
@@ -35,7 +35,7 @@ Special layout for 404 page and password page
     </style>
   {% endif %}
   <!-- Fonts ================================================== -->
-  {% include 'google-fonts' %}
+  {% include 'typekit-fonts' %}
 
   <!-- Favicons ================================================== -->
   {% include 'favicon' %}

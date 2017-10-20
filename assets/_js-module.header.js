@@ -14,6 +14,7 @@ define(['jquery', 'utils'], function($, utils) {
     var scrollBarWidth = utils.getScrollBarWidth();
 
     document.body.addEventListener('drawer-open', function() {
+      console.log("drawer open")
       document.body.classList.add('overflow-hidden');
       DOM.mainContent.style.paddingRight = scrollBarWidth + 'px';
       DOM.header.style.paddingRight = scrollBarWidth + 'px';
@@ -21,6 +22,7 @@ define(['jquery', 'utils'], function($, utils) {
     });
 
     document.body.addEventListener('drawer-closed', function() {
+      console.log("drawer closed")
       document.body.classList.remove('overflow-hidden');
       DOM.mainContent.style.paddingRight = '';
       DOM.header.style.paddingRight = '';

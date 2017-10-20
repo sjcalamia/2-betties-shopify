@@ -38,7 +38,7 @@ define([], function(){
       if (temp) {
         DOM[prop] = temp;
       } else {
-        throw new Error(DOM[prop] +' does not exist');
+        throw new Error(`DOM[${prop}]: ${DOM[prop]} does not exist`);
       }
     }
 

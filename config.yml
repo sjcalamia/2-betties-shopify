@@ -2,3 +2,9 @@ development:
   password: 45a4236aadb886183bc2f4a6d4fc6b4e
   theme_id: "178627402"
   store: 2betties-dev.myshopify.com
+
+production:
+  password: 03ba286dc56065c08a3cab297bad5725
+  theme_id: "184206727"
+  store: 2betties.myshopify.com
+  timeout: 300s

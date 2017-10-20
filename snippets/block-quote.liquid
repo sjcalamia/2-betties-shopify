@@ -1,12 +1,27 @@
 <aside class="section section--testimonial clearfix">
   {% include 'nuts.svg' %}
-  <blockquote class="large--two-thirds push--large--one-sixth medium--one-whole">
-    <svg>
-      <use href="#walnut" class="walnut nut bg-drawing" transform="translate(124 200) rotate(45) scale(0.5)" />
-      <use href="#threealmonds" class="threealmonds nut bg-drawing" transform="translate(-4 -100) rotate(75) scale(0.5)" />
-      <use href="#nuts" class="nuts nut bg-drawing" transform="translate(1010 -70) rotate(125) scale(0.6)" />
-      <use href="#maple" class="maple bg-drawing" transform="translate(655 200) rotate(15) scale(0.8)" />
-    </svg>
+  <blockquote class="large--two-thirds push--large--one-eighth medium--one-whole">
+  {% include 'ingredients' with 'walnut, threealmonds, nuts, maple' %}
+  <!--<span class="ingredient">
+      <svg>
+        <use href="#walnut" class="walnut nut bg-drawing" transform="translate(124 200) rotate(45) scale(0.5)" />
+      </svg>
+    </span>
+    <span class="ingredient">
+      <svg>
+        <use href="#threealmonds" class="threealmonds nut bg-drawing" transform="translate(-4 -100) rotate(75) scale(0.5)" />
+      </svg>
+    </span>
+    <span class="ingredient">
+      <svg>
+        <use href="#nuts" class="nuts nut bg-drawing" transform="translate(1010 -70) rotate(125) scale(0.6)" />
+      </svg>
+    </span>
+    <span class="ingredient">
+      <svg>
+        <use href="#maple" class="maple bg-drawing" transform="translate(655 200) rotate(15) scale(0.8)" />
+      </svg>
+    </span>-->
     <p class="quote">{{ quote_text }}</p>
     <h4 class="quotee">{{ quotee }}</h4>
   </blockquote>

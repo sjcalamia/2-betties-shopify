@@ -1,3 +1,4 @@
+{%- assign content = content_html -%}
 {%- comment -%}
 Strip span tags
 {%- assign content = content_html | split: ']<' | join: '] <' -%}

@@ -1,5 +1,3 @@
-<!-- *** Main content *** -->
-<main class="main-content" role="main">
 <article class="nutrition">
   <header class="hero heading--page">
     <h1 class="hed title">{{ page.title }}</h1>
@@ -32,8 +30,8 @@
       <p>Sugar, regardless of its source, is a simple carbohydrate converted into glucose that the body then uses for energy. There is a big difference, however, between natural sugar and added sugar, refined sugar, and non-refined sugar. Added sugar can be refined or non-refined. Unrefined natural sweeteners such as maple syrup and honey have more beneficial nutrients compared to refined sugars—including table sugar, high fructose corn syrup, beet, or rice syrups.</p>
       <p><strong>The American Heart Association suggests an added sugar limit per day for:</strong></p>
       <ul>
-        <li>Women 24 grams or about 6 teaspoons of sugar (100 calories) and,</li>
-        <li>Men 36 grams or about 9 teaspoons of sugar (150 calories.)</li>
+        <li>Women&mdash;24 grams or about 6 teaspoons of sugar (100 calories)</li>
+        <li>Men&mdash;36 grams or about 9 teaspoons of sugar (150 calories)</li>
       </ul>
     </article>
   </section>
@@ -41,7 +39,7 @@
 
   </section>
   <section class="wrapper grid protein">
-    <div class="grid__item one-whole">
+    <article class="lesson grid__item one-whole">
       <h3>Power up your protein knowledge.</h3>
       <p>Protein aids the healthy development of your organs, tissues, muscles, hair, and nails. Additionally, protein helps support the absorption of important nutrients use universally by the body to develop, grow, and function normally. This incredible enzyme and hormone producer is the building block of bones, muscles, cartilage, skin, and blood. It also helps to reduce hunger and boost metabolism—helping you to lose/maintain your weight while stabilizing your blood sugar levels. Protein is also known to help improve your ability to learn and concentrate—reducing brain fog and boosting your energy levels.</p>
       <ul>
@@ -49,7 +47,7 @@
         <li>The average sedentary man should get 56 grams of protein; 46 grams of protein for the average sedentary woman</li>
         <li>1 Egg has 6 grams of protein, 2 Rounds have 6 grams of protein</li>
       </ul>
-    </div>
+    </article>
   </section>
   <section class="hero protein">
 
@@ -60,8 +58,8 @@
       <p class="dek">Here are some insights and tips to get better acquainted with the Nutritional Facts Label. Understanding of the dos and don'ts (and what's really inside that package) will help you make smarter food choices for you and your family.</p>
     </header>
     <figure class="one-whole grid__item">
-      <figure-caption class="one-whole"><h5 class="one-third push--one-third medium-down--hide">Typical Snack-Cookie Label:</h5></figure-caption>
-      <ol type="1" start="1" class="one-third left medium-down--one-whole medium-down--clear">
+      <figure-caption class="one-whole"><h5 class="one-third push--one-third small--hide">Typical Snack-Cookie Label:</h5></figure-caption>
+      <ol start="1" class="one-third left small--one-whole small--clear">
         <li>
           <p><strong>Check the servings and calories&mdash;</strong>if you eat more than a single serving, you're multiplying the number of calories and percentage of the nutrient's Daily Value</p>
         </li>
@@ -72,8 +70,8 @@
           <p><strong>Not all fats are created equal&mdash;</strong>Polyunsaturated and monounsaturated fats are considered "good fats" and you'll find them in fish, nuts, and vegetable oil. Saturated fats, trans fats, and cholesterol all lead to potential heart disease and are a big NO NO.</p>
         </li>
       </ol>
-      <img src="{{ '101_label.png' | asset_url }}" alt="Sample nutrition label from a common snack cookie." class="one-third medium-down--one-whole" />
-      <ol type="1" start="4" class="one-third right medium-down--one-whole medium-down--clear">
+      <img src="{{ '101_label.png' | asset_url }}" alt="Sample nutrition label from a common snack cookie." class="one-third small--one-whole" />
+      <ol start="4" class="one-third right small--one-whole small--clear">
         <li>
           <p><strong>Reduce your sodium, reduce your blood pressure&mdash;</strong>processed foods are big producers of sodium in yuour diet. For most people, 2,300 milligrams is current recommended limit and not necessarily recommended daily allowance. For health sake, consider lowering sodium/salt intake and increasing your amount of potassium to help counteract sodium's effect on blood pressure.</p>
         </li>
@@ -86,36 +84,4 @@
       </ol>
   </section>
 </article>
-</main>
-<!-- *** End main content *** -->
-<script>
-let infoboxSizing = (e)=>{
-  console.log("Infobox sizing event: ",e);
-  require(['jquery'],($)=>{
-    $(".info-box").each(
-      (i,e)=>{
-        let $el = $(e)
-        let $img = $($el.find("img"))
-        let $con = $($el.children(".content")[0])
-        let $hed = $($con.find(".hed")[0])
-        let $led = $($con.find(".lede")[0])
-        // set the font size so that the content matches the image height
-        console.log($img.height())
-        while ($con.height() >  $img.height()) {
-          let fs = parseFloat($led.css("fontSize"));
-          if (fs < 9) break;
-          $led.css("font-size",(fs - 0.75)+"px")
-          $hed.css("font-size",(parseFloat($hed.css("fontSize")) - 0.5)+"px")
-        }
 
-        // set the padding so that the content is vertically centered.
-        let padd = ( $el.height()-$con.height() ) / 2
-        $con.css("padding-top", "calc( " + padd + "px - .5em )")
-      }
-    )
-  })
-}
-document.addEventListener("DOMContentLoaded", infoboxSizing)
-window.addEventListener("resize", infoboxSizing)
-
-</script>

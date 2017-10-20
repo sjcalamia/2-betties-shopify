@@ -9,6 +9,17 @@
     {% assign hero_link = false %}
   {% endunless %}
 {% endif %}
+{% if hero_collection %}
+  {% capture image__url %}{{ hero_collection.image.src | img_url: '2000x' | format: 'jpg' }}{% endcapture %}
+  <!-- hero_collection: {{ hero_collection }} -->
+  <!-- collection: {{ collections[hero_collection] }} -->
+  <!-- image__url: {{ image__url }} -->
+  {% capture hero_title %}{{ hero_collection.title }}{% endcapture %}
+  {% capture hero_desc %}{{ hero_collection.description }}{% endcapture %}
+  {% unless hero_link %}
+    {% assign hero_link = false %}
+  {% endunless %}
+{% endif %}
 
 {% if hero_dek %}
   <!-- hero_dek: {{ hero_dek }} -->
@@ -31,7 +42,7 @@ Hero Section
 {% else %}
 <section class="hero clearfix" style="background-image: url({{ img_bg | img_url: '2000x' | format: 'jpg' }});">
 {% endif %}
-  <div class="">
+  <div class="copy">
     {% if hero_title != blank %}
       <h1 class="title hed">{{ hero_title }}</h1>
     {% endif %}

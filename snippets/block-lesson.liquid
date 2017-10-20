@@ -1,7 +1,7 @@
 {% capture bg_lightness %}{% cycle "dark", "light" %}{% endcapture %}
 <article class="{{ nuts }} info-box one-whole {{ bg_lightness }}">
   {% assign desktop="large--" %}
-  {% assign mobile="medium--" %}
+  {% assign mobile="small--" %}
   {% assign hide_class = "hide" %}
   {% capture img_src %}{{ nuts | replace: " ", "-" }}.jpg{% endcapture %}
   {% capture img_tag %}<img class="" width="100%" src='{{ img_src | asset_img_url: "large" }}' alt="">{% endcapture %}

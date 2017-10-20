@@ -1,4 +1,11 @@
 {%-comment-%}
+YotPro
+{%-endcomment-%}
+<script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/CLd4EQAAef5lDpvdmTb1YC1RJtDPXeDsCr5zZYeU/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+
+{%-comment-%}
 ************************************************************************
   RequireJS
   http://requirejs.org/
@@ -52,11 +59,12 @@
     Drawers initialization
     ---------------------------------------------------------
   */
+  console.log(`Looding for drawer--menu ${document.querySelector(".drawer--menu")}`)
   if (document.querySelector('.drawer--menu')) {
     require(['drawers'], function(Drawers){
       new Drawers ({
         DOM : {
-          container:  '#main-nav',
+          container:  'nav#main-nav',
           openBtn :   '#main-nav-open-btn',
           closeBtn :  '.drawer--menu .drawer__btn-close'
         }
@@ -228,10 +236,17 @@
   if (document.querySelector('.carousel--homepage')) {
     require(['swiper', 'utils'], function(Swiper, utils){
 
+      if (document.querySelector('.swiper-active-slide')) {
+        console.log("well, there is a slide... idk why we needed this DOM finder...")
+      } else {
+        return;
+        console.log(`Looks like there isn't a .swiper-active-slide after all... what is happening?`)
+      }
       var DOM = utils.domFinder({
         activeSlideContainer: '.swiper-active-slide',
         carouselContainer:    '.carousel--homepage'
       });
+      console.log("Yet the script must go on..and it doesn't")
 
       var autoplaySetting      = parseInt(DOM.carouselContainer.getAttribute('data-autoplay'), 10) || 0;
 
@@ -1240,4 +1255,5 @@
     }
   });
 
+  console.log("Well, at least the script finishes")
 </script>

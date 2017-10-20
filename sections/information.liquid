@@ -150,7 +150,7 @@
 {%- endif -%}
 {% assign image_alignment = "init" %}
 {% assign desktop = "large--" %}
-{% assign mobile = "medium--" %}
+{% assign mobile = "small--" %}
 
 {% if section.settings.hide_image_on_mobile %}
   {% assign hide_class = "hide" %}
@@ -184,33 +184,3 @@
 
 </section>
 
-{% javascript %}
-let infoboxSizing = (e)=>{
-  console.log("Infobox sizing event: ",e);
-  require(['jquery'],($)=>{
-    $(".info-box").each(
-      (i,e)=>{
-        let $el = $(e)
-        let $img = $($el.find("img"))
-        let $con = $($el.children(".content")[0])
-        let $hed = $($con.find(".hed")[0])
-        let $led = $($con.find(".lede")[0])
-        // set the font size so that the content matches the image height
-        console.log($img.height())
-        while ($con.height() >  $img.height()) {
-          let fs = parseFloat($led.css("fontSize"));
-          if (fs < 9) break;
-          $led.css("font-size",(fs - 0.75)+"px")
-          $hed.css("font-size",(parseFloat($hed.css("fontSize")) - 0.5)+"px")
-        }
-
-        // set the padding so that the content is vertically centered.
-        let padd = ( $el.height()-$con.height() ) / 2
-        $con.css("padding-top", "calc( " + padd + "px - .5em )")
-      }
-    )
-  })
-}
-document.addEventListener("DOMContentLoaded", infoboxSizing)
-window.addEventListener("resize", infoboxSizing)
-{% endjavascript %}

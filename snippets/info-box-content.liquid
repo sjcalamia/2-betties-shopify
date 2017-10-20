@@ -10,6 +10,7 @@ Variables in use:
     content
 {% endcomment %}
 <!--
+/snippets/info-box-content.liquid
 LIQUID VARS
 desktop: {{ desktop }}
 mobile: {{ mobile }}
@@ -25,7 +26,7 @@ content: {{ content }}
   {% when "one-quarter" %}
     {% assign content_size = "three-quarters" %}
   {% when "one-third" %}
-    {% assign content_size = " two-thirds" %}
+    {% assign content_size = "two-thirds" %}
   {% when "one-half" %}
     {% assign content_size = "one-half" %}
 {% endcase %}
@@ -38,33 +39,20 @@ content: {{ content }}
 {% endcase %}
 
 <!-- image source: {{ img }} -->
-{%- if image_alignment == "left" -%}
-  <figure class="{{ desktop }}left {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
+<figure class="{{ image_alignment }} {{mobile}}clear {{ image_size }} {{ mobile }}one-whole {{ hide_class | prepend: mobile }}">
   {% if img_tag %}
     {{ img_tag }}
   {% else if raw_art %}
-    <img width="100%" src="{{ articles[raw_art].image.src | img_url: "large" }}" />
+    <img src="{{ articles[raw_art].image.src | img_url: "large" }}" />
   {% else %}
-    <img width="100%" src="{{ img | img_url }}" />
+    <img src="{{ img | img_url }}" />
   {% endif %}
-  </figure>
-{%- endif -%}
+</figure>
 
-<div class="content {{ content_alignment | prepend: desktop }} {{ content_size | prepend: desktop }} {{ mobile }}one-whole">
+<div class="content  {{mobile}}clear {{ content_alignment }} {{ content_size }} {{ mobile }}one-whole">
   <h3 class="hed">{{ hed }}</h3>
   <p class="lede body excerpt">{{ content }}</p>
 </div>
 
-{%- if image_alignment == "right" -%}
-  <figure class="{{ desktop }}right {{ image_size | prepend: desktop }} {{ hide_class | prepend: mobile }}">
-  {% if img_tag %}
-    {{ img_tag }}
-  {% else if raw_art %}
-    <img width="100%" src="{{ articles[raw_art].image.src | img_url: "large" }}" />
-  {% else %}
-    <img width="100%" src="{{ img | img_url }}" />
-  {% endif %}
-  </figure>
-{%- endif -%}
 
 

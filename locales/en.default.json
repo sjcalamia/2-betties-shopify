@@ -5,21 +5,30 @@
       "page": "Page {{ page }}"
     },
     "form_popup_errors": {
-      "name_html": "<span>Ooops!<\/span> The name is empty",
-      "last_name_html": "<span>Oh!<\/span> The last name is empty",
-      "fullname_html": "<span>Sorry...<\/span> Please type fullname",
-      "author_html": "The name is empty",
-      "email_html": "<span>Ooops!<\/span> Please check the email",
-      "password_html": "<span>Notice.<\/span> The password must consist min 6 charecter",
+      "name_html": "<span>Ooops!<\/span> Looks like you forgot to fill in your name!",
+      "last_name_html": "<span>Oh!<\/span> Please tell us your last name",
+      "fullname_html": "<span>Sorry...<\/span> Please enter your full name",
+      "author_html": "Name is empty",
+      "email_html": "<span>Ooops!<\/span> Please check your email address for typos",
+      "password_html": "<span>Notice:<\/span> Your password must have at least 6 characters ",
       "message_html": "<span>Ooops!<\/span> This field is empty.",
-      "comment_author_html": "<span>Sorry...<\/span> This field is empty. Please, fill it to complete adding the comment",
-      "city_html": "<span>Sorry...<\/span> This field is empty. Please, fill it to complete adding the address",
-      "country_html": "<span>Sorry...<\/span> This field is empty. Please, fill it to complete adding the address",
-      "address1_html": "<span>Ooops!<\/span> This field is empty. Please, fill it to complete adding the address",
-      "zip_html": "<span>Oh!<\/span> This zip code is invalid. Please, add the correct one so we could deliver your purchase right to you."
+      "comment_author_html": "<span>Sorry...<\/span> This field is empty. Please fill it in to complete adding your comment",
+      "city_html": "<span>Oops!<\/span> This field is empty. Please fill it in to complete adding the address",
+      "country_html": "<span>Oops!<\/span> This field is empty. Please fill it in to complete adding the address",
+      "address1_html": "<span>Oops!<\/span> This field is empty. Please fill it in to complete adding the address",
+      "zip_html": "<span>Oh!<\/span> This zip code is invalid. Please correct it so we can deliver your Rounds right to you!"
     },
     "hero_image": {
-      "button": "Take a look at book"
+      "button": "Get a Round!"
+    },
+    "password_page": {
+      "opening_soon":"2 Betties: Developer Version",
+      "signup_form_heading": "Let us know if you need access:",
+      "signup_form_email_label": "Your Email:",
+      "signup_form_email_placeholder": "your.name@mail.com",
+      "signup_form_submit": "Request Access",
+      "signup_form_success": "Thank you! We'll keep you in the know!",
+      "password_link":"Enter the 2 Betties Dev Site"
     }
   },
   "additional_blocks": {
@@ -30,17 +39,17 @@
       "button": "Check the recipe"
     },
     "hero_image": {
-      "button": "take a look at book"
+      "button": "Get A Round"
     },
     "hero_about_us": {
-      "button": "take a look at our story"
+      "button": "Read Our Story"
     }
   },
   "blogs": {
     "general": {
       "heading": "Blog",
       "heading_for_recipes": "Recipes",
-      "subheading": "with love from the bottom of Foodly heart",
+      "subheading": "with love from the bottom of 2 Betties' heart",
       "by_author": "by"
     },
     "article": {
@@ -51,8 +60,8 @@
     },
     "comments": {
       "heading": "Comments",
-      "success_moderated_html": "<span>Hurray!<\/span> Your comment will be posted after moderation! Thank you!",
-      "success_html": "<span>Hurray!<\/span> Your comment was posted successfully! Thank you!",
+      "success_moderated_html": "<span>Sweet!<\/span> Your comment will be posted after moderation! Thank you!",
+      "success_html": "<span>Sweet!<\/span> Your comment was posted successfully! Thank you!",
       "title": "Leave a Comment",
       "posted_on": "Posted on",
       "posted_by": "by",
@@ -85,7 +94,7 @@
   },
   "cart": {
     "general": {
-      "heading": "Your bag",
+      "heading": "Your cart",
       "product_title": "Product Title",
       "quantity": "QTY",
       "price": "Price",
@@ -96,14 +105,14 @@
       "note_placeholder": "Leave your special requirements here",
       "checkout_button": "Proceed to checkout",
       "additional_information_heading": "Choose package",
-      "additional_information_one": "paper bag",
+      "additional_information_one": "paper cart",
       "update_cart": "Update cart",
-      "added_to_cart_html": "<span>Hurray!<\/span> This product was added to cart successfully.",
-      "added_to_cart_products_html": "<span>Hurray!<\/span> All products were added to cart successfully."
+      "added_to_cart_html": "<span>Sweet!<\/span> This product was successfully added to your cart.",
+      "added_to_cart_products_html": "<span>Sweet!<\/span> All products were successfully added to your cart."
     },
     "empty": {
-      "heading": "Oh, nope!",
-      "additional_information_html": "Your bag seems to be empty and you are probably hungry.<br> Look at our fresh <strong>special offers<\/strong>, you would like it.",
+      "heading": "Oh, no!",
+      "additional_information_html": "Your cart seems to be empty and you're probably hungry.<br> Have yourself a <strong>snack<\/strong>!",
       "button": "check it out"
     },
     "calculator": {
@@ -113,7 +122,7 @@
     },
     "cart_page": {
       "continue_shopping": "Continue shopping",
-      "within": ""
+      "within": "&nbsp;"
     }
   },
   "collections": {
@@ -161,7 +170,7 @@
     "general": {
       "check_it_button": "Check it out",
       "subscribe_button": "Subscribe",
-      "add_to_cart_button": "Add to bag",
+      "add_to_cart_button": "Add to cart",
       "next_button": "Next",
       "previous_button": "Prev",
       "back_button": "Back",
@@ -205,14 +214,14 @@
       "item": "Item",
       "price": "Price",
       "delete": "Delete",
-      "add_to_bag": "Add to bag",
+      "add_to_cart": "Add to cart",
       "add_to_wishlist": "Add to wishlist",
       "added_to_wishlist": "This product is in your",
       "wishlist": "wishlist",
       "empty_heading": "OH, NOPE!",
       "product_deleted": "This product has deleted from your wishlist.",
       "empty_info_html": "Your wishlist is empty<br>Look at our fresh <strong>special offers<\/strong>, you would like it.",
-      "already_in_wishlist_html": "This product is in your <a class='text-link--default' href='\/pages\/wish-list'>wishlist<\/a>",
+      "already_in_wishlist_html": "This product is in your <a class=\"text-link--default\" href=\"\/pages\/wish-list\">wishlist<\/a>",
       "error_state": "Sorry, something went wrong. Please, try one more time"
     },
     "lookbook_page": {
@@ -246,14 +255,14 @@
     },
     "login": {
       "heading": "Login",
-      "subheading": "glad you are back, we have missed you",
+      "subheading": "Glad you're back, we've missed you.",
       "email": "Email",
       "password": "Password",
       "forgot_password": "Forgot password",
       "login_button": "Login",
       "login_button_large": "Login to my Account",
-      "dont_have_account": "Don’t have account yet?",
-      "create_it": "Create it here.",
+      "dont_have_account": "Don’t have an account yet?",
+      "create_it": "Create one!",
       "logout": "Logout"
     },
     "recover_password": {
@@ -349,12 +358,12 @@
       "show_map": "Check on map"
     },
     "form": {
-      "heading": "Let’s have a chat",
+      "heading": "",
       "message": "My message...",
-      "name": "My name is...",
-      "email": "Reply me to email...",
+      "name": "My name...",
+      "email": "My email...",
       "send_button": "Send my message",
-      "post_success_html": "<span>Hurray!<\/span> Your message successfully send"
+      "post_success_html": "<span>Sweet!<\/span> Your message successfully send"
     }
   },
   "tabs": {
@@ -367,7 +376,7 @@
       "first_button_name": "Check its ingedients",
       "second_button_name": "Handcrafted dishes",
       "third_button_name": "Sum up the order",
-      "fourth_button_name": "Add to bag",
+      "fourth_button_name": "Add to cart",
       "link_to_recipe": "Get to know the specifics of this meal"
     }
   },
@@ -403,7 +412,7 @@
   },
   "checkout_and_system": {
     "general": {
-      "openning_soon": "Openning Soon",
+      "openning_soon": "Opening Soon",
       "message_to_subscribe": "Curious what’s next?! Join our newsletter to be notified when we open."
     }
   },

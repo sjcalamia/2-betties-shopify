@@ -1,9 +1,8 @@
 <!-- Begin templates/collection.liquid -->
 <section class="section section--page">
   {%- if collection == "AllProductsCollection" -%}
-  <section class="hero full_width">
-    <h1 class="shop title script">Our Products</h1>
-  </section>
+  {% assign hero_article = "shop/hero" %}
+  {% include "block-hero" %}
   {%- endif -%}
   <div class="wrapper">
     <div class="page-description">

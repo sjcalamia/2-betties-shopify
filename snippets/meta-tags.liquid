@@ -5,11 +5,45 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="canonical" href="{{ canonical_url }}">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="{{ settings.color_primary }}">
-<meta name="msapplication-TileColor" content="{{ settings.color_primary }}">
+<meta name="theme-color" content="{{ settings.base1 }}">
+<meta name="msapplication-TileColor" content="{{ settings.base1 }}">
 {%- if page_description -%}
   <meta name="description" content="{{ page_description | escape }}">
 {%- endif -%}
+  <meta name="keywords" content="snacks, healthy, health, food, donuts, 2 betties, 2 bettys, two betties, twobetties, 2betties, 2bettys, nutrition">
+
+{% if template.name contains 'index' %}
+<meta name="google-site-verification" content="104ZFEJ2P6-F-odPdgP05I7dRVabbJ9H7L_9yL_wgjY" />
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "{{ canonical_url }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://2betties.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://2betties.com",
+  "name": "2 Betties",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-301-928-1421",
+    "contactType": "Customer service",
+    "availableLanguage": "English",
+    "areaServed":"US"
+  },
+  "logo": "https:{{ '2Betties-footer-logo.svg' | asset_url }}",
+  "sameAs": "[{{ settings.social_facebook_link }},{{ settings.social_twitter_link }},{{ settings.social_instagram_link }}]"
+}
+</script>
+{% endif %}
 
 {%- comment -%}
   Add Facebook and Pinterest Open Graph meta tags to product pages
@@ -50,8 +84,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ page_title | escape }}">
   {%- if settings.logo_use_image -%}
-    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
-    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image" content="http:{{ '2betties-footer-logo.png' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ '2betties-footer-logo.png' | asset_url }}">
   {%- endif -%}
 {%- endif -%}
 {%- if page_description -%}
@@ -74,14 +108,14 @@
 {%- comment -%}
   Twitter user name of the site, based on theme settings
 {%- endcomment -%}
+
 <meta name="twitter:card" content="summary">
-{%- if template contains 'product' -%}
+{%- if template.name contains 'product' -%}
   <meta name="twitter:title" content="{{ product.title }}">
-  <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
   <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
   <meta name="twitter:image:width" content="240">
   <meta name="twitter:image:height" content="240">
-{%- elsif template contains 'article' -%}
+{%- elsif template.name contains 'article' -%}
   <meta name="twitter:title" content="{{ article.title }}">
   <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 140, '' | escape }}">
   {%- comment -%}

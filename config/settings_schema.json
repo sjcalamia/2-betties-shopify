@@ -7,23 +7,153 @@
     "theme_support_url": "https:\/\/congruityhub.ticksy.com\/",
     "theme_documentation_url": "http:\/\/foodly.gozha.net\/documentation\/"
   },
-  { "name": "Colors",
+  {
+    "name": "Color Scheme",
     "settings": [
-      { "content": "Theme colors",
+      {
+        "content": "Dark Backgrounds",
         "type": "header"
       },
-      { "label": "Body background color",
+      {
+        "label": "Base03",
+        "type": "color",
+        "id": "base03",
+        "default": "#001D35",
+        "info": "Background"
+      },
+      {
+        "label": "Base02",
+        "type": "color",
+        "id": "base02",
+        "default": "#032C48",
+        "info": "Background highlights"
+      },
+      {
+        "content": "Content Colors",
+        "type": "header"
+      },
+      {
+        "label": "Base01",
+        "type": "color",
+        "id": "base01",
+        "default": "#657684",
+        "info": "Dark: comments \/ secondary content | Light: optional emphasized content"
+      },
+      {
+        "label": "Base00",
+        "type": "color",
+        "id": "base00",
+        "default": "#002E48",
+        "info": "Dark: unused | Light: body text \/ primary content"
+      },
+      {
+        "label": "Base0",
+        "type": "color",
+        "id": "base0",
+        "default": "#F5F7F8",
+        "info": "Dark: body text \/ primary content | Light: unused"
+      },
+      {
+        "label": "Base1",
+        "type": "color",
+        "id": "base1",
+        "default": "#45B1C7",
+        "info": "Dark: optional emphasized content | Light: comments \/ secondary content"
+      },
+      {
+        "content": "Light Backgrounds",
+        "type": "header"
+      },
+      {
+        "label": "Base2",
+        "type": "color",
+        "id": "base2",
+        "default": "#B2E0E9",
+        "info": "Background highlights"
+      },
+      {
+        "label": "Base3",
+        "type": "color",
+        "id": "base3",
+        "default": "#FEFEFE",
+        "info": "Background"
+      },
+      {
+        "content": "Color Keys",
+        "type": "header"
+      },
+      {
+        "label": "Yellow",
+        "type": "color",
+        "id": "yellow",
+        "default": "#b58900"
+      },
+      {
+        "label": "Orange",
+        "type": "color",
+        "id": "orange",
+        "default": "#D97823"
+      },
+      {
+        "label": "Red",
+        "type": "color",
+        "id": "red",
+        "default": "#9E0C40"
+      },
+      {
+        "label": "Magenta",
+        "type": "color",
+        "id": "magenta",
+        "default": "#d33682"
+      },
+      {
+        "label": "Violet",
+        "type": "color",
+        "id": "violet",
+        "default": "#6c71c4"
+      },
+      {
+        "label": "Blue",
+        "type": "color",
+        "id": "blue",
+        "default": "#45B1C7"
+      },
+      {
+        "label": "Cyan",
+        "type": "color",
+        "id": "cyan",
+        "default": "#2aa198"
+      },
+      {
+        "label": "Green",
+        "type": "color",
+        "id": "green",
+        "default": "#859900"
+      }
+    ]
+  },
+  {
+    "name": "Old Theme Colors",
+    "settings": [
+      {
+        "content": "Old Theme colors",
+        "type": "header"
+      },
+      {
+        "label": "Body background color",
         "type": "color",
         "id": "color_body_bg",
         "default": "#ffffff"
       },
-      { "label": "Primary color",
+      {
+        "label": "Primary color",
         "type": "color",
         "id": "color_primary",
         "default": "#5c4b51",
         "info": "Brand color. Used for hover state of buttons and "
       },
-      { "label": "Hightlight color",
+      {
+        "label": "Hightlight color",
         "type": "color",
         "id": "color_highlight",
         "default": "#f06060",
@@ -209,32 +339,40 @@
       }
     ]
   },
-  { "name": "Typography",
+  {
+    "name": "Typography",
     "settings": [
-      { "type": "header",
+      {
+        "type": "header",
         "content": "Body font"
       },
-      { "type": "select",
+      {
+        "type": "select",
         "id": "font_body_family",
         "label": "Font family",
         "options": [
-          { "value": "franklin-gothic-urw-comp, sans-serif",
+          {
+            "value": "franklin-gothic-urw-comp, sans-serif",
             "label": "Franklin Gothic",
             "group": "Sans-serif | Typekit"
           },
-          { "value": "sofia-pro-soft, sans-serif",
+          {
+            "value": "sofia-pro-soft, sans-serif",
             "label": "Sofia",
             "group": "Sans-serif | Typekit"
           },
-          { "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
+          {
+            "value": "'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, 'AppleGothic', sans-serif",
             "label": "Avant Garde",
             "group": "Sans-serif"
           },
-          { "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
+          {
+            "value": "'Gill Sans', 'Gill Sans MT', Calibri, sans-serif",
             "label": "Gill Sans",
             "group": "Sans-serif"
           },
-          { "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          {
+            "value": "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif",
             "label": "Helvetica Neue",
             "group": "Sans-serif"
           },
@@ -1100,7 +1238,6 @@
         "label": "Wide Width Breakpoint",
         "default": "1537px"
       }
-
     ]
   },
   {
@@ -1377,6 +1514,21 @@
         "type": "checkbox",
         "id": "product_share_btns_fancy",
         "label": "Fancy"
+      }
+    ]
+  },
+  {
+    "name": "Product Grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Grid"
+      },
+      {
+        "type": "text",
+        "id": "product_grid_caption",
+        "label": "Sizing Caption",
+        "default": "12 Rounds total (6 packs of 2)"
       }
     ]
   },
@@ -2060,8 +2212,8 @@
             "label": "Use MailChimp subscribe form"
           },
           {
-            "value": "standart",
-            "label": "Use standart(shopify) subscribe form"
+            "value": "standard",
+            "label": "Use standard(shopify) subscribe form"
           }
         ],
         "default": "mailchimp"

@@ -201,13 +201,18 @@
   }
 {% endschema %}
 
-{% stylesheet %}
+{% stylesheet 'scss' %}
 /* Our Story Page */
+@media (max-width: 480px) {
+  .our-story .main-content {
+    margin-top: 11vh;
+  }
+}
 
 /* End Our Story Styles */
 {% endstylesheet %}
 
-<div class="sections"><!--moveable sections-->
+<div class="sections our-story"><!--moveable sections-->
 {% for block in section.blocks %}
   <section class="page {{ block.type }}">
     {% case block.type %}

@@ -1,27 +1,34 @@
 {% comment %}
 Snippet is used to show products in 'collection.liquid', 'similar-product-carousel-collection.liquid'
 {% endcomment %}
-<div class="product grid--in-row">
+{% capture product_class %}{{ product.title | replace: " ", "-" }}{% endcapture %}
+{% capture product_href %}
+  {% unless product.title == 'Coming Soon,' %}{{ product.url }}{% else %}#{% endunless %}
+{% endcapture %}
+<div class="product grid--in-row {{ product.title | handleize }}">
 	<a
 		class="product__link {% unless product.available %}product--sold-out{% endunless %}"
-		href="{{ product.url }}"
+		href="{{ product_href }}"
 		title="{{ product.title }}">
     <div class="img-holder img-holder--product {% unless product.featured_image.size > 0 %}img-holder--no-product{% endunless %}">
       <img
 			  src="{% if product.featured_image.size > 0 %}{{ product.featured_image | img_url: 'grande'}}{% else %}{{ 'img_no_image.jpg' | asset_url }}{% endif %}"
 			  alt="{{ product.title }}">
     </div>
+  {% unless product.title == 'Coming soon,' %}
   </a>
+  {% endunless %}
   {% if settings.collection_product_badge == 'badge' and product.compare_at_price_min > product.price %}
     <span class="product__badge">{{ 'products.general.sale_badge_text' | t }}</span>
   {% endif %}
 
 
   <div class="product__info">
-    <h4 class="product__title"><a href="{{ product.url }}" title="{{ product.title }}">{{ product.title | truncatewords: 4 }}{% if product.type != blank %}&nbsp;{{ product.type }}{%- endif -%}</a></h4>
-		{% if product_caption %}
-    <h6 class="product__quantity-desc">{{ product_caption }}</h6>
-		{% endif %}
+    <h4 class="product__title"><a href="{{ product_href }}" title="{{ product.title }}">{{ product.title | truncatewords: 4 }}{% if product.type != blank %}&nbsp;{{ product.type }}{%- endif -%}</a></h4>
+    <h6 class="product__quantity-desc">{{ product_caption | default: settings.product_grid_caption }}</h6>
+    <div class="yotpo bottomLine"
+      data-product-id="{{ product.id }}">
+    </div>
     {% if product.price > 0.00 %}
     <span class="product__spec">
         {% if product.available %}
@@ -29,12 +36,14 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
           {{ 'products.general.in_stock' | t }}
         {% endcomment %}
           <span class="">
-            <span class="product__price"><span class="money">{{ product.price | money }}</span></span><br/>
+            <span class="product__price"><span class="money">{{ product.price | money }}</span></span>
             {%- if settings.collection_product_badge == 'price' -%}
               {%- if product.compare_at_price_min > product.price -%}
-                <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
+              <span class="product__compare-price"><span class="money">{{ product.compare_at_price_max | money }}</span></span>
               {%- endif -%}
             {%- endif -%}
+            
+
           </span>
 
         {% else %}
@@ -48,6 +57,57 @@ Snippet is used to show products in 'collection.liquid', 'similar-product-carous
           {%- endif -%}
         {%- endif -%}
     </span>
+    {% comment %} Add to cart button {% endcomment %}
+
+    <div class="form-wrapper">
+      <form class="form form--default" action="/cart/add" method="post">
+          {% if product.variants.size > 1 and product.options.size == 1 %}
+          <div class="form__row">
+            <select id="product-variants" name="id">
+              {% for variant in product.variants %}
+                {%- if variant.available -%}
+                  <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}
+                    value="{{ variant.id }}"
+                    data-variant-price={{ variant.price }}>{{ variant.title }}</option>
+                {%- else -%}
+                  <option value="{{ variant.id }}" disabled="disabled" data-variant-price={{ variant.price }}>
+                    {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                  </option>
+                {%- endif -%}
+              {% endfor %}
+            </select>
+          </div>
+
+          {% elsif product.variants.size > 1 and product.options.size > 1 %}
+          <!-- total number of product options {{product.options.size}} is greater than 1 -->
+
+          <div class="form__row">
+            <div id="product-multi-variants">
+              <!-- <div id="price-field"></div> -->
+                <select id="product-select" name="id">
+                  {% for variant in product.variants %}
+                    {%- if variant.available -%}
+                      <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+                    {%- else -%}
+                      <option value="{{ variant.id }}" disabled="disabled">
+                        {{- variant.title -}} - {{ 'products.product_page.sold_out' | t }}
+                      </option>
+                    {%- endif -%}
+                  {% endfor %}
+                </select>
+            </div>
+          </div>
+
+          {% else %} {% comment %} If there is no more than one product variant {% endcomment %}
+            <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
+          {% endif %}
+
+          <input class="form__field" type="hidden" id="quantity" name="quantity" value="1" min="1" >
+          <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
+      </form>
+    </div> <!-- End form-wrapper -->
+
   {% endif %}
+
   </div> <!-- End product__info -->
 </div> <!-- End product -->

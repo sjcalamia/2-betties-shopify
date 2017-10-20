@@ -1,11 +1,9 @@
-<!-- *** Main content *** -->
-<main class="main-content" role="main">
-<div id="container" class="parallax  {% unless product.featured_image.size > 0 %} product-without-image{% endunless %}">
-  <div class="parallax__back">
+<div id="container" class="product {% unless product.featured_image.size > 0 %} product-without-image{% endunless %}">
+  <div class="hero">
     {% include 'product-hero' %}
   </div>
 
-  <div class="parallax__base">
+  <div class="">
     <div class="wrapper">
       <div class="grid">
         <div itemscope itemtype="http://schema.org/Product" class="product product--lg grid__item one-whole">
@@ -13,8 +11,11 @@
           <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}">
           <h1 itemprop="name" class="product__title">{{ product.title }}</h1>
           <h2 itemprop="type" class="product_type">{% if product.type != blank %}{{ product.type }}{% endif %}</h2>
-          {% include 'nuts.svg' %}
+          <div class="yotpo bottomLine"
+            data-product-id="{{ product.id }}">
+          </div>
           <div class="product__info">
+            {% comment %}TODO: Insert ingredients svg use statements in here{% endcomment %}
             <span class="product__spec">6 per box |&nbsp;
               {% if product.available %}
                 {{ 'products.general.in_stock' | t }}
@@ -63,6 +64,10 @@
               <form class="form form--default" action="/cart/add" method="post">
                 <div class="form__row">
 
+                  <!-- total number of product options {{product.options.size}} -->
+                  {% for option in product.options %}
+                    <!-- {{ option }} -->
+                  {% endfor%}
                   {% if product.variants.size > 1 and product.options.size == 1 %}
 
                     <select id="product-variants" name="id">
@@ -79,10 +84,11 @@
                       {% endfor %}
                     </select>
 
-                  {% elsif product.options.size > 1 %}
+                  {% elsif product.variants.size > 1 and product.options.size > 1 %}
+                  <!-- total number of product options {{product.options.size}} is greater than 1 -->
 
                     <div id="product-multi-variants">
-                        <div id="price-field"></div>
+                      <!-- <div id="price-field"></div> -->
                         <select id="product-select" name="id">
                           {% for variant in product.variants %}
                             {%- if variant.available -%}
@@ -107,7 +113,7 @@
                     <input class="form__field" type="number" id="quantity" name="quantity" value="1" min="1" >
                     <span class="icon icon--arrow-left js-down-quantity"></span>
                   </div>
-                  <span class="js-price-and-value"><span class="money hide">{{ product.price | money }}</span></span>
+                  <span class="js-price-and-value hide"><span class="money hide">{{ product.price | money }}</span></span>
                 </div>
                 <div class="form__row">
                   <button {% unless product.available %}disabled{% endunless %} class="btn btn--default btn--full btn--submit {% unless product.available %}btn--disabled{% endunless %} js-add-to-card" type="submit" >{% unless product.available %}{{ 'products.general.out_stock' | t }}{% else %} {{ 'layout.general.add_to_cart_button' | t }}{% endunless %}</button>
@@ -157,46 +163,318 @@
       </div> <!-- End grid -->
     </div> <!-- End wrapper -->
 
-    <hr class="hr--clear-inverse hr--desktop">
 
   <div class="product-description-flex">
     <div class="wrapper">
       <div class="grid">
-        <div class="product product--lg product-container grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-one{% endif %}">
-          <div class="product__desc fold">
+        <div class="product product--lg product-container grid__item one-whole">
+          <div class="product__desc">
           {% comment %}
           Strip unnecessary html
           {% endcomment %}
           {% assign content_html = product.description %}
           {% include 'strip_html_tags' with content_html %}
 
-          {% assign split_nutritional = '[Nutritional value]' %}
-            {% if content contains split_nutritional %}
-              {% assign description_text = content | split: split_nutritional | first %}
-              {% assign nutritional_value_text = content | split: split_nutritional | last %}
-            {% endif %}
+          {% assign split_info = '[InfoBox]' %}
+          {% if content contains split_info %}
+            {% assign description_text = content | split: split_info | first %}
+            {% assign infobox_value_text = content | split: split_info | last %}
+          {% endif %}
 
-            {% comment %}
-            Product decription
-            {% endcomment %}
-            {% if settings.product_description_enable %}
-              <h3 class="heading--add fold__toggle">{{ 'products.product_page.description_title' | t }}</h3>
-              <div itemprop="description" class="rte product__desc-content fold__content">
+          {% assign split_nutritional = '[Nutrition Facts]' %}
+          {% if infobox_value_text contains split_nutritional %}
+            {% assign nutritional_value_text = infobox_value_text | split: split_nutritional | last %}
+            {% assign infobox_value_text = infobox_value_text | split: split_nutritional | first %}
+          {% endif %}
+
+          {% comment %}
+          Product decription
+          {% endcomment %}
+          {% if settings.product_description_enable %}
+            <div class="one-half small--one-whole left small--clear">
+              <h3 class="hed ">{{ 'products.product_page.description_title' | t }}</h3>
+              <div itemprop="description" class="rte product__desc-content ">
                 {% if description_text != blank %}
                   {{ description_text }}
                 {% else %}
                   {{ product.description }}
                 {% endif %}
               </div>
-            {% endif %}
+            </div>
+            <div class="one-half small--hide right small--clear product-character">
+              <figure class="right one-whole">
+                <img src="{{ product.images[0].src | img_url: 'large' }}" alt="">
+              </figure>
+            </div>
+          {% endif %}
           </div> <!-- End product__desc -->
         </div> <!-- End grid__item -->
       </div> <!-- End grid -->
     </div> <!-- End wrapper -->
 
+    {% comment %}Product Side by Side Images{% endcomment %}
+    <div class="grid">
+      <div class="grid__item info-box">
+        {% assign img_src=product.images[3].src %}
+        <figure class="left clear one-half small--one-whole">
+          <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+        </figure>
+
+        {% assign img_src=product.images[4].src %}
+        <figure class="right small--clear one-half small--one-whole">
+          <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+        </figure>
+      </div>
+
+      {% comment %}Infobox Text: Ingredients and other Product Specs{% endcomment %}
+      {% if infobox_value_text %}
+      <div class="grid__item info-box">
+
+        {% if nutritional_value_text %}
+          <!-- {{nutritional_value_text}} -->
+          {% assign content = nutritional_value_text | split: '[' %}
+          {% for sect in content %}
+            {% assign key = sect | split: ']' | first %}
+            {% assign val = sect | split: ']' | last %}
+            <!-- {{key}} {{val}}-->
+
+            {% case key %}
+            {% when "Servings" %}
+              {% assign servings = val | split: " ! " %}
+              <!-- {{ servings }} -->
+              {% for serving in servings %}
+              <!-- {{ serving | strip}} -->
+                {% assign skey = serving | split: " : " | first %}
+                {% assign sval = serving | strip | split: " : " | last %}
+            <!-- {{skey}} {{sval}}-->
+                {% case skey %}
+                {% when "servings per container" %}
+                  {% assign nf_srvpercon = sval %}
+                  <!-- {{ nf_srvpercon }}-->
+                {% when "serving size" %}
+                  {% assign nf_srvsize = sval %}
+                {% when "calories" %}
+                  {% assign nf_calories = sval %}
+                {% endcase%}
+              {% endfor%}
+            {% when "Nutrients" %}
+              {% assign nutrients = val | split: " ! " %}
+              {% for nutrient in nutrients %}
+                {% assign nkey = nutrient | split: ", " %}
+                {% case nkey[0] %}
+                  {% when "Total Fat" %}
+                    {% assign nf_tfat_label = nkey[0] %}
+                    {% assign nf_tfat_weight = nkey[1] %}
+                    {% assign nf_tfat_pdv = nkey[2] %}
+                  {% when "Saturated Fat" %}
+                    {% assign nf_sfat_label = nkey[0] %}
+                    {% assign nf_sfat_weight = nkey[1] %}
+                    {% assign nf_sfat_pdv = nkey[2] %}
+                  {% when "Trans Fat" %}
+                    {% assign nf_xfat_label = "<em>Trans</em> Fat"  %}
+                    {% assign nf_xfat_weight = nkey[1] %}
+                    {% assign nf_xfat_pdv = nkey[2] %}
+                    
+                  {% when "Cholesterol" %}
+                    {% assign nf_chol_label = nkey[0] %}
+                    {% assign nf_chol_weight = nkey[1] %}
+                    {% assign nf_chol_pdv = nkey[2] %}
+
+                  {% when "Sodium" %}
+                    {% assign nf_sodm_label = nkey[0] %}
+                    {% assign nf_sodm_weight = nkey[1] %}
+                    {% assign nf_sodm_pdv = nkey[2] %}
+
+                  {% when "Total Carbohydrate" %}
+                    {% assign nf_carb_label = nkey[0] %}
+                    {% assign nf_carb_weight = nkey[1] %}
+                    {% assign nf_carb_pdv = nkey[2] %}
+                  {% when "Dietary Fiber" %}
+                    {% assign nf_dfib_label = nkey[0] %}
+                    {% assign nf_dfib_weight = nkey[1] %}
+                    {% assign nf_dfib_pdv = nkey[2] %}
+                  {% when "Total Sugars" %}
+                    {% assign nf_tsug_label = nkey[0] %}
+                    {% assign nf_tsug_weight = nkey[1] %}
+                  {% when "Added Sugar" %}
+                    {% assign nf_asug_label = nkey[0] %}
+                    {% assign nf_asug_weight = nkey[1] %}
+                    {% assign nf_asug_pdv = nkey[2] %}
+
+                  {% when "Protein" %}
+                    {% assign nf_prot_label = nkey[0] %}
+                    {% assign nf_prot_weight = nkey[1] %}
+                    {% assign nf_prot_pdv = nkey[2] %}
+                {% endcase%}
+              {% endfor%}
+            {% when "Vitamins" %}
+              {% assign nutrients = val | split: " ! " %}
+              {% for nutrient in nutrients %}
+                {% assign vkey = nutrient | split: ", " %}
+                {% case vkey[0] %}
+                  {% when "Vitamin D" %}
+                    {% assign nf_vitd_label = vkey[0] %}
+                    {% assign nf_vitd_weight = vkey[1] %}
+                    {% assign nf_vitd_pdv = vkey[2] %}
+                  {% when "Calcium" %}
+                    {% assign nf_calc_label = vkey[0] %}
+                    {% assign nf_calc_weight = vkey[1] %}
+                    {% assign nf_calc_pdv = vkey[2] %}
+                  {% when "Iron" %}
+                    {% assign nf_iron_label = vkey[0] %}
+                    {% assign nf_iron_weight = vkey[1] %}
+                    {% assign nf_iron_pdv = vkey[2] %}
+                  {% when "Potassium" %}
+                    {% assign nf_potK_label = vkey[0] %}
+                    {% assign nf_potK_weight = vkey[1] %}
+                    {% assign nf_potK_pdv = vkey[2] %}
+                {% endcase%}
+              {% endfor %}
+            {% endcase %}
+          {% endfor%}
+          
+          <div class="article_container small--clear small--one-whole one-half left">
+            <article class="nutrition-info centered five-eighths medium-down--eleven-twelfths">
+              <header>
+                <h1>Nutrition Facts</h1>
+                <section class="servings">
+                  <h3 class="per-container">{{ nf_srvpercon }} servings per container</h3>
+                  <h2 class="size"><span class="label">Serving size</span><span class="amt">{{ nf_srvsize }}</span></h2>
+                </section>
+              </header>
+              <section class="amtpersrv">
+                <h4 class="title">Amount per serving</h4>
+                <h2 class="calories"><span class="label">Calories</span><span class="amount">{{ nf_calories }}</span></h2>
+              </section>
+              <section class="dailyvalue">
+                <h4 class="title">% Daily Value*</h4>
+                <ul class="nutrients primary">
+                  <li class="fat">
+                    <span class="label">Total Fat</span>
+                    <span class="weight">{{ nf_tfat_weight }}</span>
+                    {% if nf_tfat_pdv != "" %}<span class="pdv">{{ nf_tfat_pdv }}</span>{% endif %}
+                    <ul class="secondary">
+                      <li class="saturated">
+                        <span class="label">Saturated Fat</span>
+                        <span class="weight">{{ nf_sfat_weight }}</span>
+                        {% if nf_sfat_pdv != "" %}<span class="pdv">{{ nf_sfat_pdv }}</span>{% endif %}
+                      </li>
+                      <li class="trans">
+                        <span class="label"><em>Trans</em> Fat</span>
+                        <span class="weight">{{ nf_xfat_weight }}</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="cholesterol">
+                    <span class="label">Cholesterol</span>
+                    <span class="weight">{{ nf_chol_weight }}</span>
+                    {% if nf_chol_pdv != "" %}<span class="pdv">{{ nf_chol_pdv }}</span>{% endif %}
+                  </li>
+                  <li class="sodium">
+                    <span class="label">Sodium</span>
+                    <span class="weight">{{ nf_sodm_weight }}</span>
+                    {% if nf_sodm_pdv != "" %}<span class="pdv">{{ nf_sodm_pdv }}</span>{% endif %}
+                  </li>
+                  <li class="carbohydrate">
+                    <span class="label">Total Carbohydrate</span>
+                    <span class="weight">{{ nf_carb_weight }}</span>
+                    {% if nf_carb_pdv != "" %}<span class="pdv">{{ nf_carb_pdv }}</span>{% endif %}
+                    <ul class="secondary">
+                      <li class="fiber">
+                        <span class="label">Dietary Fiber</span>
+                        <span class="weight">{{ nf_dfib_weight }}</span>
+                        {% if nf_dfib_pdv != "" %}<span class="pdv">{{ nf_dfib_pdv }}</span>{% endif %}
+                      </li>
+                      <li class="sugars">
+                        <span class="label">Total Sugars</span>
+                        <span class="weight">{{ nf_tsug_weight }}</span>
+                        <ul class="tertiary">
+                          <li class="added">
+                            <span class="label">Includes <span class="weight">{{ nf_asug_weight }}</span> Added Sugars</span>
+                            {% if nf_asug_pdv != "" %}<span class="pdv">{{ nf_asug_pdv }}</span>{% endif %}
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="protein">
+                    <span class="label">Protein</span>
+                    <span class="weight">{{ nf_prot_weight }}</span>
+                  </li>
+                </ul>
+                <ul class="vitamins primary">
+                  <li class="vitamin-d">
+                    <span class="label">Vitamin D</span>
+                    <span class="weight">{{ nf_vitd_weight }}</span>
+                    {% if nf_vitd_pdv != "" %}<span class="pdv">{{ nf_vitd_pdv }}</span>{% endif %}
+                  </li>
+                  <li class="calcium">
+                    <span class="label">Calcium</span>
+                    <span class="weight">{{ nf_calc_weight }}</span>
+                    {% if nf_calc_pdv != "" %}<span class="pdv">{{ nf_calc_pdv }}</span>{% endif %}
+                  </li>
+                  <li class="iron">
+                    <span class="label">Iron</span>
+                    <span class="weight">{{ nf_rion_weight }}</span>
+                    {% if nf_iron_pdv != "" %}<span class="pdv">{{ nf_iron_pdv }}</span>{% endif %}
+                  </li>
+                  <li class="potassium">
+                    <span class="label">Potassium</span>
+                    <span class="weight">{{ nf_potK_weight }}</span>
+                    {% if nf_potK_pdv != "" %}<span class="pdv">{{ nf_carb_pdv }}</span>{% endif %}
+                  </li>
+                </ul>
+                <footer class="footnotes">
+                  <p class="dv_footnote">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</p>
+                </footer>
+              </section>
+            </article>
+          </div>
+
+        {% else %}
+          {% assign img_src=product.images[2].src %}
+          <figure class="left clear one-half small--one-whole">
+            <img width="100%" src="{{ img_src | img_url: 'large' }}" />
+          </figure>
+        {% endif %}
+
+        {% assign content = infobox_value_text | split: '[' %}
+        {% for sect in content %}
+          {% assign key = sect | split: ']' | first %}
+          {% assign val = sect | split: ']' | last %}
+
+          {% case key %}
+          {% when "Ingredients" %}
+            {% assign ingredients_value_text = val %}
+          {% when "Storage" %}
+            {% assign storage_value_text = val %}
+          {% when "Allergens" %}
+            {% assign allergens_value_text = val %}
+          {% endcase%}
+        {% endfor%}
+
+        <div class="content small--clear right one-half small--one-whole">
+          {% if ingredients_value_text != blank %}
+          <h3 class="hed ingredients-list">Ingredients</h3>
+          <p class="lede body excerpt ingredients-list">{{ ingredients_value_text }}</p>
+          {% endif %}
+          {% if storage_value_text != blank %}
+          <h3 class="hed storage">Storage &amp; Handling</h3>
+          <p class="lede body excerpt storage">{{ storage_value_text }}</p>
+          {% endif %}
+          {% if allergens_value_text != blank %}
+          <h3 class="hed allergens">Allergen Information</h3>
+          <p class="lede body excerpt allergens">{{ allergens_value_text }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div> <!-- End grid -->
+
 
     {% if settings.product_share_btns_enable %}
-      <div class="{% if product.featured_image.size > 0 %}fade-up delay-two{% endif %}">
+      <div class="">
         {% comment %}
         Snippet for social media buttons
         For setting go to Admin -> Theme -> Customize Theme -> Product page
@@ -208,259 +486,24 @@
     {% endif %}
   </div>
 
-    <div class="wrapper">
-      <div class="grid">
-        <div class="product product--lg grid__item one-whole {% if product.featured_image.size > 0 %}fade-up delay-three{% endif %}">
-
-          {% comment %}
-          Product nutritional values
-          {% endcomment %}
-          {% if settings.product_nutritional_enable and  nutritional_value_text != blank %}
-
-            {% comment %}
-            Get string with minerals
-            {% endcomment %}
-            {% if settings.product_nutritional_minerals != blank and nutritional_value_text contains settings.product_nutritional_minerals %}
-              {% assign vitamins_and_energy_text = nutritional_value_text | split: settings.product_nutritional_minerals | first %}
-              {% assign minerals_text = nutritional_value_text | split: settings.product_nutritional_minerals | last %}
-            {% endif %}
-
-            {% comment %}
-            Get strings with energy value and vitamins
-            {% endcomment %}
-            {% if settings.product_nutritional_vitamins != blank and nutritional_value_text contains settings.product_nutritional_vitamins %}
-              {% assign energy_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | first  | strip_html %}
-              {% assign vitamins_text = vitamins_and_energy_text | split: settings.product_nutritional_vitamins | last  | strip_html %}
-            {% endif %}
-
-            {% comment %}
-            Get array of energy, vitamins and minerals
-            {% endcomment %}
-            {% assign energy_array = energy_text  | split: ', ' %}
-            {% assign vitamins_array = vitamins_text | split: ',' %}
-            {% assign minerals_array = minerals_text | split: ',' %}
-
-            <div class="product__desc product__desc--components fold">
-              <h3 class="heading--add fold__toggle">{{ 'products.product_page.nutritional_title' | t }}</h3>
-              {% comment %}
-              Show energy values
-              {% endcomment %}
-              <div class="fold__content">
-                <div class="components-container">
-                  <ul class="components-list">
-                    {% for i in (0..energy_array.size) %}
-                      {% if forloop.last %} {% break %} {% endif %}
-                      <li class="components-list__item">
-                        {{ energy_array[i] | split: '|' | first | strip }} <span class="components-list__value" ><strong>{{ energy_array[i] | split: '|' | last | strip }}</strong></span>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-
-                {% comment %}
-                Show vitamins list
-                {% endcomment %}
-                <div class="components-container">
-                  <span class="components__title">{{ settings.product_nutritional_vitamins }}</span>
-                  <ul class="components-list components-list--elements">
-                    {% for i in (0..vitamins_array.size) %}
-                      {% if forloop.last %} {% break %} {% endif %}
-                      <li class="components-list__item">
-                        {{ vitamins_array[i] | strip_html | strip }}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div> <!-- End components-container -->
-
-                {% comment %}
-                Show mineral list
-                {% endcomment %}
-                <div class="components-container">
-                  <span class="components__title">{{ settings.product_nutritional_minerals }}</span>
-                  <ul class="components-list components-list--elements">
-                    {% for i in (0..minerals_array.size) %}
-                      {% if forloop.last %} {% break %} {% endif %}
-                      <li class="components-list__item">
-                        {{ minerals_array[i] | strip_html | strip }}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div> <!-- End components-container -->
-              </div> <!-- End product__desc-content -->
-            </div> <!-- End product__desc -->
-          {% endif %}
-        </div> <!-- End grid__item -->
-      </div> <!-- End grid -->
-    </div> <!-- End wrapper -->
-
-    <hr class="hr--clear-inverse hr--desktop">
-
-
+    
     {% comment %}
     Add product review widget, must install Product Review App:
     https://apps.shopify.com/product-reviews
     {% endcomment %}
-    {% if settings.product_reviews_recipe == 'reviews' %}
-      <div class="wrapper">
-        <div class="grid paste">
-          <div class="grid__item one-whole fold product-reviews {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
-            <h3 class="heading--add fold__toggle">{{ 'products.product_page.customer_reviews' | t }}</h3>
-            <div class="fold__content">
-              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
-            </div>
-          </div> <!-- End grid__item -->
-        </div> <!-- End grid -->
-      </div> <!-- End wrapper -->
-      <hr class="hr--clear-inverse hr--desktop">
-    {% elsif settings.product_reviews_recipe == 'recipe' %}
-      <div class="wrapper">
-        <div class="grid">
-          <div class="product product--lg grid__item one-whole product-container {% if product.featured_image.size > 0 %}fade-up delay-four{% endif %}">
-
-              {% assign current_product_title = product.title | downcase %}
-
-              {% if settings.product_recipe_blog != blank %}
-                {% assign matched_article = false %}
-                {% assign first_article = false %}
-                {% assign random_article = false %}
-
-                {% for article in blogs[settings.product_recipe_blog].articles %}
-
-                  {% comment %}
-                  Checking if article tags have some word from product title
-                  {% endcomment %}
-                  {% for tag in article.tags %}
-                    {% assign tag = tag | downcase %}
-                    {% assign product_title = product.title | downcase %}
-
-                    {% if product_title contains tag %}
-                      {% assign matched_article = true %}
-                      {% break %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if matched_article == true and first_article == false %}
-
-                    {% include 'shortcode-recipe' with article.content %}
-
-                    <div class="product-recipe fold">
-                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
-
-                      <div class="fold__content">
-                        <div class="text-center">
-                          <div class="bg-cover">
-                            <div class="img-holder img-holder--block">
-                              {% if settings.product_recipe_blog_ingredients != blank %}
-                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
-                              {% endif %}
-
-                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
-                              <span class="license-mark">{{ license_mark }}</span>
-
-                              {% if settings.product_recipe_blog_directions != blank %}
-                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
-                              {% endif %}
-                            </div> <!-- End img-holder -->
-                          </div> <!-- End bg-cover -->
-                        </div> <!-- End text-center -->
-
-                        <h4 class="product-recipe__title">{{ article.title }}</h4>
-
-
-                        {% comment %}{% if introduction_text != blank %}
-                          {{ introduction_text }}
-                        {% endif %}{% endcomment %}
-
-                        <div class="rte product-recipe__content left">
-                          {{ ingredients_part }}
-                        </div>
-
-                        <div class="rte product-recipe__content right">
-                          {{ directions_part }}
-                        </div>
-
-                        {% comment %}
-                        Show the first matched article
-                        {% endcomment %}
-                        {% assign first_article = true %}
-                        {% assign random_article = true %}
-                      </div> <!-- End fold__content -->
-                    </div> <!-- End product-recipe -->
-                  {% endif %}
-                {% endfor %}
-
-                {% comment %}
-                Random article (if article tags don't have words from product title)
-                {% endcomment %}
-                {% if random_article == false %}
-                  {% capture index %}{{ 'now' | date: '%S' | times: blogs[settings.product_recipe_blog].articles.size | divided_by: 60 }}{% endcapture %}
-                  {% for article in blogs[settings.product_recipe_blog].articles offset:index limit:1 %}
-
-                    {% include 'shortcode-recipe' with article.content %}
-
-                    <div class="product-recipe fold">
-                      <h3 class="heading--add fold__toggle">{{ 'products.product_page.special_recipe_title' | t }}</h3>
-
-                      <div class="fold__content">
-                        <div class="text-center">
-                          <div class="bg-cover">
-                            <div class="img-holder img-holder--block">
-                              {% if settings.product_recipe_blog_ingredients != blank %}
-                                <span class="product-recipe__spec-title left"><strong>{{ settings.product_recipe_blog_ingredients }}</strong></span>
-                              {% endif %}
-
-                              <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}">
-                              <span class="license-mark">{{ license_mark }}</span>
-
-                              {% if settings.product_recipe_blog_directions != blank %}
-                                <span class="product-recipe__spec-title right"><strong>{{ settings.product_recipe_blog_directions }}</strong></span>
-                              {% endif %}
-                            </div> <!-- End img-holder -->
-                          </div> <!-- End bg-cover -->
-                        </div> <!-- End text-center -->
-
-                        <h4 class="product-recipe__title">{{ article.title }}</h4>
-
-
-                        {% comment %}{% if introduction_text != blank %}
-                          {{ introduction_text }}
-                        {% endif %}{% endcomment %}
-
-                        <div class="rte product-recipe__content left">
-                          {{ ingredients_part }}
-                        </div>
-
-                        <div class="rte product-recipe__content right">
-                          {{ directions_part }}
-                        </div>
-
-                        {% comment %}
-                        Show the first matched article
-                        {% endcomment %}
-                        {% assign first_article = true %}
-                        {% assign random_article = true %}
-                      </div> <!-- End fold__content -->
-                    </div> <!-- End product-recipe -->
-
-                  {% endfor %}
-                {% endif %}
-              {% else %}
-                {% include 'fallback-msg' %}
-              {% endif %}
-
-          </div> <!-- End grid__item -->
-        </div> <!-- End grid -->
-      </div> <!-- End wrapper -->
-      <hr class="hr--clear-inverse hr--desktop">
-    {% endif %}
-
-
+      <div class="yotpo yotpo-main-widget" 
+       data-product-id="{{ product.id }}" 
+       data-name="{{ product.title | escape }}" 
+       data-url="{{ shop.url }}{{ product.url }}" 
+       data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+       data-description="{{ product.description | escape }}"> 
+      </div>
 
     {% if settings.product_similar_enable %}
       <div class="wrapper">
         <div class="grid">
           <div class="grid__item">
-            <div class="fold similar-product {% if product.featured_image.size > 0 %}fade-up delay-five{% endif %}">
+            <div class="fold similar-product ">
               <h3 class="heading heading--add fold__toggle">{{ 'products.product_page.similar_products_title' | t }}</h3>
 
               <div class="fold__content">
@@ -485,8 +528,6 @@
     {% endif %}
   </div>
 </div>
-</main>
-<!-- *** End main content *** -->
 {% unless product == empty %}
   <script type="application/json" id="ProductJson">
     {{ product | json }}

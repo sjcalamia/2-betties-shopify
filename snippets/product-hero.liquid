@@ -1,25 +1,8 @@
 {% comment %}
 Product slideshow
 For settings go to Admin -> Theme -> Customize Theme -> Homepage Slideshow
-
-<section class="hero product">
-  <figure class="hero" background-image="{{ }}">
-
-  </figure>
-</section>
 {% endcomment %}
-<!-- Flexslider -->
-<div class="flexslider flexslider-thumb flexslider-thumb--product">
-  <ul class="slides">
-    {% for image in product.images offset: 1 limit: 3 %}
-	    <li
-        class="slide slide--{{ forloop.index }} js-img-holder-cover"
-        background-image="{{ image.src | product_img_url: 'master' }}"
-        style="background-size: cover;">
-        {% comment %}data-thumb="{{ image.src | product_img_url: 'compact' }}">{% endcomment %}
-	    	<img src="{{ image.src | product_img_url: 'master' }}" alt="{{ product.title }}">
-	    </li>
-    {% endfor %}
-  </ul>
-</div>
-<!-- End flexslider -->
+
+{% assign img_bg = product.images[1].src %}
+{% include 'block-hero' %}
+

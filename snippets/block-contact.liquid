@@ -15,18 +15,18 @@ More information:
     {% endif %}
 
     <div class="form__row">
-      <textarea class="form__field--textarea-neutral form__field--full" id="contactFormMessage" name="contact[body]" rows="10" placeholder="My message..."></textarea>
+      <textarea class="form__field--textarea-neutral form__field--full" id="contactFormMessage" name="contact[body]" rows="10" placeholder="{{ 'contact.form.message' | t }}"></textarea>
       <label class="form__field--placeholder" for="contactFormMessage">{{ 'contact.form.message' | t }}</label>
     </div>
 
     <div class="form__row form__row-blocks">
       <div class="form__row-block">
-        <input class="form__field" id="contactFormName" type="text" name="contact[name]" placeholder="My name is...">
+        <input class="form__field" id="contactFormName" type="text" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}">
         <label class="form__field--placeholder" for="contactFormName">{{ 'contact.form.name' | t }}</label>
       </div> <!-- End form__row-block -->
 
       <div class="form__row-block">
-        <input class="form__field" id="contactFormEmail" type="email" name="contact[email]" placeholder="Reply me to email...">
+        <input class="form__field" id="contactFormEmail" type="email" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}">
         <label class="form__field--placeholder" for="contactFormEmail">{{ 'contact.form.email' | t }}</label>
       </div> <!-- End form__row-block -->
     </div> <!-- End form__row -->

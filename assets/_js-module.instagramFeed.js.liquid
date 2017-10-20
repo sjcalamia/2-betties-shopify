@@ -10,9 +10,10 @@ define(['instafeed', 'utils'], function(Instafeed, utils){
         get: 'user',
         userId: '{{ settings.footer_instagram_user_id }}',
         accessToken: '{{ settings.footer_instagram_access_token }}',
-        clientId: '123',
-        limit: 8,
-        resolution: 'low_resolution',
+        clientId: 'bb764c4548c14fdb8074070b57e27981',
+        resolution: 'standard_resolution',
+        limit: 10,
+        success: function(d) { console.log(d) },
         after: function(){
           var instaLinks = DOM.instaFeedSelectorID.getElementsByTagName('a');
           for (var i = 0, max = instaLinks.length; i < max; i++) {
